@@ -23,7 +23,7 @@ export const data: Array<Course> = [
     id: 3,
     cover: '/images/courses/christopher-gower-m_HRfLhgABo-unsplash.jpg',
     title: 'NEET UG Complete Course',
-    rating: 4,
+    rating: 5,
     ratingCount: 178,
     price: 24999,
     category: 'Medical Entrance',
