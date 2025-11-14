@@ -101,8 +101,8 @@ const HomePopularCourse: FC = () => {
                 justifyContent: { xs: 'center', md: 'flex-start' },
               }}
             >
-              <Typography variant="h1" sx={{ mt: { xs: 0, md: -5 }, fontSize: { xs: 30, md: 48 } }}>
-                Most Popular Courses
+              <Typography variant="h1" sx={{ mt: { xs: 0, md: -5 }, fontSize: { xs: 30, md: 48 }, fontWeight: 'bold', color: 'text.primary' }}>
+                Our Popular Courses
               </Typography>
             </Box>
           </Grid>
