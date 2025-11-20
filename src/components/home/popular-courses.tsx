@@ -68,6 +68,7 @@ const HomePopularCourse: FC = () => {
     speed: 300,
     slidesToShow: matchMobileView ? 1 : 3,
     slidesToScroll: 1,
+    adaptiveHeight: false, // Important for consistent heights
     prevArrow: <SliderArrow type="prev" />,
     nextArrow: <SliderArrow type="next" />,
     dots: true,
@@ -101,18 +102,36 @@ const HomePopularCourse: FC = () => {
                 justifyContent: { xs: 'center', md: 'flex-start' },
               }}
             >
-              <Typography variant="h1" sx={{ mt: { xs: 0, md: -5 }, fontSize: { xs: 30, md: 48 }, fontWeight: 'bold', color: 'text.primary' }}>
+              <Typography
+                variant="h1"
+                sx={{ mt: { xs: 0, md: -5 }, fontSize: { xs: 30, md: 48 }, fontWeight: 'bold', color: 'text.primary' }}
+              >
                 Our Popular Courses
               </Typography>
             </Box>
           </Grid>
 
           <Grid item xs={12} md={9}>
-            <Slider {...sliderConfig}>
-              {data.map((item) => (
-                <CourseCardItem key={String(item.id)} item={item} />
-              ))}
-            </Slider>
+            <Box
+              sx={{
+                '& .slick-slide > div': {
+                  height: '100%',
+                },
+                '& .slick-track': {
+                  display: 'flex',
+                  alignItems: 'stretch',
+                },
+                '& .slick-slide': {
+                  height: 'inherit',
+                },
+              }}
+            >
+              <Slider {...sliderConfig}>
+                {data.map((item) => (
+                  <CourseCardItem key={String(item.id)} item={item} />
+                ))}
+              </Slider>
+            </Box>
           </Grid>
         </Grid>
       </Container>

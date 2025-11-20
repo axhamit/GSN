@@ -7,7 +7,12 @@ import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import CircularProgress from '@mui/material/CircularProgress'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
-import { data } from './feature.data'
+import ScienceIcon from '@mui/icons-material/Science'
+import CalculateIcon from '@mui/icons-material/Calculate'
+import BiotechIcon from '@mui/icons-material/Biotech'
+import MenuBookIcon from '@mui/icons-material/MenuBook'
+import SchoolIcon from '@mui/icons-material/School'
+import QuizIcon from '@mui/icons-material/Quiz'
 
 interface LinearProgressProps {
   order: number
@@ -35,6 +40,29 @@ const BorderLinearProgress = styled(LinearProgress, {
   },
 }))
 
+const data = [
+  {
+    title: 'Expert Faculty',
+    description: 'Learn from IIT/NIT & Medical college graduates with 10+ years teaching experience',
+    icon: <SchoolIcon />,
+  },
+  {
+    title: 'Doubt Solving',
+    description: '24/7 doubt resolution with dedicated mentors and subject matter experts',
+    icon: <QuizIcon />,
+  },
+  {
+    title: 'Study Materials',
+    description: 'Comprehensive notes, practice papers, and reference books provided',
+    icon: <MenuBookIcon />,
+  },
+  {
+    title: 'Mock Tests',
+    description: 'Regular full-length mock tests with detailed performance analysis',
+    icon: <BiotechIcon />,
+  },
+]
+
 const HomeFeature: FC = () => {
   return (
     <Box id="feature" sx={{ py: { xs: 10, md: 14 }, backgroundColor: 'background.paper' }}>
@@ -42,7 +70,25 @@ const HomeFeature: FC = () => {
         <Grid container spacing={3}>
           <Grid item xs={12} md={5}>
             <Box sx={{ position: 'relative' }}>
-              <Image src="/images/home-feature.png" width={650} height={678} quality={97} alt="Feature img" />
+              <Box
+                sx={{
+                  position: 'relative',
+                  width: { xs: '100%', md: 450 }, // responsive width
+                  height: { xs: 350, md: 520 }, // maintains ratio on large screens
+                  mx: 'auto',
+                }}
+              >
+                <Image
+                  src="/images/home-feature.png"
+                  alt="Students studying"
+                  fill
+                  style={{
+                    objectFit: 'contain', // 🔥 keeps original proportion
+                  }}
+                  quality={97}
+                />
+              </Box>
+
               <Box
                 sx={{
                   position: 'absolute',
@@ -58,25 +104,25 @@ const HomeFeature: FC = () => {
                 }}
               >
                 <Typography variant="h5" sx={{ mb: 1 }}>
-                  Lorem ipsum dolor
+                  Success Rate
                 </Typography>
                 <Box sx={{ mb: 2 }}>
                   <Typography variant="subtitle1" color="text.secondary">
-                    UI/UI Design
+                    NEET Qualified
                   </Typography>
-                  <BorderLinearProgress variant="determinate" color="inherit" value={65} order={1} />
+                  <BorderLinearProgress variant="determinate" color="inherit" value={78} order={1} />
                 </Box>
                 <Box sx={{ mb: 2 }}>
                   <Typography variant="subtitle1" color="text.secondary">
-                    Mobile Development
+                    JEE Advanced
                   </Typography>
-                  <BorderLinearProgress variant="determinate" color="inherit" value={40} order={2} />
+                  <BorderLinearProgress variant="determinate" color="inherit" value={65} order={2} />
                 </Box>
                 <Box sx={{ mb: 2 }}>
                   <Typography variant="subtitle1" color="text.secondary">
-                    Web Development
+                    Board Exams 90%+
                   </Typography>
-                  <BorderLinearProgress variant="determinate" color="inherit" value={50} order={3} />
+                  <BorderLinearProgress variant="determinate" color="inherit" value={85} order={3} />
                 </Box>
               </Box>
 
@@ -103,9 +149,9 @@ const HomeFeature: FC = () => {
                     flexDirection: 'column',
                   }}
                 >
-                  <Typography sx={{ fontWeight: 600, lineHeight: 1 }}>Lorem ipsum</Typography>
+                  <Typography sx={{ fontWeight: 600, lineHeight: 1 }}>Student Satisfaction</Typography>
                   <Typography variant="subtitle1" sx={{ mb: 1, color: 'text.disabled' }}>
-                    Lorem ipsum
+                    Based on Reviews
                   </Typography>
                   <Box
                     sx={{
@@ -118,7 +164,7 @@ const HomeFeature: FC = () => {
                     }}
                   >
                     <Typography variant="h4" sx={{ color: '#32dc88' }}>
-                      75%
+                      94%
                     </Typography>
                     <CircularProgress
                       sx={{ position: 'absolute', color: 'divider' }}
@@ -131,7 +177,7 @@ const HomeFeature: FC = () => {
                       disableShrink
                       thickness={2}
                       variant="determinate"
-                      value={75}
+                      value={94}
                       size={85}
                       sx={{ transform: 'rotate(96deg) !important', color: '#32dc88', position: 'absolute' }}
                     />
@@ -153,7 +199,7 @@ const HomeFeature: FC = () => {
                 fontWeight: 'bold',
               }}
             >
-              Make your{' '}
+              Make Your{' '}
               <Typography
                 component="mark"
                 sx={{
@@ -164,7 +210,7 @@ const HomeFeature: FC = () => {
                   backgroundColor: 'unset',
                 }}
               >
-                Learning <br />
+                Exam Preparation <br />
                 <Box
                   sx={{
                     position: 'absolute',
@@ -178,12 +224,12 @@ const HomeFeature: FC = () => {
                   <img src="/images/headline-curve.svg" alt="Headline curve" />
                 </Box>
               </Typography>
-              Enjoyable
+              Effective
             </Typography>
 
             <Typography sx={{ color: 'text.secondary', mb: 2, ml: { xs: 0, md: 4 } }}>
-              Set the way of learning according to your wishes with some of the benefits that you get us, so you on
-              enjoy the lessons that we provide.
+              Our proven teaching methodology and comprehensive study materials help students excel in NEET, JEE, KCET,
+              and Board exams. Get personalized attention and structured learning paths for guaranteed success.
             </Typography>
 
             <Grid container spacing={2} sx={{ ml: { xs: 0, md: 2 } }}>

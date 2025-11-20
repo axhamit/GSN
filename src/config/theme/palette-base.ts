@@ -1,18 +1,17 @@
 import { PaletteOptions } from '@mui/material'
 
-const paletteBase: Partial<PaletteOptions> = {
+const paletteBase = {
   primary: {
-    light: '#9FF1D2',
-    main: '#127C71',
-    dark: '#0D6A69',
-    contrastText: '#fbfbfb',
+    light: '#D7EFFF',
+    main: '#1E88E5',
+    dark: '#0D47A1',
+    contrastText: '#FFFFFF',
   },
   secondary: {
-    light: '#FDE6A8',
-    main: '#ffaf35',
-    dark: '#D0821C',
-    contrastText: '#fbfbfb',
+    light: '#FFF3E0',
+    main: '#FB8C00',
+    dark: '#E65100',
+    contrastText: '#FFFFFF',
   },
 }
-
 export default paletteBase

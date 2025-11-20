@@ -3,61 +3,61 @@ import type { Testimonial } from '@/interfaces/testimonial'
 export const data: Array<Testimonial> = [
   {
     id: 1,
-    title: 'Detailed learning materials',
+    title: 'Expert Guidance for Every Exam',
     content:
-      'Classes that provide very detailed material in term of making UI UX Design starting team making low and hight quality, system designs, using data layout and make prototypes and testing.',
+      'The coaching is extremely comprehensive for PCMB 11th & 12th. The teachers explain every concept clearly and guide us personally through KCET and JEE preparation.',
     user: {
       id: 1,
-      name: 'Luis Sera',
-      professional: 'UI/UX Engineer',
+      name: 'Aarav Patil',
+      professional: 'PCMB Student',
       photo: '1.jpg',
     },
   },
   {
     id: 2,
-    title: 'Best Quality Online Course!',
+    title: 'Perfect for Competitive Exams',
     content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      'I joined for NEET coaching and the study plans are very structured. The personalised approach and doubt-clearing sessions helped me improve my accuracy a lot.',
     user: {
-      id: 1,
-      name: 'Riski',
-      professional: 'Software Engineer',
+      id: 2,
+      name: 'Diya Sharma',
+      professional: 'NEET Aspirant',
       photo: '2.jpg',
     },
   },
   {
     id: 3,
-    title: 'Very complete class',
+    title: 'Best Coaching for 10th Board',
     content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      'Their 10th Standard Board preparation is excellent. The teachers make concepts easy and the regular tests helped me score better.',
     user: {
-      id: 1,
-      name: 'Nguyễn Văn',
-      professional: 'FullStack Designer',
+      id: 3,
+      name: 'Rahul Mehra',
+      professional: 'Class 10 Student',
       photo: '3.jpg',
     },
   },
   {
     id: 4,
-    title: 'Great Quality!',
+    title: 'Online + Offline Flexibility',
     content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      'The option to choose between online and offline classes is very helpful. I could manage my school timings easily while preparing for KCET.',
     user: {
-      id: 1,
-      name: 'Diana Jordan',
-      professional: 'SEO Expert',
+      id: 4,
+      name: 'Sneha Kulkarni',
+      professional: 'KCET Student',
       photo: '4.jpg',
     },
   },
   {
     id: 5,
-    title: 'Detailed learning materials',
+    title: 'Personalized Study Plans',
     content:
-      'Classes that provide very detailed material in term of making UI UX Design starting team making low and hight quality, system designs, using data layout and make prototypes and testing.',
+      'The personalised study plans helped me stay consistent. The mentors monitor progress every week and guide us according to our weak areas.',
     user: {
-      id: 1,
-      name: 'Ashley Graham',
-      professional: 'Back-End Developer',
+      id: 5,
+      name: 'Vikram Rao',
+      professional: 'JEE Aspirant',
       photo: '5.jpg',
     },
   },

@@ -3,50 +3,50 @@ import type { Mentor } from '@/interfaces/mentor'
 export const data: Array<Mentor> = [
   {
     id: 1,
-    photo: '/images/mentors/christian-buehner-DItYlc26zVI-unsplash.jpg',
-    name: 'Jhon Dwirian',
-    category: 'UI/UX Design',
+    photo: '/images/mentors/physics-teacher.jpg',
+    name: 'Dr. Raghav Sharma',
+    category: 'Physics (JEE • NEET • KCET)',
     description:
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      'With 12+ years of experience, Dr. Raghav specializes in simplifying complex Physics concepts and preparing students for JEE, NEET, and KCET through conceptual clarity and problem-solving.',
     company: {
-      name: 'Grab',
-      logo: '/images/companies/grab.png',
+      name: 'Former Faculty – Allen',
+      logo: '/images/companies/allen.png',
     },
   },
   {
     id: 2,
-    photo: '/images/mentors/jonas-kakaroto-KIPqvvTOC1s-unsplash.jpg',
-    name: 'Leon S Kennedy',
-    category: 'Machine Learning',
+    photo: '/images/mentors/chemistry-teacher.jpg',
+    name: 'Prof. Anjali Mehta',
+    category: 'Chemistry (11th • 12th • NEET)',
     description:
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      'An expert in Organic and Physical Chemistry, she focuses on NCERT foundation + competitive exam strategy, helping students boost speed and accuracy with structured study plans.',
     company: {
-      name: 'Google',
-      logo: '/images/companies/google.png',
+      name: 'Ex-FIITJEE',
+      logo: '/images/companies/fiitjee.png',
     },
   },
   {
     id: 3,
-    photo: '/images/mentors/noah-buscher-8A7fD6Y5VF8-unsplash.jpg',
-    name: 'Nguyễn Thuy',
-    category: 'Android Development',
+    photo: '/images/mentors/maths-teacher.jpg',
+    name: 'Karan Deshmukh',
+    category: 'Mathematics (10th • 11th • JEE)',
     description:
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      'Karan sir makes Maths easy with real-life examples and exam-focused shortcuts. His guided practice sessions have helped 5000+ students score high in JEE and 10th Board exams.',
     company: {
-      name: 'Airbnb',
-      logo: '/images/companies/airbnb.png',
+      name: 'Vedantu',
+      logo: '/images/companies/vedantu.png',
     },
   },
   {
     id: 4,
-    photo: '/images/mentors/philip-martin-5aGUyCW_PJw-unsplash.jpg',
-    name: 'Rizki Known',
-    category: 'Fullstack Development',
+    photo: '/images/mentors/biology-teacher.jpg',
+    name: 'Dr. Supriya Kulkarni',
+    category: 'Biology (NEET Specialist)',
     description:
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      'A NEET Biology mentor with 10+ years of experience, she teaches using diagrams, flowcharts, and personalized guidance to help students master high-weightage chapters.',
     company: {
-      name: 'Microsoft',
-      logo: '/images/companies/microsoft.png',
+      name: 'Aakash Institute',
+      logo: '/images/companies/aakash.png',
     },
   },
 ]

@@ -1,34 +1,29 @@
-import React, { ReactNode } from 'react'
-import ArtTrackIcon from '@mui/icons-material/ArtTrack'
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
-import LocalLibraryIcon from '@mui/icons-material/LocalLibrary'
-import ContactSupportIcon from '@mui/icons-material/ContactSupport'
+import ScienceIcon from '@mui/icons-material/Science'
+import CalculateIcon from '@mui/icons-material/Calculate'
+import BiotechIcon from '@mui/icons-material/Biotech'
+import MenuBookIcon from '@mui/icons-material/MenuBook'
+import SchoolIcon from '@mui/icons-material/School'
+import QuizIcon from '@mui/icons-material/Quiz'
 
-interface Data {
-  title: string
-  description: string
-  icon?: ReactNode
-}
-
-export const data: Data[] = [
+export const data = [
   {
-    title: 'Easy Accessable',
-    description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore',
-    icon: <ArtTrackIcon />,
+    title: 'Expert Faculty',
+    description: 'Learn from IIT/NIT & Medical college graduates with 10+ years teaching experience',
+    icon: <SchoolIcon />,
   },
   {
-    title: 'More Affordable Cost',
-    description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore',
-    icon: <AttachMoneyIcon />,
+    title: 'Doubt Solving',
+    description: '24/7 doubt resolution with dedicated mentors and subject matter experts',
+    icon: <QuizIcon />,
   },
   {
-    title: 'Flexible Study Time',
-    description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore',
-    icon: <LocalLibraryIcon />,
+    title: 'Study Materials',
+    description: 'Comprehensive notes, practice papers, and reference books provided',
+    icon: <MenuBookIcon />,
   },
   {
-    title: 'Consultation With Mentor',
-    description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore',
-    icon: <ContactSupportIcon />,
+    title: 'Mock Tests',
+    description: 'Regular full-length mock tests with detailed performance analysis',
+    icon: <BiotechIcon />,
   },
 ]

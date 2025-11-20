@@ -30,17 +30,36 @@ const exps: Array<Exp> = [
     value: '50+',
   },
 ]
-
 const ExpItem: FC<ExpItemProps> = ({ item }) => {
   const { value, label } = item
   return (
-    <Box sx={{ textAlign: 'center', mb: { xs: 1, md: 0 } }}>
+    <Box
+      sx={{
+        textAlign: 'center',
+        p: 3,
+        borderRadius: 4,
+        background: 'white',
+        boxShadow: '0px 4px 15px rgba(0,0,0,0.08)',
+        transition: '0.3s',
+        border: '1px solid rgba(0,0,0,0.05)',
+        '&:hover': {
+          transform: 'translateY(-6px)',
+          boxShadow: '0px 8px 25px rgba(0,0,0,0.12)',
+        },
+      }}
+    >
       <Typography
-        sx={{ color: 'secondary.main', mb: { xs: 1, md: 2 }, fontSize: { xs: 28, md: 36 }, fontWeight: 'bold' }}
+        sx={{
+          color: 'primary.main',
+          fontSize: { xs: 32, md: 40 },
+          fontWeight: '700',
+          mb: 1,
+        }}
       >
         {value}
       </Typography>
-      <Typography color="text.secondary" variant="h6" sx={{ fontSize: { xs: '1rem', md: '1.1rem' } }}>
+
+      <Typography color="text.secondary" sx={{ fontSize: { xs: '1rem', md: '1.1rem' } }}>
         {label}
       </Typography>
     </Box>
@@ -115,80 +134,98 @@ const HomeHero: FC = () => {
               </Box>
 
               <Box sx={{ mb: 4 }}>
-                <Typography 
-                  sx={{ 
-                    color: 'text.secondary', 
-                    lineHeight: 1.6, 
+                <Typography
+                  sx={{
+                    color: 'text.secondary',
+                    lineHeight: 1.6,
                     fontSize: { xs: '1rem', md: '1.1rem' },
-                    mb: 3 
+                    mb: 3,
                   }}
                 >
                   Comprehensive coaching for <strong>PCMB 11th & 12th</strong>, competitive exams like{' '}
-                  <strong>KCET, JEE, NEET</strong>, and <strong>10th Standard Board</strong> preparation. 
-                  Choose between online and offline classes with personalized study plans.
+                  <strong>KCET, JEE, NEET</strong>, and <strong>10th Standard Board</strong> preparation. Choose between
+                  online and offline classes with personalized study plans.
                 </Typography>
-              
+
                 {/* Course Highlights */}
                 <Grid container spacing={1.5} sx={{ mb: 3 }}>
                   <Grid item xs={6} sm={3}>
-                    <Box sx={{ 
-                      textAlign: 'center', 
-                      p: 1.5, 
-                      backgroundColor: 'primary.main', 
-                      borderRadius: 2, 
-                      color: 'white',
-                      fontSize: { xs: '0.75rem', sm: '0.85rem' }
-                    }}>
-                      <Typography variant="subtitle2" fontWeight="bold">PCMB 11th</Typography>
+                    <Box
+                      sx={{
+                        textAlign: 'center',
+                        p: 1.5,
+                        backgroundColor: 'primary.main',
+                        borderRadius: 2,
+                        color: 'white',
+                        fontSize: { xs: '0.75rem', sm: '0.85rem' },
+                      }}
+                    >
+                      <Typography variant="subtitle2" fontWeight="bold">
+                        PCMB 11th
+                      </Typography>
                     </Box>
                   </Grid>
                   <Grid item xs={6} sm={3}>
-                    <Box sx={{ 
-                      textAlign: 'center', 
-                      p: 1.5, 
-                      backgroundColor: 'secondary.main', 
-                      borderRadius: 2, 
-                      color: 'white',
-                      fontSize: { xs: '0.75rem', sm: '0.85rem' }
-                    }}>
-                      <Typography variant="subtitle2" fontWeight="bold">PCMB 12th</Typography>
+                    <Box
+                      sx={{
+                        textAlign: 'center',
+                        p: 1.5,
+                        backgroundColor: 'secondary.main',
+                        borderRadius: 2,
+                        color: 'white',
+                        fontSize: { xs: '0.75rem', sm: '0.85rem' },
+                      }}
+                    >
+                      <Typography variant="subtitle2" fontWeight="bold">
+                        PCMB 12th
+                      </Typography>
                     </Box>
                   </Grid>
                   <Grid item xs={6} sm={3}>
-                    <Box sx={{ 
-                      textAlign: 'center', 
-                      p: 1.5, 
-                      backgroundColor: 'error.main', 
-                      borderRadius: 2, 
-                      color: 'white',
-                      fontSize: { xs: '0.7rem', sm: '0.8rem' }
-                    }}>
-                      <Typography variant="subtitle2" fontWeight="bold">KCET/JEE/NEET</Typography>
+                    <Box
+                      sx={{
+                        textAlign: 'center',
+                        p: 1.5,
+                        backgroundColor: 'error.main',
+                        borderRadius: 2,
+                        color: 'white',
+                        fontSize: { xs: '0.7rem', sm: '0.8rem' },
+                      }}
+                    >
+                      <Typography variant="subtitle2" fontWeight="bold">
+                        KCET/JEE/NEET
+                      </Typography>
                     </Box>
                   </Grid>
                   <Grid item xs={6} sm={3}>
-                    <Box sx={{ 
-                      textAlign: 'center', 
-                      p: 1.5, 
-                      backgroundColor: 'warning.main', 
-                      borderRadius: 2, 
-                      color: 'white',
-                      fontSize: { xs: '0.75rem', sm: '0.85rem' }
-                    }}>
-                      <Typography variant="subtitle2" fontWeight="bold">10th Board</Typography>
+                    <Box
+                      sx={{
+                        textAlign: 'center',
+                        p: 1.5,
+                        backgroundColor: 'warning.main',
+                        borderRadius: 2,
+                        color: 'white',
+                        fontSize: { xs: '0.75rem', sm: '0.85rem' },
+                      }}
+                    >
+                      <Typography variant="subtitle2" fontWeight="bold">
+                        10th Board
+                      </Typography>
                     </Box>
                   </Grid>
                 </Grid>
               </Box>
 
-              <Box sx={{ 
-                display: 'flex', 
-                flexDirection: { xs: 'column', sm: 'row' }, 
-                gap: 2,
-                '& button': { 
-                  width: { xs: '100%', sm: 'auto' } 
-                } 
-              }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: { xs: 'column', sm: 'row' },
+                  gap: 2,
+                  '& button': {
+                    width: { xs: '100%', sm: 'auto' },
+                  },
+                }}
+              >
                 <ScrollLink to="popular-course" spy={true} smooth={true} offset={0} duration={350}>
                   <StyledButton color="primary" size="large" variant="contained">
                     Explore Courses
@@ -220,7 +257,7 @@ const HomeHero: FC = () => {
                 alignItems: 'center',
                 width: { xs: 280, md: 300 },
                 border: '2px solid',
-                borderColor: 'primary.main'
+                borderColor: 'primary.main',
               }}
             >
               <Box
@@ -240,10 +277,7 @@ const HomeHero: FC = () => {
                 <Image src="/images/certificate.png" alt="Certificate icon" width={32} height={32} quality={97} />
               </Box>
               <Box>
-                <Typography
-                  component="h6"
-                  sx={{ color: 'primary.main', fontSize: '1rem', fontWeight: 700, mb: 0.5 }}
-                >
+                <Typography component="h6" sx={{ color: 'primary.main', fontSize: '1rem', fontWeight: 700, mb: 0.5 }}>
                   Top Results
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary', lineHeight: 1.3 }}>
@@ -286,10 +320,7 @@ const HomeHero: FC = () => {
                 <PlayArrowIcon sx={{ color: 'secondary.main', fontSize: 20 }} />
               </Box>
               <Box>
-                <Typography
-                  component="h6"
-                  sx={{ color: 'white', fontSize: '0.85rem', fontWeight: 700, mb: 0.2 }}
-                >
+                <Typography component="h6" sx={{ color: 'white', fontSize: '0.85rem', fontWeight: 700, mb: 0.2 }}>
                   Online & Offline
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'white', lineHeight: 1.2, fontSize: '0.75rem' }}>
@@ -298,41 +329,47 @@ const HomeHero: FC = () => {
               </Box>
             </Box>
 
-            <Box sx={{ 
-              lineHeight: 0, 
-              borderRadius: 4, 
-              overflow: 'hidden', 
-              boxShadow: 4,
-              position: 'relative',
-              zIndex: 0 
-            }}>
-              <Image 
-                src="/images/home-hero.jpg" 
-                width={600} 
-                height={500} 
-                alt="Students learning" 
-                style={{ 
-                  width: '100%', 
-                  height: 'auto',
-                  objectFit: 'cover'
-                }}
+            <Box
+              sx={{
+                lineHeight: 0,
+                borderRadius: 4,
+                overflow: 'hidden',
+                boxShadow: 4,
+                position: 'relative',
+                zIndex: 0,
+              }}
+            >
+              <Image
+                src="/images/home-hero.jpg"
+                alt="Students learning"
+                width={1200} // High-resolution width
+                height={900} // Adjust based on actual aspect ratio
+                quality={100}
                 priority
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  objectFit: 'cover',
+                  borderRadius: '16px',
+                }}
               />
             </Box>
           </Grid>
         </Grid>
 
         {/* Experience Section */}
-        <Box sx={{ 
-          boxShadow: 2, 
-          py: 4, 
-          px: { xs: 3, md: 7 }, 
-          borderRadius: 4, 
-          mt: 6, 
-          backgroundColor: 'primary.50',
-          border: '1px solid',
-          borderColor: 'primary.100'
-        }}>
+        <Box
+          sx={{
+            boxShadow: 2,
+            py: 4,
+            px: { xs: 3, md: 7 },
+            borderRadius: 4,
+            mt: 6,
+            backgroundColor: 'primary.50',
+            border: '1px solid',
+            borderColor: 'primary.100',
+          }}
+        >
           <Grid container spacing={3}>
             {exps.map((item) => (
               <Grid key={item.value} item xs={12} md={4}>

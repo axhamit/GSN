@@ -16,14 +16,19 @@ const Footer: FC = () => {
           <Grid item xs={12} md={5}>
             <Box sx={{ width: { xs: '100%', md: 360 }, mb: { xs: 3, md: 0 } }}>
               <Typography component="h2" variant="h2" sx={{ mb: 2 }}>
-                Coursespace
+                GSN FOUNDATION
               </Typography>
+
               <Typography variant="subtitle1" sx={{ letterSpacing: 1, mb: 2 }}>
-                Coursespace is an online learning platform that has been operating since 2018 until now.
+                GSN Foundation provides expert coaching for PCMB 11th & 12th, competitive exams like JEE, NEET, KCET,
+                and 10th Standard Board preparation. Learn through both online and offline classes with personalized
+                study plans.
               </Typography>
+
               <FooterSocialLinks />
             </Box>
           </Grid>
+
           <Grid item xs={12} md={7}>
             <FooterNavigation />
           </Grid>
