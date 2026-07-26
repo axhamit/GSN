@@ -59,7 +59,7 @@ const StyledDots = styled('ul')(({ theme }) => ({
 
 const HomeOurMentors: FC = () => {
   const { breakpoints } = useTheme()
-  const matchMobileView = useMediaQuery(breakpoints.down('md'))
+  const matchMobileView = useMediaQuery(breakpoints.down('md'), { noSsr: true })
 
   const sliderConfig: Settings = {
     infinite: true,

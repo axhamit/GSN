@@ -5,4 +5,6 @@ export interface Testimonial {
   title: string
   content: string
   user: User
+  rating?: number
+  date?: string
 }

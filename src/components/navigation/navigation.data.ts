@@ -1,20 +1,8 @@
-import type { Navigation } from '@/interfaces/navigation'
-
-export const navigations: Navigation[] = [
-  {
-    label: 'Home',
-    path: '#', // '/',
-  },
-  {
-    label: 'Courses',
-    path: 'popular-course', // '/popular-course',
-  },
-  {
-    label: 'Testimonial',
-    path: 'testimonial', // '/testimonial',
-  },
-  {
-    label: 'Mentor',
-    path: 'mentors', // '/mentors',
-  },
+// navigation.data.ts
+export const navigations = [
+  { path: '/', label: 'Home' },
+  { path: 'courses', label: 'Courses' }, // This will be replaced by the dropdown
+  // { path: 'popular-course', label: 'Popular Courses' },
+  { path: 'about', label: 'About' },
+  { path: 'contact', label: 'Contact' },
 ]
