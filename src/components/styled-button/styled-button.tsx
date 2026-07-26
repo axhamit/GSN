@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react'
 import Box from '@mui/material/Box'
 import { Theme } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { styled, SxProps } from '@mui/material/styles'
 import { ButtonProps } from '@mui/material/Button'
 import { fontFamily } from '@/config/theme/typography'
 
@@ -10,6 +10,8 @@ interface BaseButtonProps extends Pick<ButtonProps, 'onClick' | 'type' | 'startI
   color?: 'default' | 'primary' | 'secondary' | 'dark' | 'light'
   size?: 'small' | 'medium' | 'large'
   disableHoverEffect?: boolean
+  className?: string
+  sx?: SxProps<Theme>
 }
 interface StyledButtonRootProps extends BaseButtonProps {
   theme?: Theme
@@ -17,7 +19,7 @@ interface StyledButtonRootProps extends BaseButtonProps {
 
 const StyledButtonRoot = styled('button', {
   shouldForwardProp: (prop) =>
-    prop !== 'variant' && prop !== 'color' && prop !== 'size' && prop !== 'disableHoverEffect',
+    prop !== 'variant' && prop !== 'color' && prop !== 'size' && prop !== 'disableHoverEffect' && prop !== 'sx',
 })<StyledButtonRootProps>(({ theme, color, variant, size, disableHoverEffect }) => ({
   fontFamily,
   cursor: 'pointer',

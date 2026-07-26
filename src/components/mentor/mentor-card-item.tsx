@@ -40,7 +40,8 @@ const MentorCardItem: FC<Props> = ({ item }) => {
           <Image src={item.photo as string} width={570} height={427} alt={'Mentor ' + item.id} />
         </Box>
         <Box sx={{ mb: 2 }}>
-          <Typography component="h2" variant="h4" sx={{ fontSize: '1.4rem' }}>
+          <Typography variant="h1"
+  component="h2" variant="h4" sx={{ fontSize: '1.4rem' }}>
             {item.name}
           </Typography>
           <Typography sx={{ mb: 2, color: 'text.secondary' }}>{item.category}</Typography>

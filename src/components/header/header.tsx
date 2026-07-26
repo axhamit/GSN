@@ -11,7 +11,7 @@ import { Menu, Close } from '@mui/icons-material'
 const Header: FC = () => {
   const [visibleMenu, setVisibleMenu] = useState<boolean>(false)
   const { breakpoints } = useTheme()
-  const matchMobileView = useMediaQuery(breakpoints.down('md'))
+  const matchMobileView = useMediaQuery(breakpoints.down('md'), { noSsr: true })
 
   return (
     <Box sx={{ backgroundColor: 'background.paper' }}>
@@ -30,7 +30,6 @@ const Header: FC = () => {
               alignItems: 'center',
               justifyContent: 'space-between',
               flexDirection: { xs: 'column', md: 'row' },
-
               transition: (theme) => theme.transitions.create(['top']),
               ...(matchMobileView && {
                 py: 6,
