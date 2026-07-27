@@ -21,14 +21,16 @@ const DynamicAdvancedExcel = dynamic(() => import('../components/AdvancedExcel/A
 const DynamicEmployabilityChallenge = dynamic(() => import('../components/EmployabilityChallenge/EmployabilityChallenge'), { ssr: false })
 const DynamicGenerativeAIProgram = dynamic(() => import('../components/GenerativeAIProgram/GenerativeAIProgram'), { ssr: false })
 const DynamicPartnershipModels = dynamic(() => import('../components/PartnershipModels/PartnershipModels'), { ssr: false })
+const DynamicAvishkarCareer = dynamic(()=> import ('../components/AvishkarCareer/AvishkarCareer'), { ssr: false } )
 const Home: NextPageWithLayout = () => {
   return (
     <>
       <DynamicHomeHero />
       <DynamicHomePopularCourse />
       <DynamicHomeFeature />
+      <DynamicAvishkarCareer/>
       <DynamicHomeTestimonial />
-      <DynamicHomeOurMentors />
+      {/* <DynamicHomeOurMentors /> */}
       <DynamicAboutGSN />
       <DynamicGapAnalysis />
       <DynamicWhyPartner />
