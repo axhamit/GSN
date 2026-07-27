@@ -354,7 +354,7 @@ const HomeFeature: FC = () => {
   component="h2"
                 sx={{
                   position: 'relative',
-                  fontSize: { xs: 2.5, sm: 3.2, md: 3.8 },
+                  fontSize: { xs: '2.5rem', sm: '3.2rem', md: '3.8rem' },
                   lineHeight: 1.2,
                   fontWeight: 800,
                   mb: 3,
