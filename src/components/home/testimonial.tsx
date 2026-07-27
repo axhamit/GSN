@@ -555,7 +555,7 @@ const HomeTestimonial: FC = () => {
                                 fontWeight: 500,
                               }}
                             >
-                              {item.role || 'Student'}
+                              {item.user?.professional || 'Student'}
                             </Typography>
                           </Box>
                         </Box>

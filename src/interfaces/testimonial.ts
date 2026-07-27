@@ -7,4 +7,6 @@ export interface Testimonial {
   user: User
   rating?: number
   date?: string
+  avatar?: string
+  name:string
 }

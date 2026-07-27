@@ -82,7 +82,7 @@ const Footer: FC = () => {
               <Typography
                 variant="h1"
   component="h2"
-                variant="h4"
+               
                 sx={{
                   fontWeight: 900,
                   mb: 1,
