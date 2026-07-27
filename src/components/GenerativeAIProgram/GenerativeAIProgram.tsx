@@ -163,6 +163,8 @@ const GenerativeAIProgram: FC = () => {
             <Typography
               component="span"
               sx={{
+                fontSize: 'inherit',
+                fontWeight: 'inherit',
                 background: `linear-gradient(135deg, ${theme.palette.primary.light}, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                 backgroundSize: '200% 200%',
                 backgroundClip: 'text',

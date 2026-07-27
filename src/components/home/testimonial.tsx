@@ -285,7 +285,7 @@ const HomeTestimonial: FC = () => {
                   variant="h1"
   component="h2"
                   sx={{
-                    fontSize: { xs: 3, sm: 3.8, md: 5.5 },
+                    fontSize: { xs: '3rem', sm: '3.8rem', md: '5.5rem' },
                     lineHeight: 1.1,
                     fontWeight: 900,
                     letterSpacing: '-0.04em',
@@ -298,7 +298,7 @@ const HomeTestimonial: FC = () => {
                     component="span"
                     sx={{
                       display: 'block',
-                      fontSize: { xs: 1.2, sm: 1.5, md: 2 },
+                      fontSize: { xs: '1.2rem', sm: '1.5rem', md: '2rem' },
                       fontWeight: 700,
                       color: alpha(theme.palette.text.primary, 0.5),
                       textTransform: 'uppercase',

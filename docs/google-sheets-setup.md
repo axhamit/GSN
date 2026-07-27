@@ -3,9 +3,12 @@
 Form submissions from `EnrollmentForm` are posted to `/api/enquiry`, which forwards them to a
 Google Apps Script Web App bound to a Google Sheet.
 
-## 1. Create the sheet
+## 1. Prepare the sheet
 
-Create a new Google Sheet and add this header row in row 1:
+Target sheet:
+https://docs.google.com/spreadsheets/d/1SVddjQRHf3oQbtD5Kll18rav_DILUOl9XneEJ_77gEI/edit
+
+Add this header row in row 1:
 
 ```
 Timestamp | Name | Email | Phone | Message | Course | Course Price | Source

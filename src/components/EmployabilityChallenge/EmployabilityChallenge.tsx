@@ -242,6 +242,8 @@ const EmployabilityChallenge: FC<EmployabilityChallengeProps> = ({ data = defaul
             <Typography
               component="span"
               sx={{
+                fontSize: 'inherit',
+                fontWeight: 'inherit',
                 background: `linear-gradient(135deg, ${theme.palette.error.light}, ${theme.palette.error.main}, ${theme.palette.primary.main})`,
                 backgroundSize: '200% 200%',
                 backgroundClip: 'text',
@@ -658,7 +660,7 @@ const EmployabilityChallenge: FC<EmployabilityChallengeProps> = ({ data = defaul
               </Box>
               <Typography
                 sx={{
-                  fontSize: { xs: 2, sm: 2.5, md: 3 },
+                  fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
                   fontWeight: 900,
                   background: `linear-gradient(135deg, ${theme.palette.primary.light}, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                   backgroundClip: 'text',
