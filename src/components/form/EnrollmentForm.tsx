@@ -95,7 +95,8 @@ const EnrollmentForm: FC<EnrollmentFormProps> = ({
       PaperProps={{
         sx: {
           borderRadius: { xs: 3, md: 4 },
-          background: `linear-gradient(135deg, ${theme.palette.background.paper}, ${alpha(theme.palette.primary.main, 0.02)})`,
+          backgroundColor: theme.palette.background.paper,
+          backgroundImage: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0)}, ${alpha(theme.palette.primary.main, 0.02)})`,
           boxShadow: `0 30px 80px ${alpha(theme.palette.common.black, 0.3)}`,
           position: 'relative',
           overflow: 'hidden',
