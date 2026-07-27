@@ -1,28 +1,34 @@
 import React, { FC, useState, useEffect } from 'react'
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import { alpha, useTheme } from '@mui/material/styles'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
-import TrendingUpIcon from '@mui/icons-material/TrendingUp'
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium'
 import SchoolIcon from '@mui/icons-material/School'
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 import PsychologyIcon from '@mui/icons-material/Psychology'
 import PeopleIcon from '@mui/icons-material/People'
-import BusinessCenterIcon from '@mui/icons-material/BusinessCenter'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import StarIcon from '@mui/icons-material/Star'
 import { motion } from 'framer-motion'
+import EnrollmentForm from '@/components/form/EnrollmentForm'
+
+type AccentColor = 'primary' | 'secondary' | 'warning' | 'success'
+
+interface RoadmapStep {
+  step: string
+  icon: React.ReactElement
+  title: string
+  description: string
+  color: AccentColor
+}
 
 const AvishkarCareer: FC = () => {
   const theme = useTheme()
   const [activeStep, setActiveStep] = useState(0)
+  const [enquiryOpen, setEnquiryOpen] = useState(false)
 
-  const roadmap = [
+  const roadmap: RoadmapStep[] = [
     {
       step: 'Assess',
       icon: <PsychologyIcon />,
@@ -65,7 +71,7 @@ const AvishkarCareer: FC = () => {
       setActiveStep((prev) => (prev + 1) % roadmap.length)
     }, 4000)
     return () => clearInterval(interval)
-  }, [])
+  }, [roadmap.length])
 
   const stats = [
     { value: '95%', label: 'Placement Rate' },
@@ -168,7 +174,7 @@ const AvishkarCareer: FC = () => {
             <Typography
               component="h1"
               sx={{
-                fontSize: { xs: 2.8, sm: 3.5, md: 4.5 },
+                fontSize: { xs: '2.8rem', sm: '3.5rem', md: '4.5rem' },
                 fontWeight: 900,
                 lineHeight: 1.1,
                 letterSpacing: '-0.03em',
@@ -179,7 +185,7 @@ const AvishkarCareer: FC = () => {
                 component="span"
                 sx={{
                   display: 'block',
-                  fontSize: { xs: 1, sm: 1.2, md: 1.6 },
+                  fontSize: { xs: '1rem', sm: '1.2rem', md: '1.6rem' },
                   fontWeight: 700,
                   color: alpha(theme.palette.text.primary, 0.4),
                   textTransform: 'uppercase',
@@ -258,7 +264,7 @@ const AvishkarCareer: FC = () => {
                 >
                   <Typography
                     sx={{
-                      fontSize: { xs: 1.8, sm: 2.2, md: 2.8 },
+                      fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.8rem' },
                       fontWeight: 900,
                       background: `linear-gradient(135deg, ${theme.palette.primary.light}, ${theme.palette.primary.main})`,
                       backgroundClip: 'text',
@@ -333,7 +339,8 @@ const AvishkarCareer: FC = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -8 }}
-              style={{ flex: '0 0 auto', width: { xs: '80%', sm: '45%', md: '30%' } }}
+              onMouseEnter={() => setActiveStep(index)}
+              style={{ flex: '0 0 auto' }}
             >
               <Box
                 sx={{
@@ -343,8 +350,12 @@ const AvishkarCareer: FC = () => {
                   height: '100%',
                   background: `linear-gradient(145deg, ${alpha(theme.palette.background.paper, 0.95)}, ${alpha(theme.palette.background.default, 0.85)})`,
                   backdropFilter: 'blur(20px)',
-                  border: `1px solid ${alpha(theme.palette[item.color as keyof typeof theme.palette].main, 0.08)}`,
-                  boxShadow: `0 15px 50px ${alpha(theme.palette.common.black, 0.08)}`,
+                  border: `1px solid ${alpha(theme.palette[item.color].main, index === activeStep ? 0.35 : 0.08)}`,
+                  boxShadow:
+                    index === activeStep
+                      ? `0 25px 70px ${alpha(theme.palette[item.color].main, 0.18)}`
+                      : `0 15px 50px ${alpha(theme.palette.common.black, 0.08)}`,
+                  transform: index === activeStep ? 'translateY(-6px)' : 'none',
                   transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                   position: 'relative',
                   overflow: 'hidden',
@@ -355,13 +366,13 @@ const AvishkarCareer: FC = () => {
                     right: -60,
                     width: 120,
                     height: 120,
-                    background: `radial-gradient(circle, ${alpha(theme.palette[item.color as keyof typeof theme.palette].main, 0.04)}, transparent 70%)`,
+                    background: `radial-gradient(circle, ${alpha(theme.palette[item.color].main, 0.04)}, transparent 70%)`,
                     borderRadius: '50%',
                     transition: 'all 0.6s ease',
                   },
                   '&:hover': {
-                    borderColor: alpha(theme.palette[item.color as keyof typeof theme.palette].main, 0.2),
-                    boxShadow: `0 25px 70px ${alpha(theme.palette[item.color as keyof typeof theme.palette].main, 0.1)}`,
+                    borderColor: alpha(theme.palette[item.color].main, 0.2),
+                    boxShadow: `0 25px 70px ${alpha(theme.palette[item.color].main, 0.1)}`,
                     '&::before': { transform: 'scale(1.8)', opacity: 1 },
                   },
                 }}
@@ -376,8 +387,8 @@ const AvishkarCareer: FC = () => {
                       width: 44,
                       height: 44,
                       borderRadius: '50%',
-                      background: `linear-gradient(135deg, ${theme.palette[item.color as keyof typeof theme.palette].main}, ${theme.palette[item.color as keyof typeof theme.palette].dark})`,
-                      boxShadow: `0 4px 20px ${alpha(theme.palette[item.color as keyof typeof theme.palette].main, 0.3)}`,
+                      background: `linear-gradient(135deg, ${theme.palette[item.color].main}, ${theme.palette[item.color].dark})`,
+                      boxShadow: `0 4px 20px ${alpha(theme.palette[item.color].main, 0.3)}`,
                       color: 'white',
                       fontWeight: 700,
                       fontSize: '1.1rem',
@@ -393,10 +404,10 @@ const AvishkarCareer: FC = () => {
                       width: 36,
                       height: 36,
                       borderRadius: '50%',
-                      background: alpha(theme.palette[item.color as keyof typeof theme.palette].main, 0.08),
+                      background: alpha(theme.palette[item.color].main, 0.08),
                       '& svg': {
                         fontSize: 20,
-                        color: theme.palette[item.color as keyof typeof theme.palette].main,
+                        color: theme.palette[item.color].main,
                       },
                     }}
                   >
@@ -417,7 +428,7 @@ const AvishkarCareer: FC = () => {
                   <Box
                     component="span"
                     sx={{
-                      color: theme.palette[item.color as keyof typeof theme.palette].main,
+                      color: theme.palette[item.color].main,
                       fontWeight: 700,
                       mr: 0.5,
                     }}
@@ -492,12 +503,17 @@ const AvishkarCareer: FC = () => {
               transition={{ type: 'spring', stiffness: 300 }}
             >
               <Box
+                component="button"
+                type="button"
+                onClick={() => setEnquiryOpen(true)}
+                aria-label="Start your Avishkar journey"
                 sx={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: 1,
                   px: 3,
                   py: 1.2,
+                  border: 'none',
                   borderRadius: 50,
                   background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
                   color: 'white',
@@ -563,6 +579,13 @@ const AvishkarCareer: FC = () => {
           />
         </Box>
       </Container>
+
+      <EnrollmentForm
+        open={enquiryOpen}
+        onClose={() => setEnquiryOpen(false)}
+        courseName="Avishkar Your Career Program"
+        source="AvishkarCareer"
+      />
     </Box>
   )
 }
