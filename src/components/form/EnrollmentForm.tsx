@@ -10,37 +10,32 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import SchoolIcon from '@mui/icons-material/School'
+import Alert from '@mui/material/Alert'
 import { useTheme, alpha } from '@mui/material/styles'
-import useMediaQuery from '@mui/material/useMediaQuery' 
-
-
-interface EnrollmentFormData {
-  name: string
-  email: string
-  phone: string
-  courseName: string
-  coursePrice: number
-  message: string
-}
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { EnquiryPayload } from '@/interfaces/enquiry'
 
 interface EnrollmentFormProps {
   open: boolean
   onClose: () => void
   courseName: string
-  coursePrice: number
+  coursePrice?: number
+  source?: string
   onSuccess?: () => void
 }
 
-const EnrollmentForm: FC<EnrollmentFormProps> = ({ 
-  open, 
-  onClose, 
-  courseName, 
+const EnrollmentForm: FC<EnrollmentFormProps> = ({
+  open,
+  onClose,
+  courseName,
   coursePrice,
-  onSuccess 
+  source = 'website',
+  onSuccess
 }) => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const [loading, setLoading] = useState(false)
+  const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -48,48 +43,61 @@ const EnrollmentForm: FC<EnrollmentFormProps> = ({
     message: '',
   })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     })
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault()
+
+    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
+      setStatus({ type: 'error', message: 'Please fill in your name, email and phone number.' })
+      return
+    }
+
     setLoading(true)
+    setStatus(null)
 
     try {
-      // Prepare data for API
-      const enrollmentData: EnrollmentFormData = {
+      const payload: EnquiryPayload = {
         ...formData,
         courseName,
         coursePrice,
+        source,
       }
 
-      // Send to your API endpoint
-      console.log('Enrollment Data:', enrollmentData)
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      // Success
-      alert('🎉 Thank you for your interest! We will contact you shortly.')
-      onSuccess?.()
-      onClose()
+      const response = await fetch('/api/enquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`)
+      }
+
+      setStatus({ type: 'success', message: 'Thank you! Our team will contact you within 24 hours.' })
       setFormData({ name: '', email: '', phone: '', message: '' })
+      onSuccess?.()
     } catch (error) {
-      console.error('Enrollment error:', error)
-      alert('Something went wrong. Please try again.')
+      setStatus({ type: 'error', message: 'Something went wrong. Please try again or call us directly.' })
     } finally {
       setLoading(false)
     }
   }
 
+  const handleClose = (): void => {
+    setStatus(null)
+    onClose()
+  }
+
   return (
     <Dialog
       open={open}
-      onClose={onClose}
+      onClose={handleClose}
       maxWidth="sm"
       fullWidth
       PaperProps={{
@@ -144,12 +152,14 @@ const EnrollmentForm: FC<EnrollmentFormProps> = ({
           <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500, fontSize: { xs: '0.85rem', md: '0.875rem' } }}>
             {courseName}
           </Typography>
-          <Typography variant="caption" sx={{ color: 'success.main', fontWeight: 700, display: 'block', mt: 0.5, fontSize: { xs: '0.7rem', md: '0.75rem' } }}>
-            Course Fee: ₹{coursePrice.toLocaleString()}
-          </Typography>
+          {coursePrice !== undefined && (
+            <Typography variant="caption" sx={{ color: 'success.main', fontWeight: 700, display: 'block', mt: 0.5, fontSize: { xs: '0.7rem', md: '0.75rem' } }}>
+              Course Fee: ₹{coursePrice.toLocaleString()}
+            </Typography>
+          )}
         </Box>
         <IconButton 
-          onClick={onClose} 
+          onClick={handleClose} 
           sx={{ 
             backgroundColor: alpha(theme.palette.primary.main, 0.08),
             '&:hover': {
@@ -169,6 +179,12 @@ const EnrollmentForm: FC<EnrollmentFormProps> = ({
           <Typography variant="body2" sx={{ mb: 3, color: 'text.secondary', fontSize: { xs: '0.85rem', md: '0.875rem' } }}>
             Fill in your details and our team will get back to you within 24 hours.
           </Typography>
+
+          {status && (
+            <Alert severity={status.type} sx={{ mb: 2.5, borderRadius: 2 }} onClose={() => setStatus(null)}>
+              {status.message}
+            </Alert>
+          )}
 
           <TextField
             fullWidth
@@ -264,7 +280,7 @@ const EnrollmentForm: FC<EnrollmentFormProps> = ({
 
       <DialogActions sx={{ px: { xs: 2, md: 3 }, pb: { xs: 2, md: 3 }, gap: 1.5, position: 'relative', zIndex: 1, flexDirection: { xs: 'column', sm: 'row' } }}>
         <Button
-          onClick={onClose}
+          onClick={handleClose}
           disabled={loading}
           fullWidth={isMobile}
           sx={{
