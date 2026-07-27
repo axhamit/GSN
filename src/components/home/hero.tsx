@@ -591,7 +591,7 @@ const HomeHero: FC = () => {
         </Grid>
 
         {/* Experience Stats Section */}
-        {/* <Box
+        <Box
           sx={{
             mt: 10,
             p: { xs: 3, md: 5 },
@@ -608,7 +608,7 @@ const HomeHero: FC = () => {
               </Grid>
             ))}
           </Grid>
-        </Box> */}
+        </Box>
       </Container>
     </Box>
   )

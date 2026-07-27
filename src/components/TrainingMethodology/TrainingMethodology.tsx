@@ -23,6 +23,11 @@ import {
 const TrainingMethodology: FC = () => {
   const theme = useTheme()
 
+  const getPaletteColor = (color: string) => {
+    const paletteColor = (theme.palette as Record<string, any>)[color] ?? theme.palette.primary
+    return paletteColor as { main: string; light: string; dark: string }
+  }
+
   const steps = [
     {
       number: '01',
@@ -295,7 +300,7 @@ const TrainingMethodology: FC = () => {
                   height: '100%',
                   background: `linear-gradient(145deg, ${alpha(theme.palette.background.paper, 0.95)}, ${alpha(theme.palette.background.default, 0.85)})`,
                   backdropFilter: 'blur(20px)',
-                  border: `1px solid ${alpha(theme.palette[step.color as keyof typeof theme.palette].main, 0.08)}`,
+                  border: `1px solid ${alpha(getPaletteColor(step.color).main, 0.08)}`,
                   boxShadow: `
                     0 20px 60px ${alpha(theme.palette.common.black, 0.15)},
                     inset 0 1px 0 ${alpha(theme.palette.common.white, 0.05)}
@@ -310,15 +315,15 @@ const TrainingMethodology: FC = () => {
                     right: -80,
                     width: 160,
                     height: 160,
-                    background: `radial-gradient(circle, ${alpha(theme.palette[step.color as keyof typeof theme.palette].main, 0.04)}, transparent 70%)`,
+                    background: `radial-gradient(circle, ${alpha(getPaletteColor(step.color).main, 0.04)}, transparent 70%)`,
                     borderRadius: '50%',
                     transition: 'all 0.6s ease',
                   },
                   '&:hover': {
                     transform: 'translateY(-12px) scale(1.02)',
-                    borderColor: alpha(theme.palette[step.color as keyof typeof theme.palette].main, 0.3),
+                    borderColor: alpha(getPaletteColor(step.color).main, 0.3),
                     boxShadow: `
-                      0 30px 80px ${alpha(theme.palette[step.color as keyof typeof theme.palette].main, 0.15)},
+                      0 30px 80px ${alpha(getPaletteColor(step.color).main, 0.15)},
                       inset 0 1px 0 ${alpha(theme.palette.common.white, 0.1)}
                     `,
                     '&::before': {
@@ -338,8 +343,8 @@ const TrainingMethodology: FC = () => {
                       minWidth: 56,
                       height: 56,
                       borderRadius: 3,
-                      background: `linear-gradient(135deg, ${theme.palette[step.color as keyof typeof theme.palette].main}, ${theme.palette[step.color as keyof typeof theme.palette].dark})`,
-                      boxShadow: `0 8px 30px ${alpha(theme.palette[step.color as keyof typeof theme.palette].main, 0.3)}`,
+                      background: `linear-gradient(135deg, ${getPaletteColor(step.color).main}, ${getPaletteColor(step.color).dark})`,
+                      boxShadow: `0 8px 30px ${alpha(getPaletteColor(step.color).main, 0.3)}`,
                       fontFamily: 'monospace',
                       fontSize: '1.4rem',
                       fontWeight: 800,
@@ -352,12 +357,12 @@ const TrainingMethodology: FC = () => {
                     sx={{
                       p: 1,
                       borderRadius: 2,
-                      background: `linear-gradient(135deg, ${alpha(theme.palette[step.color as keyof typeof theme.palette].main, 0.1)}, ${alpha(theme.palette[step.color as keyof typeof theme.palette].main, 0.03)})`,
-                      border: `1px solid ${alpha(theme.palette[step.color as keyof typeof theme.palette].main, 0.05)}`,
+                      background: `linear-gradient(135deg, ${alpha(getPaletteColor(step.color).main, 0.1)}, ${alpha(getPaletteColor(step.color).main, 0.03)})`,
+                      border: `1px solid ${alpha(getPaletteColor(step.color).main, 0.05)}`,
                       display: 'flex',
                       '& svg': {
                         fontSize: 28,
-                        color: theme.palette[step.color as keyof typeof theme.palette].main,
+                        color: getPaletteColor(step.color).main,
                       },
                     }}
                   >
@@ -372,7 +377,7 @@ const TrainingMethodology: FC = () => {
                     ...sectionCardTitleSx,
                     fontWeight: 800,
                     mb: 2,
-                    background: `linear-gradient(135deg, ${theme.palette[step.color as keyof typeof theme.palette].light}, ${theme.palette[step.color as keyof typeof theme.palette].main})`,
+                    background: `linear-gradient(135deg, ${getPaletteColor(step.color).light}, ${getPaletteColor(step.color).main})`,
                     backgroundClip: 'text',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
@@ -407,11 +412,11 @@ const TrainingMethodology: FC = () => {
                         gap: 1.5,
                         p: 1.5,
                         borderRadius: 2,
-                        background: alpha(theme.palette[step.color as keyof typeof theme.palette].main, 0.03),
-                        border: `1px solid ${alpha(theme.palette[step.color as keyof typeof theme.palette].main, 0.05)}`,
+                        background: alpha(getPaletteColor(step.color).main, 0.03),
+                        border: `1px solid ${alpha(getPaletteColor(step.color).main, 0.05)}`,
                         transition: 'all 0.3s ease',
                         '&:hover': {
-                          background: alpha(theme.palette[step.color as keyof typeof theme.palette].main, 0.06),
+                          background: alpha(getPaletteColor(step.color).main, 0.06),
                           transform: 'translateX(4px)',
                         },
                       }}
@@ -419,7 +424,7 @@ const TrainingMethodology: FC = () => {
                       <ArrowForwardIcon
                         sx={{
                           fontSize: 16,
-                          color: theme.palette[step.color as keyof typeof theme.palette].main,
+                          color: getPaletteColor(step.color).main,
                         }}
                       />
                       <Typography

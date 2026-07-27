@@ -23,6 +23,11 @@ import {
 const WhyPartner: FC = () => {
   const theme = useTheme()
 
+  const getPaletteColor = (color: string) => {
+    const paletteColor = (theme.palette as Record<string, any>)[color] ?? theme.palette.primary
+    return paletteColor as { main: string; light: string; dark: string }
+  }
+
   const benefits = [
     {
       icon: <TrendingUpIcon />,
@@ -213,7 +218,7 @@ const WhyPartner: FC = () => {
                   height: '100%',
                   background: `linear-gradient(145deg, ${alpha(theme.palette.background.paper, 0.95)}, ${alpha(theme.palette.background.default, 0.85)})`,
                   backdropFilter: 'blur(20px)',
-                  border: `1px solid ${alpha(theme.palette[benefit.color as keyof typeof theme.palette].main, 0.08)}`,
+                  border: `1px solid ${alpha(getPaletteColor(benefit.color).main, 0.08)}`,
                   boxShadow: `
                     0 20px 60px ${alpha(theme.palette.common.black, 0.15)},
                     inset 0 1px 0 ${alpha(theme.palette.common.white, 0.05)}
@@ -228,15 +233,15 @@ const WhyPartner: FC = () => {
                     right: -80,
                     width: 160,
                     height: 160,
-                    background: `radial-gradient(circle, ${alpha(theme.palette[benefit.color as keyof typeof theme.palette].main, 0.04)}, transparent 70%)`,
+                    background: `radial-gradient(circle, ${alpha(getPaletteColor(benefit.color).main, 0.04)}, transparent 70%)`,
                     borderRadius: '50%',
                     transition: 'all 0.6s ease',
                   },
                   '&:hover': {
                     transform: 'translateY(-8px) scale(1.01)',
-                    borderColor: alpha(theme.palette[benefit.color as keyof typeof theme.palette].main, 0.2),
+                    borderColor: alpha(getPaletteColor(benefit.color).main, 0.2),
                     boxShadow: `
-                      0 30px 80px ${alpha(theme.palette[benefit.color as keyof typeof theme.palette].main, 0.12)},
+                      0 30px 80px ${alpha(getPaletteColor(benefit.color).main, 0.12)},
                       inset 0 1px 0 ${alpha(theme.palette.common.white, 0.1)}
                     `,
                     '&::before': {
@@ -256,12 +261,12 @@ const WhyPartner: FC = () => {
                       minWidth: 48,
                       height: 48,
                       borderRadius: 3,
-                      background: `linear-gradient(135deg, ${alpha(theme.palette[benefit.color as keyof typeof theme.palette].main, 0.12)}, ${alpha(theme.palette[benefit.color as keyof typeof theme.palette].main, 0.04)})`,
-                      border: `1px solid ${alpha(theme.palette[benefit.color as keyof typeof theme.palette].main, 0.1)}`,
+                      background: `linear-gradient(135deg, ${alpha(getPaletteColor(benefit.color).main, 0.12)}, ${alpha(getPaletteColor(benefit.color).main, 0.04)})`,
+                      border: `1px solid ${alpha(getPaletteColor(benefit.color).main, 0.1)}`,
                       fontFamily: 'monospace',
                       fontSize: '1.2rem',
                       fontWeight: 800,
-                      color: theme.palette[benefit.color as keyof typeof theme.palette].main,
+                      color: getPaletteColor(benefit.color).main,
                     }}
                   >
                     {benefit.number}
@@ -274,8 +279,8 @@ const WhyPartner: FC = () => {
                         sx={{
                           p: 1,
                           borderRadius: 2,
-                          background: `linear-gradient(135deg, ${theme.palette[benefit.color as keyof typeof theme.palette].main}, ${theme.palette[benefit.color as keyof typeof theme.palette].dark})`,
-                          boxShadow: `0 4px 20px ${alpha(theme.palette[benefit.color as keyof typeof theme.palette].main, 0.3)}`,
+                          background: `linear-gradient(135deg, ${getPaletteColor(benefit.color).main}, ${getPaletteColor(benefit.color).dark})`,
+                          boxShadow: `0 4px 20px ${alpha(getPaletteColor(benefit.color).main, 0.3)}`,
                           display: 'flex',
                           '& svg': {
                             fontSize: 22,
@@ -290,7 +295,7 @@ const WhyPartner: FC = () => {
                         sx={{
                           ...sectionCardTitleSx,
                           color: 'text.primary',
-                          background: `linear-gradient(135deg, ${theme.palette[benefit.color as keyof typeof theme.palette].light}, ${theme.palette[benefit.color as keyof typeof theme.palette].main})`,
+                          background: `linear-gradient(135deg, ${getPaletteColor(benefit.color).light}, ${getPaletteColor(benefit.color).main})`,
                           backgroundClip: 'text',
                           WebkitBackgroundClip: 'text',
                           WebkitTextFillColor: 'transparent',
