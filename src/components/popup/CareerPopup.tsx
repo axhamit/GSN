@@ -54,7 +54,8 @@ const CareerPopup: FC<CareerPopupProps> = ({ onEnrollClick }) => {
       PaperProps={{
         sx: {
           borderRadius: { xs: 3, md: 4 },
-          background: `linear-gradient(135deg, ${theme.palette.background.paper}, ${alpha(theme.palette.primary.main, 0.05)})`,
+          backgroundColor: theme.palette.background.paper,
+          backgroundImage: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0)}, ${alpha(theme.palette.primary.main, 0.05)})`,
           boxShadow: `0 40px 100px ${alpha(theme.palette.common.black, 0.5)}`,
           position: 'relative',
           overflow: 'hidden',
