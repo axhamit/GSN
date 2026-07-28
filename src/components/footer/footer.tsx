@@ -18,19 +18,12 @@ const Footer: FC = () => {
     <Box
       component="footer"
       sx={{
-        background: `
-          linear-gradient(165deg, 
-            #0a0a0a 0%, 
-            ${alpha(theme.palette.primary.dark, 0.15)} 30%, 
-            #0a0a0a 60%,
-            ${alpha(theme.palette.primary.dark, 0.05)} 100%
-          )
-        `,
+        background: '#0a0a0a', // Pure dark background
         pt: { xs: 8, md: 12 },
         pb: { xs: 4, md: 6 },
         position: 'relative',
         overflow: 'hidden',
-        borderTop: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+        borderTop: `1px solid ${alpha('#ffffff', 0.05)}`,
         '&::before': {
           content: '""',
           position: 'absolute',
@@ -38,7 +31,7 @@ const Footer: FC = () => {
           right: '-10%',
           width: '40%',
           height: '40%',
-          background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.05)} 0%, transparent 70%)`,
+          background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.03)} 0%, transparent 70%)`,
           borderRadius: '50%',
           pointerEvents: 'none',
         },
@@ -49,7 +42,7 @@ const Footer: FC = () => {
           left: '-5%',
           width: '30%',
           height: '30%',
-          background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.03)} 0%, transparent 70%)`,
+          background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.02)} 0%, transparent 70%)`,
           borderRadius: '50%',
           pointerEvents: 'none',
         },
@@ -81,8 +74,7 @@ const Footer: FC = () => {
               {/* Logo */}
               <Typography
                 variant="h1"
-  component="h2"
-               
+                component="h2"
                 sx={{
                   fontWeight: 900,
                   mb: 1,
@@ -100,7 +92,7 @@ const Footer: FC = () => {
               <Typography
                 variant="subtitle2"
                 sx={{
-                  color: alpha(theme.palette.common.white, 0.5),
+                  color: alpha('#ffffff', 0.4),
                   fontFamily: 'monospace',
                   letterSpacing: 0.5,
                   mb: 3,
@@ -114,7 +106,7 @@ const Footer: FC = () => {
               <Typography
                 variant="body2"
                 sx={{
-                  color: alpha(theme.palette.common.white, 0.7),
+                  color: alpha('#ffffff', 0.6),
                   lineHeight: 1.8,
                   mb: 3,
                   fontSize: '0.9rem',
@@ -132,7 +124,7 @@ const Footer: FC = () => {
                   <Typography
                     variant="body2"
                     sx={{
-                      color: alpha(theme.palette.common.white, 0.8),
+                      color: alpha('#ffffff', 0.7),
                       fontSize: '0.85rem',
                       '&:hover': { color: theme.palette.primary.main },
                       cursor: 'pointer',
@@ -147,7 +139,7 @@ const Footer: FC = () => {
                   <Typography
                     variant="body2"
                     sx={{
-                      color: alpha(theme.palette.common.white, 0.8),
+                      color: alpha('#ffffff', 0.7),
                       fontSize: '0.85rem',
                     }}
                   >
@@ -173,7 +165,7 @@ const Footer: FC = () => {
                 variant="h6"
                 sx={{
                   fontWeight: 700,
-                  color: 'white',
+                  color: '#ffffff',
                   mb: 2,
                   fontSize: '1rem',
                   letterSpacing: 0.5,
@@ -188,11 +180,11 @@ const Footer: FC = () => {
                   p: 2,
                   borderRadius: 3,
                   mb: 2,
-                  background: alpha(theme.palette.primary.main, 0.06),
+                  background: alpha(theme.palette.primary.main, 0.05),
                   border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
                   transition: 'all 0.3s ease',
                   '&:hover': {
-                    background: alpha(theme.palette.primary.main, 0.1),
+                    background: alpha(theme.palette.primary.main, 0.08),
                     transform: 'translateX(4px)',
                   },
                 }}
@@ -202,20 +194,20 @@ const Footer: FC = () => {
                   <Typography
                     variant="body2"
                     sx={{
-                      color: 'white',
+                      color: '#ffffff',
                       fontWeight: 600,
                       fontSize: '0.9rem',
                     }}
                   >
-                    Vijay Kumar Nandapur
+                    Vijay Kumar N
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, pl: 0.5 }}>
-                  <PhoneIcon sx={{ fontSize: 16, color: alpha(theme.palette.common.white, 0.4) }} />
+                  <PhoneIcon sx={{ fontSize: 16, color: alpha('#ffffff', 0.3) }} />
                   <Typography
                     variant="body2"
                     sx={{
-                      color: alpha(theme.palette.common.white, 0.8),
+                      color: alpha('#ffffff', 0.7),
                       fontSize: '0.85rem',
                       '&:hover': { color: theme.palette.primary.main },
                       cursor: 'pointer',
@@ -233,11 +225,11 @@ const Footer: FC = () => {
                   p: 2,
                   borderRadius: 3,
                   mb: 3,
-                  background: alpha(theme.palette.secondary.main, 0.06),
+                  background: alpha(theme.palette.secondary.main, 0.05),
                   border: `1px solid ${alpha(theme.palette.secondary.main, 0.08)}`,
                   transition: 'all 0.3s ease',
                   '&:hover': {
-                    background: alpha(theme.palette.secondary.main, 0.1),
+                    background: alpha(theme.palette.secondary.main, 0.08),
                     transform: 'translateX(4px)',
                   },
                 }}
@@ -247,7 +239,7 @@ const Footer: FC = () => {
                   <Typography
                     variant="body2"
                     sx={{
-                      color: 'white',
+                      color: '#ffffff',
                       fontWeight: 600,
                       fontSize: '0.9rem',
                     }}
@@ -256,11 +248,11 @@ const Footer: FC = () => {
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, pl: 0.5 }}>
-                  <PhoneIcon sx={{ fontSize: 16, color: alpha(theme.palette.common.white, 0.4) }} />
+                  <PhoneIcon sx={{ fontSize: 16, color: alpha('#ffffff', 0.3) }} />
                   <Typography
                     variant="body2"
                     sx={{
-                      color: alpha(theme.palette.common.white, 0.8),
+                      color: alpha('#ffffff', 0.7),
                       fontSize: '0.85rem',
                       '&:hover': { color: theme.palette.secondary.main },
                       cursor: 'pointer',
@@ -278,11 +270,11 @@ const Footer: FC = () => {
                   p: 2,
                   borderRadius: 3,
                   textAlign: 'center',
-                  background: alpha(theme.palette.common.white, 0.03),
-                  border: `1px solid ${alpha(theme.palette.common.white, 0.06)}`,
+                  background: alpha('#ffffff', 0.02),
+                  border: `1px solid ${alpha('#ffffff', 0.05)}`,
                   transition: 'all 0.3s ease',
                   '&:hover': {
-                    background: alpha(theme.palette.common.white, 0.06),
+                    background: alpha('#ffffff', 0.04),
                     transform: 'scale(1.02)',
                   },
                 }}
@@ -295,7 +287,7 @@ const Footer: FC = () => {
                     width: 80,
                     height: 80,
                     borderRadius: 3,
-                    background: 'white',
+                    background: '#ffffff',
                     mb: 1,
                     position: 'relative',
                     '&::after': {
@@ -314,14 +306,14 @@ const Footer: FC = () => {
                   <QrCodeIcon
                     sx={{
                       fontSize: 50,
-                      color: '#000',
+                      color: '#000000',
                     }}
                   />
                 </Box>
                 <Typography
                   variant="caption"
                   sx={{
-                    color: alpha(theme.palette.common.white, 0.6),
+                    color: alpha('#ffffff', 0.5),
                     display: 'block',
                     fontSize: '0.7rem',
                     letterSpacing: 0.5,
@@ -339,7 +331,7 @@ const Footer: FC = () => {
           sx={{
             mt: 6,
             pt: 3,
-            borderTop: `1px solid ${alpha(theme.palette.common.white, 0.05)}`,
+            borderTop: `1px solid ${alpha('#ffffff', 0.05)}`,
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -350,7 +342,7 @@ const Footer: FC = () => {
           <Typography
             variant="caption"
             sx={{
-              color: alpha(theme.palette.common.white, 0.4),
+              color: alpha('#ffffff', 0.3),
               fontSize: '0.75rem',
             }}
           >
@@ -360,7 +352,7 @@ const Footer: FC = () => {
             <Typography
               variant="caption"
               sx={{
-                color: alpha(theme.palette.common.white, 0.3),
+                color: alpha('#ffffff', 0.2),
                 fontSize: '0.7rem',
                 cursor: 'pointer',
                 '&:hover': { color: theme.palette.primary.main },
@@ -372,7 +364,7 @@ const Footer: FC = () => {
             <Typography
               variant="caption"
               sx={{
-                color: alpha(theme.palette.common.white, 0.3),
+                color: alpha('#ffffff', 0.2),
                 fontSize: '0.7rem',
                 cursor: 'pointer',
                 '&:hover': { color: theme.palette.primary.main },

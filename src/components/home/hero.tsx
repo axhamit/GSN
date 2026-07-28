@@ -508,7 +508,7 @@ const HomeHero: FC = () => {
               >
                 {mounted ? (
                   <Image
-                    src="/images/home-hero.jpg"
+                    src="/images/hero.png"
                     alt="Students learning"
                     width={1200}
                     height={900}

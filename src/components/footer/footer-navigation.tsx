@@ -6,14 +6,16 @@ import type { Navigation } from '@/interfaces/navigation'
 import { navigations as headerNavigations } from '@/components/navigation/navigation.data'
 import { FooterSectionTitle } from '@/components/footer'
 
-// ---------------- UPDATED COURSE MENU ----------------
+// ---------------- UPDATED COURSE MENU WITH CAREER LAUNCH PROGRAM ----------------
 const courseMenu: Array<Navigation> = [
+   { label: 'Career Launch Program', path: 'courses/career-launch-academy' }, // Added Career Launch Program
   { label: 'PCMB – 11th & 12th', path: '#' },
   { label: '10th Board Preparation', path: '#' },
   { label: 'JEE Coaching', path: '#' },
   { label: 'NEET Coaching', path: '#' },
   { label: 'KCET Coaching', path: '#' },
   { label: 'Online + Offline Classes', path: '#' },
+ 
 ]
 
 // Use header navigations
@@ -32,9 +34,10 @@ const companyMenu: Array<Navigation> = [
 interface NavigationItemProps {
   label: string
   path: string
+  isHighlighted?: boolean
 }
 
-const NavigationItem: FC<NavigationItemProps> = ({ label, path }) => {
+const NavigationItem: FC<NavigationItemProps> = ({ label, path, isHighlighted }) => {
   return (
     <Link href={path} passHref legacyBehavior>
       <MuiLink
@@ -42,9 +45,17 @@ const NavigationItem: FC<NavigationItemProps> = ({ label, path }) => {
         sx={{
           display: 'block',
           mb: 1,
-          color: 'primary.contrastText',
+          color: isHighlighted ? 'primary.main' : '#ffffff',
+          fontWeight: isHighlighted ? 600 : 400,
+          fontSize: isHighlighted ? '0.95rem' : '0.9rem',
+          transition: 'all 0.3s ease',
+          '&:hover': {
+            color: 'primary.main',
+            transform: 'translateX(4px)',
+          },
         }}
       >
+        {isHighlighted && '🚀 '}
         {label}
       </MuiLink>
     </Link>
@@ -57,9 +68,17 @@ const FooterNavigation: FC = () => {
       {/* Course Section */}
       <Grid item xs={12} md={4}>
         <FooterSectionTitle title="Courses" />
-        {courseMenu.map(({ label, path }, index) => (
-          <NavigationItem key={index + path} label={label} path="#" />
-        ))}
+        {courseMenu.map(({ label, path }, index) => {
+          const isCareerLaunch = label === 'Career Launch Program'
+          return (
+            <NavigationItem 
+              key={index + path} 
+              label={label} 
+              path={path}
+              isHighlighted={isCareerLaunch}
+            />
+          )
+        })}
       </Grid>
 
       {/* Menu Section */}
