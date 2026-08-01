@@ -188,9 +188,9 @@ const CoursePageTemplate: FC<CoursePageTemplateProps> = ({ course }) => {
         <HomeFeature />
       </Box>
 
-      <Box sx={{ mt: 6 }}>
+      {/* <Box sx={{ mt: 6 }}>
         <HomeOurMentors />
-      </Box>
+      </Box> */}
 
       <Box sx={{ mt: 6 }}>
         <AboutGSN />
@@ -200,9 +200,9 @@ const CoursePageTemplate: FC<CoursePageTemplateProps> = ({ course }) => {
         <HomeTestimonial />
       </Box>
 
-      <Box sx={{ mt: 6 }}>
+      {/* <Box sx={{ mt: 6 }}>
         <HomeNewsLetter />
-      </Box>
+      </Box> */}
 
       <EnrollmentForm
         open={enrollOpen}
