@@ -593,7 +593,7 @@ const HomeTestimonial: FC = () => {
                 }}
               >
                 <Image
-                  src="/images/home-testimonial.png"
+                  src="/images/home-testimonals.png"
                   alt="Student Testimonial"
                   fill
                   style={{

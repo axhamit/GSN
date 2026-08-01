@@ -141,7 +141,7 @@ const HomeFeature: FC = () => {
                 }}
               >
                 <Image
-                  src="/images/home-feature.png"
+                  src="/images/home-feature-1.png"
                   alt="Students studying"
                   fill
                   style={{
@@ -166,72 +166,73 @@ const HomeFeature: FC = () => {
               </Box>
 
               {/* Floating Card - Success Rate */}
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: { xs: 20, md: 40 },
-                  right: { xs: 10, md: -30 },
-                  boxShadow: `0 20px 60px ${alpha(theme.palette.common.black, 0.5)}`,
-                  borderRadius: 4,
-                  px: 2.5,
-                  py: 2.5,
-                  zIndex: 2,
-                  background: `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.95)}, ${alpha(theme.palette.background.default, 0.9)})`,
-                  backdropFilter: 'blur(20px)',
-                  border: `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
-                  minWidth: 200,
-                  animation: 'float 3s ease-in-out infinite',
-                  '@keyframes float': {
-                    '0%, 100%': { transform: 'translateY(0px)' },
-                    '50%': { transform: 'translateY(-8px)' },
-                  },
-                }}
-              >
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-                  <EmojiEventsIcon sx={{ color: theme.palette.warning.main, fontSize: 24 }} />
-                  <Typography variant="h6" sx={{ fontWeight: 700, color: 'text.primary' }}>
-                    Success Rate
-                  </Typography>
-                </Box>
-                
-                <Box sx={{ mb: 2.5 }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                    <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
-                      NEET Qualified
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: '#f303ff', fontWeight: 600 }}>
-                      78%
-                    </Typography>
-                  </Box>
-                  <BorderLinearProgress variant="determinate" value={78} order={1} />
-                </Box>
-                
-                <Box sx={{ mb: 2.5 }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                    <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
-                      JEE Advanced
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: '#26e8bd', fontWeight: 600 }}>
-                      65%
-                    </Typography>
-                  </Box>
-                  <BorderLinearProgress variant="determinate" value={65} order={2} />
-                </Box>
-                
-                <Box>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                    <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
-                      Board Exams 90%+
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: '#0063ff', fontWeight: 600 }}>
-                      85%
-                    </Typography>
-                  </Box>
-                  <BorderLinearProgress variant="determinate" value={85} order={3} />
-                </Box>
-              </Box>
+             <Box
+  sx={{
+    position: 'absolute',
+    top: { xs: 20, md: 40 },
+    right: { xs: 10, md: -30 },
+    boxShadow: `0 20px 60px ${alpha(theme.palette.common.black, 0.5)}`,
+    borderRadius: 3,
+    px: 2,
+    py: 2,
+    zIndex: 2,
+    background: `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.95)}, ${alpha(theme.palette.background.default, 0.9)})`,
+    backdropFilter: 'blur(20px)',
+    border: `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
+    minWidth: 170,
+    maxWidth: 190,
+    animation: 'float 3s ease-in-out infinite',
+    '@keyframes float': {
+      '0%, 100%': { transform: 'translateY(0px)' },
+      '50%': { transform: 'translateY(-8px)' },
+    },
+  }}
+>
+  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, mb: 1.5 }}>
+    <EmojiEventsIcon sx={{ color: theme.palette.warning.main, fontSize: 18 }} />
+    <Typography variant="subtitle2" sx={{ fontWeight: 700, color: 'text.primary', fontSize: '0.85rem' }}>
+      Success Rate
+    </Typography>
+  </Box>
+  
+  <Box sx={{ mb: 1.5 }}>
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.25 }}>
+      <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500, fontSize: '0.7rem' }}>
+        NEET Qualified
+      </Typography>
+      <Typography variant="caption" sx={{ color: '#f303ff', fontWeight: 600, fontSize: '0.7rem' }}>
+        78%
+      </Typography>
+    </Box>
+    <BorderLinearProgress variant="determinate" value={78} order={1} sx={{ height: 5 }} />
+  </Box>
+  
+  <Box sx={{ mb: 1.5 }}>
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.25 }}>
+      <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500, fontSize: '0.7rem' }}>
+        JEE Advanced
+      </Typography>
+      <Typography variant="caption" sx={{ color: '#26e8bd', fontWeight: 600, fontSize: '0.7rem' }}>
+        65%
+      </Typography>
+    </Box>
+    <BorderLinearProgress variant="determinate" value={65} order={2} sx={{ height: 5 }} />
+  </Box>
+  
+  <Box>
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.25 }}>
+      <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500, fontSize: '0.7rem' }}>
+        Board Exams 90%+
+      </Typography>
+      <Typography variant="caption" sx={{ color: '#0063ff', fontWeight: 600, fontSize: '0.7rem' }}>
+        85%
+      </Typography>
+    </Box>
+    <BorderLinearProgress variant="determinate" value={85} order={3} sx={{ height: 5 }} />
+  </Box>
+</Box>
 
-              {/* Floating Card - Student Satisfaction */}
+              {/* Floating Card - Student Satisfaction - FIXED */}
               <Box
                 sx={{
                   position: 'absolute',
@@ -239,67 +240,74 @@ const HomeFeature: FC = () => {
                   left: { xs: 10, md: -20 },
                   boxShadow: `0 20px 60px ${alpha(theme.palette.common.black, 0.5)}`,
                   borderRadius: 4,
-                  px: 3,
+                  px: 2.5,
                   py: 2.5,
                   zIndex: 2,
                   background: `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.95)}, ${alpha(theme.palette.background.default, 0.9)})`,
                   backdropFilter: 'blur(20px)',
                   border: `1px solid ${alpha(theme.palette.success.main, 0.2)}`,
                   textAlign: 'center',
-                  minWidth: 180,
+                  minWidth: 160,
+                  maxWidth: 180,
                   animation: 'float 3.5s ease-in-out infinite 0.5s',
+                  overflow: 'hidden',
                 }}
               >
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, mb: 1 }}>
-                  <StarIcon sx={{ color: theme.palette.warning.main, fontSize: 20 }} />
-                  <Typography sx={{ fontWeight: 600, color: 'text.primary' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5, mb: 0.5 }}>
+                  <StarIcon sx={{ color: theme.palette.warning.main, fontSize: 16 }} />
+                  <Typography sx={{ fontWeight: 600, color: 'text.primary', fontSize: '0.85rem' }}>
                     Student Satisfaction
                   </Typography>
                 </Box>
-                <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block', mb: 2 }}>
+                <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block', mb: 1.5, fontSize: '0.65rem' }}>
                   Based on Reviews
                 </Typography>
                 
+                {/* Circular Progress - Properly Contained */}
                 <Box
                   sx={{
-                    height: 100,
-                    width: 100,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
                     position: 'relative',
+                    width: 70,
+                    height: 70,
                     mx: 'auto',
                   }}
                 >
                   <CircularProgress
                     sx={{ 
                       position: 'absolute',
+                      top: 0,
+                      left: 0,
                       color: alpha(theme.palette.divider, 0.1),
                     }}
-                    thickness={3}
+                    thickness={4}
                     variant="determinate"
                     value={100}
-                    size={100}
+                    size={70}
                   />
                   <CircularProgress
-                    thickness={3}
+                    sx={{ 
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      color: '#32dc88',
+                      filter: `drop-shadow(0 0 15px ${alpha('#32dc88', 0.3)})`,
+                    }}
+                    thickness={4}
                     variant="determinate"
                     value={94}
-                    size={100}
-                    sx={{ 
-                      transform: 'rotate(96deg) !important',
-                      color: '#32dc88',
-                      position: 'absolute',
-                      filter: `drop-shadow(0 0 20px ${alpha('#32dc88', 0.3)})`,
-                    }}
+                    size={70}
                   />
                   <Typography 
-                    variant="h3" 
                     sx={{ 
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
                       color: '#32dc88',
                       fontWeight: 700,
-                      textShadow: `0 0 30px ${alpha('#32dc88', 0.2)}`,
+                      fontSize: '1.1rem',
+                      textShadow: `0 0 20px ${alpha('#32dc88', 0.2)}`,
+                      lineHeight: 1,
                     }}
                   >
                     94%
@@ -351,7 +359,7 @@ const HomeFeature: FC = () => {
               {/* Heading */}
               <Typography
                 variant="h1"
-  component="h2"
+                component="h2"
                 sx={{
                   position: 'relative',
                   fontSize: { xs: '2.5rem', sm: '3.2rem', md: '3.8rem' },

@@ -55,6 +55,7 @@ const CareerLaunchProgram: FC<CareerLaunchProgramProps> = ({ onEnrollClick }) =>
       title: 'Advanced Tech & Gen AI Productivity',
       icon: <CodeIcon />,
       color: 'secondary',
+
       items: [
         'Advanced technical skills',
         'Generative AI tools & applications',
@@ -64,14 +65,15 @@ const CareerLaunchProgram: FC<CareerLaunchProgramProps> = ({ onEnrollClick }) =>
     },
     {
       week: 'Week 5-6',
-      title: 'Domain Expertise (Sales/HR)',
+      title: 'Domain Expertise',
       icon: <DomainIcon />,
       color: 'warning',
       items: [
         'Domain-specific training',
         'Sales fundamentals & strategies',
+        'BSFI and Operations',
         'HR operations & talent management',
-        'Industry best practices'
+        'IT Support & Networking',
       ],
     },
     {
