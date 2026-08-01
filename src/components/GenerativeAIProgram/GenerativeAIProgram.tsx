@@ -1,8 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
+import EnrollmentForm from '@/components/form/EnrollmentForm'
 import { alpha, useTheme } from '@mui/material/styles'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import PsychologyIcon from '@mui/icons-material/Psychology'
@@ -26,10 +27,15 @@ import {
 
 const GenerativeAIProgram: FC = () => {
   const theme = useTheme()
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false)
 
   const getPaletteColor = (color: string) => {
     const paletteColor = (theme.palette as Record<string, any>)[color] ?? theme.palette.primary
     return paletteColor as { main: string; light: string; dark: string }
+  }
+
+  const handleEnrollClick = () => {
+    setIsEnrollOpen(true)
   }
 
   const features = [
@@ -516,6 +522,7 @@ const GenerativeAIProgram: FC = () => {
             Join our program and become a certified AI professional
           </Typography>
           <Box
+            onClick={handleEnrollClick}
             sx={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -584,6 +591,13 @@ const GenerativeAIProgram: FC = () => {
           />
         </Box>
       </Container>
+
+      <EnrollmentForm
+        open={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        courseName="Generative AI Program"
+        source="generative-ai"
+      />
     </Box>
   )
 }
