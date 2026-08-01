@@ -1,8 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
+import EnrollmentForm from '@/components/form/EnrollmentForm'
 import { alpha, useTheme } from '@mui/material/styles'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import TableChartIcon from '@mui/icons-material/TableChart'
@@ -25,6 +26,7 @@ import {
 
 const AdvancedExcel: FC = () => {
   const theme = useTheme()
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false)
 
   const features = [
     {
@@ -62,6 +64,10 @@ const AdvancedExcel: FC = () => {
   const getPaletteColor = (color: string) => {
     const paletteColor = (theme.palette as Record<string, any>)[color] ?? theme.palette.primary
     return paletteColor as { main: string; light: string; dark: string }
+  }
+
+  const handleEnrollClick = () => {
+    setIsEnrollOpen(true)
   }
 
   return (
@@ -493,6 +499,7 @@ const AdvancedExcel: FC = () => {
             Join our Advanced Excel training and become a data analytics expert
           </Typography>
           <Box
+            onClick={handleEnrollClick}
             sx={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -561,6 +568,13 @@ const AdvancedExcel: FC = () => {
           />
         </Box>
       </Container>
+
+      <EnrollmentForm
+        open={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        courseName="Advanced Excel"
+        source="advanced-excel"
+      />
     </Box>
   )
 }

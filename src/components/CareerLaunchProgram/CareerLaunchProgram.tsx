@@ -1,10 +1,11 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, useState } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { alpha, useTheme } from '@mui/material/styles'
+import EnrollmentForm from '@/components/form/EnrollmentForm'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import TimerIcon from '@mui/icons-material/Timer'
 import CodeIcon from '@mui/icons-material/Code'
@@ -31,6 +32,7 @@ interface CareerLaunchProgramProps {
 
 const CareerLaunchProgram: FC<CareerLaunchProgramProps> = ({ onEnrollClick }) => {
   const theme = useTheme()
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false)
 
   const getPaletteColor = (color: string) => {
     const paletteColor = (theme.palette as Record<string, any>)[color] ?? theme.palette.primary
@@ -74,6 +76,8 @@ const CareerLaunchProgram: FC<CareerLaunchProgramProps> = ({ onEnrollClick }) =>
         'BSFI and Operations',
         'HR operations & talent management',
         'IT Support & Networking',
+        'sales and marketing'
+
       ],
     },
     {
@@ -95,6 +99,11 @@ const CareerLaunchProgram: FC<CareerLaunchProgramProps> = ({ onEnrollClick }) =>
     { value: '24', label: 'Placement Guarantee', icon: <EmojiEventsIcon /> },
     { value: '100%', label: 'Success Rate', icon: <PeopleIcon /> },
   ]
+
+  const handleEnrollClick = () => {
+    onEnrollClick?.()
+    setIsEnrollOpen(true)
+  }
 
   return (
     <Box
@@ -642,7 +651,7 @@ const CareerLaunchProgram: FC<CareerLaunchProgramProps> = ({ onEnrollClick }) =>
           <Button
             variant="contained"
             size="large"
-            onClick={onEnrollClick}
+            onClick={handleEnrollClick}
             sx={{
               background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
               borderRadius: 3,
@@ -662,6 +671,13 @@ const CareerLaunchProgram: FC<CareerLaunchProgramProps> = ({ onEnrollClick }) =>
           </Button>
         </Box>
       </Container>
+
+      <EnrollmentForm
+        open={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        courseName="Career Launch Program"
+        source="career-launch-program"
+      />
     </Box>
   )
 }

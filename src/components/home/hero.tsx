@@ -308,7 +308,7 @@ const HomeHero: FC = () => {
               </Box>
 
               {/* Course Tags */}
-              <Grid container spacing={2} sx={{ mb: 4 }}>
+              <Grid container spacing={{ xs: 1, sm: 2 }} sx={{ mb: 4 }}>
                 {[
                   { label: 'PCMB 11th', color: 'primary' },
                   { label: 'PCMB 12th', color: 'secondary' },
@@ -322,9 +322,9 @@ const HomeHero: FC = () => {
                       <Box
                         sx={{
                           textAlign: 'center',
-                          p: 1.5,
+                          p: { xs: 1, sm: 1.5 },
                           background: `linear-gradient(135deg, ${alpha(paletteColor.main, 0.15)}, ${alpha(paletteColor.main, 0.05)})`,
-                          borderRadius: 3,
+                          borderRadius: { xs: 2, sm: 3 },
                           border: `1px solid ${alpha(paletteColor.main, 0.2)}`,
                           transition: 'all 0.3s ease',
                           cursor: 'pointer',
@@ -341,8 +341,9 @@ const HomeHero: FC = () => {
                           sx={{
                             color: paletteColor.main,
                             fontWeight: 700,
-                            fontSize: { xs: '0.7rem', sm: '0.8rem' },
-                            letterSpacing: 0.5,
+                            fontSize: { xs: '0.62rem', sm: '0.8rem' },
+                            letterSpacing: { xs: 0.2, sm: 0.5 },
+                            lineHeight: 1.2,
                           }}
                         >
                           {course.label}
@@ -460,9 +461,9 @@ const HomeHero: FC = () => {
                   zIndex: 2,
                   background: `linear-gradient(135deg, ${alpha(theme.palette.secondary.main, 0.9)}, ${alpha(theme.palette.secondary.dark, 0.9)})`,
                   backdropFilter: 'blur(10px)',
-                  borderRadius: 4,
-                  p: 2,
-                  minWidth: { xs: 120, md: 160 },
+                  borderRadius: { xs: 3, md: 4 },
+                  p: { xs: 1.25, md: 2 },
+                  minWidth: { xs: 112, md: 160 },
                   border: `1px solid ${alpha(theme.palette.secondary.main, 0.3)}`,
                   boxShadow: `0 20px 60px ${alpha(theme.palette.secondary.main, 0.3)}`,
                   animation: 'float 3.5s ease-in-out infinite 0.5s',
@@ -479,10 +480,10 @@ const HomeHero: FC = () => {
                     <PlayArrowIcon sx={{ color: 'white', fontSize: 24 }} />
                   </Box>
                   <Box>
-                    <Typography variant="body2" sx={{ color: 'white', fontWeight: 700 }}>
+                    <Typography variant="body2" sx={{ color: 'white', fontWeight: 700, fontSize: { xs: '0.8rem', md: '0.95rem' } }}>
                       Online & Offline
                     </Typography>
-                    <Typography variant="caption" sx={{ color: alpha(theme.palette.common.white, 0.8) }}>
+                    <Typography variant="caption" sx={{ color: alpha(theme.palette.common.white, 0.8), fontSize: { xs: '0.65rem', md: '0.75rem' } }}>
                       Flexible Learning
                     </Typography>
                   </Box>
@@ -508,7 +509,7 @@ const HomeHero: FC = () => {
               >
                 {mounted ? (
                   <Image
-                    src="/images/hero.png"
+                    src="/images/3Hero.png"
                     alt="Students learning"
                     width={1200}
                     height={900}
