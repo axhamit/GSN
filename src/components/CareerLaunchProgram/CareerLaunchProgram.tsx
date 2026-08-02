@@ -72,12 +72,11 @@ const CareerLaunchProgram: FC<CareerLaunchProgramProps> = ({ onEnrollClick }) =>
       color: 'warning',
       items: [
         'Domain-specific training',
-        'Sales fundamentals & strategies',
-        'BSFI and Operations',
+        'Sales and marketing',
+        'BFSI and Operations',
         'HR operations & talent management',
         'IT Support & Networking',
-        'sales and marketing'
-
+        
       ],
     },
     {
