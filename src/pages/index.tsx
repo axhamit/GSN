@@ -29,7 +29,7 @@ const Home: NextPageWithLayout = () => {
       <DynamicHomePopularCourse />
       <DynamicHomeFeature />
       <DynamicAvishkarCareer/>
-      <DynamicHomeTestimonial />
+      {/* <DynamicHomeTestimonial /> */}
       {/* <DynamicHomeOurMentors /> */}
       <DynamicAboutGSN />
       <DynamicGapAnalysis />
@@ -41,7 +41,7 @@ const Home: NextPageWithLayout = () => {
       <DynamicEmployabilityChallenge />
       <DynamicGenerativeAIProgram />
       <DynamicPartnershipModels />
-      <DynamicHomeNewsLetter />
+      {/* <DynamicHomeNewsLetter /> */}
     </>
   )
 }

@@ -19,7 +19,7 @@ import HomeTestimonial from '@/components/home/testimonial'
 import HomeFeature from '@/components/home/feature'
 import HomeOurMentors from '@/components/home/mentors'
 import AboutGSN from '@/components/home/aboutGsn/aboutGsn'
-import HomeNewsLetter from '@/components/home/newsletter'
+// import HomeNewsLetter from '@/components/home/newsletter'
 import CareerLaunchHero from '@/courses/CareerLaunchHero/CareerLaunchHero'
 import AdvancedExcel from '@/components/AdvancedExcel/AdvancedExcel'
 import CareerLaunchProgram from '../CareerLaunchProgram/CareerLaunchProgram'
@@ -188,21 +188,21 @@ const CoursePageTemplate: FC<CoursePageTemplateProps> = ({ course }) => {
         <HomeFeature />
       </Box>
 
-      <Box sx={{ mt: 6 }}>
+      {/* <Box sx={{ mt: 6 }}>
         <HomeOurMentors />
-      </Box>
+      </Box> */}
 
       <Box sx={{ mt: 6 }}>
         <AboutGSN />
       </Box>
 
-      <Box sx={{ mt: 6 }}>
+      {/* <Box sx={{ mt: 6 }}>
         <HomeTestimonial />
-      </Box>
+      </Box> */}
 
-      <Box sx={{ mt: 6 }}>
+      {/* <Box sx={{ mt: 6 }}>
         <HomeNewsLetter />
-      </Box>
+      </Box> */}
 
       <EnrollmentForm
         open={enrollOpen}
