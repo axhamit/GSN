@@ -207,8 +207,9 @@ const Footer: FC = () => {
                   <Typography
                     variant="body2"
                     sx={{
-                      color: alpha('#ffffff', 0.7),
+                      color: '#ffffff',
                       fontSize: '0.85rem',
+                      fontWeight: 600,
                       '&:hover': { color: theme.palette.primary.main },
                       cursor: 'pointer',
                       transition: 'color 0.3s ease',
@@ -252,8 +253,9 @@ const Footer: FC = () => {
                   <Typography
                     variant="body2"
                     sx={{
-                      color: alpha('#ffffff', 0.7),
+                      color: '#ffffff',
                       fontSize: '0.85rem',
+                      fontWeight: 600,
                       '&:hover': { color: theme.palette.secondary.main },
                       cursor: 'pointer',
                       transition: 'color 0.3s ease',
