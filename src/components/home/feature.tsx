@@ -41,6 +41,9 @@ const BorderLinearProgress = styled(LinearProgress, {
     ...(order === 3 && {
       background: `linear-gradient(90deg, #0063ff, #66a3ff)`,
     }),
+      ...(order === 4 && {
+        background: `linear-gradient(90deg, ${theme.palette.info.main}, ${theme.palette.info.light})`,
+      }),
   },
 }))
 
@@ -229,6 +232,19 @@ const HomeFeature: FC = () => {
       </Typography>
     </Box>
     <BorderLinearProgress variant="determinate" value={85} order={3} sx={{ height: 5 }} />
+  </Box>
+  
+  <Box sx={{ mt: 1 }}>
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.25 }}>
+      <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500, fontSize: '0.7rem' }}>
+        Career Launch
+         Program
+      </Typography>
+      <Typography variant="caption" sx={{ color: theme.palette.info.main, fontWeight: 600, fontSize: '0.7rem' }}>
+        80%
+      </Typography>
+    </Box>
+    <BorderLinearProgress variant="determinate" value={100} order={4} sx={{ height: 5 }} />
   </Box>
 </Box>
 

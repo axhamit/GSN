@@ -16,6 +16,7 @@ import StarIcon from '@mui/icons-material/Star'
 import { motion } from 'framer-motion'
 import { Course } from '@/interfaces/course'
 import EnrollmentForm from '@/components/form/EnrollmentForm'
+import { SHOW_FEES } from '@/utils/config'
 
 interface CourseCardItemProps {
   item: Course
@@ -259,33 +260,35 @@ const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
               </Typography>
             </Box>
 
-            {/* Price Badge */}
-            <Box
-              sx={{
-                position: 'absolute',
-                bottom: 12,
-                right: 12,
-                zIndex: 2,
-                background: `linear-gradient(135deg, ${alpha(theme.palette.success.main, 0.92)}, ${alpha(theme.palette.success.dark, 0.92)})`,
-                borderRadius: 2,
-                px: 1.5,
-                py: 0.5,
-                backdropFilter: 'blur(8px)',
-                border: `1px solid ${alpha(theme.palette.common.white, 0.15)}`,
-                boxShadow: `0 4px 15px ${alpha(theme.palette.success.main, 0.25)}`,
-              }}
-            >
-              <Typography
+            {/* Price Badge (hidden when SHOW_FEES is false) */}
+            {SHOW_FEES && (
+              <Box
                 sx={{
-                  color: 'white',
-                  fontWeight: 800,
-                  fontSize: '0.9rem',
-                  letterSpacing: 0.3,
+                  position: 'absolute',
+                  bottom: 12,
+                  right: 12,
+                  zIndex: 2,
+                  background: `linear-gradient(135deg, ${alpha(theme.palette.success.main, 0.92)}, ${alpha(theme.palette.success.dark, 0.92)})`,
+                  borderRadius: 2,
+                  px: 1.5,
+                  py: 0.5,
+                  backdropFilter: 'blur(8px)',
+                  border: `1px solid ${alpha(theme.palette.common.white, 0.15)}`,
+                  boxShadow: `0 4px 15px ${alpha(theme.palette.success.main, 0.25)}`,
                 }}
               >
-                ₹{item.price.toLocaleString()}
-              </Typography>
-            </Box>
+                <Typography
+                  sx={{
+                    color: 'white',
+                    fontWeight: 800,
+                    fontSize: '0.9rem',
+                    letterSpacing: 0.3,
+                  }}
+                >
+                  ₹{item.price.toLocaleString()}
+                </Typography>
+              </Box>
+            )}
           </Box>
 
           {/* Content Section */}

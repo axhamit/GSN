@@ -15,6 +15,7 @@ import Snackbar from '@mui/material/Snackbar'
 import { useTheme, alpha } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { EnquiryPayload } from '@/interfaces/enquiry'
+import { SHOW_FEES } from '@/utils/config'
 import InputAdornment from '@mui/material/InputAdornment'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
@@ -222,7 +223,7 @@ const EnrollmentForm: FC<EnrollmentFormProps> = ({
             <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500, fontSize: { xs: '0.85rem', md: '0.875rem' } }}>
               {courseName}
             </Typography>
-            {coursePrice !== undefined && (
+            {SHOW_FEES && coursePrice !== undefined && (
               <Typography variant="caption" sx={{ color: 'success.main', fontWeight: 700, display: 'block', mt: 0.5, fontSize: { xs: '0.7rem', md: '0.75rem' } }}>
                 Course Fee: ₹{coursePrice.toLocaleString()}
               </Typography>
