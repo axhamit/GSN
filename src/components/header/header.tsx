@@ -10,54 +10,74 @@ import { Menu, Close } from '@mui/icons-material'
 
 const Header: FC = () => {
   const [visibleMenu, setVisibleMenu] = useState<boolean>(false)
-  const { breakpoints } = useTheme()
+  const theme = useTheme()
+  const { breakpoints } = theme
   const matchMobileView = useMediaQuery(breakpoints.down('md'), { noSsr: true })
 
   return (
-    <Box sx={{ backgroundColor: 'background.paper' }}>
-      <Container sx={{ py: { xs: 2, md: 3 } }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+    <Box sx={{ backgroundColor: 'background.paper', position: 'sticky', top: 0, zIndex: 1200 }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 1.25, md: 2.5 }, px: { xs: 2, md: 3 } }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1.5 }}>
           <Logo />
+
           <Box sx={{ ml: 'auto', display: { xs: 'inline-flex', md: 'none' } }}>
-            <IconButton onClick={() => setVisibleMenu(!visibleMenu)}>
-              <Menu />
+            <IconButton onClick={() => setVisibleMenu(!visibleMenu)} sx={{ p: 1 }}>
+              {visibleMenu ? <Close /> : <Menu />}
             </IconButton>
           </Box>
+
           <Box
             sx={{
-              width: '100%',
-              display: 'flex',
+              display: { xs: 'none', md: 'flex' },
               alignItems: 'center',
-              justifyContent: 'space-between',
-              flexDirection: { xs: 'column', md: 'row' },
-              transition: (theme) => theme.transitions.create(['top']),
-              ...(matchMobileView && {
-                py: 6,
-                backgroundColor: 'background.paper',
-                zIndex: 'appBar',
-                position: 'fixed',
-                height: { xs: '100vh', md: 'auto' },
-                top: visibleMenu ? 0 : '-120vh',
-                left: 0,
-              }),
+              justifyContent: 'flex-end',
+              flexGrow: 1,
+              gap: { md: 1.5, lg: 2 },
             }}
           >
-            <Box /> {/* Magic space */}
             <Navigation />
             <AuthNavigation />
-            {visibleMenu && matchMobileView && (
+          </Box>
+
+          {matchMobileView && (
+            <Box
+              sx={{
+                display: visibleMenu ? 'flex' : 'none',
+                flexDirection: 'column',
+                position: 'fixed',
+                inset: 0,
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100vh',
+                py: 2.5,
+                px: 2,
+                backgroundColor: 'background.paper',
+                zIndex: 'appBar',
+                overflowY: 'auto',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+                boxShadow: `0 12px 40px ${theme.palette.grey[900]}`,
+              }}
+            >
               <IconButton
                 sx={{
                   position: 'fixed',
-                  top: 10,
-                  right: 10,
+                  top: 12,
+                  right: 12,
+                  zIndex: 2,
                 }}
-                onClick={() => setVisibleMenu(!visibleMenu)}
+                onClick={() => setVisibleMenu(false)}
               >
                 <Close />
               </IconButton>
-            )}
-          </Box>
+
+              <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1.5, mt: 6 }}>
+                <Navigation />
+                <AuthNavigation />
+              </Box>
+            </Box>
+          )}
         </Box>
       </Container>
     </Box>

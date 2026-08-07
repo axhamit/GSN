@@ -299,8 +299,8 @@ const HomeHero: FC = () => {
                     mx: { xs: 'auto', md: 0 },
                   }}
                 >
-                  Comprehensive coaching for <strong style={{ color: theme.palette.primary.main }}>PCMB 11th & 12th</strong>
-                  , competitive exams like{' '}
+                  Comprehensive coaching for <strong style={{ color: theme.palette.warning.main }}>PCMB 11th & 12th</strong>,{' '}
+                  <strong style={{ color: theme.palette.info.main }}>Career Launch Program</strong>, competitive exams like{' '}
                   <strong style={{ color: theme.palette.secondary.main }}>KCET, JEE, NEET</strong>, and{' '}
                   <strong style={{ color: theme.palette.warning.main }}>10th Standard Board</strong> preparation.
                   Choose between online and offline classes with personalized study plans.
@@ -310,8 +310,8 @@ const HomeHero: FC = () => {
               {/* Course Tags */}
               <Grid container spacing={{ xs: 1, sm: 2 }} sx={{ mb: 4 }}>
                 {[
-                  { label: 'PCMB 11th', color: 'primary' },
-                  { label: 'PCMB 12th', color: 'secondary' },
+                  { label: 'PCMB 11th', color: 'warning' },
+                  { label: 'PCMB 12th', color: 'warning' },
                   { label: 'KCET/JEE/NEET', color: 'error' },
                   { label: '10th Board', color: 'warning' },
                 ].map((course) => {

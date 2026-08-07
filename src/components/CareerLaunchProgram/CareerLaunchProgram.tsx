@@ -277,10 +277,8 @@ const CareerLaunchProgram: FC<CareerLaunchProgramProps> = ({ onEnrollClick }) =>
                   ...sectionSubtitleSx,
                   fontWeight: 800,
                   mb: 2,
-                  background: `linear-gradient(135deg, ${theme.palette.primary.light}, ${theme.palette.primary.main})`,
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
+                  color: theme.palette.text.primary,
+                  textShadow: `0 1px 2px ${alpha(theme.palette.common.black, 0.15)}`,
                 }}
               >
                 Your 60-Day Roadmap to Success

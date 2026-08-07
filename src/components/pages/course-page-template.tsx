@@ -15,6 +15,7 @@ import PeopleIcon from '@mui/icons-material/People'
 import StarIcon from '@mui/icons-material/Star'
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
 import EnrollmentForm from '@/components/form/EnrollmentForm'
+import { SHOW_FEES } from '@/utils/config'
 import HomeTestimonial from '@/components/home/testimonial'
 import HomeFeature from '@/components/home/feature'
 import HomeOurMentors from '@/components/home/mentors'
@@ -146,9 +147,11 @@ const CoursePageTemplate: FC<CoursePageTemplateProps> = ({ course }) => {
                 </Box>
 
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap', mb: 3 }}>
-                  <Typography variant="h5" sx={{ fontWeight: 800, color: 'primary.main' }}>
-                    ₹{course.price.toLocaleString()}
-                  </Typography>
+                  {SHOW_FEES && (
+                    <Typography variant="h5" sx={{ fontWeight: 800, color: 'primary.main' }}>
+                      ₹{course.price.toLocaleString()}
+                    </Typography>
+                  )}
                   <Rating value={course.rating} readOnly sx={{ color: '#ffb400' }} />
                 </Box>
 

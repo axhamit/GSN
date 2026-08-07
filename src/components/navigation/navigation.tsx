@@ -2,10 +2,10 @@ import React, { FC, useState } from 'react'
 import Box from '@mui/material/Box'
 import { Link as ScrollLink } from 'react-scroll'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import { navigations } from './navigation.data'
 import { useTheme, alpha } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import SchoolIcon from '@mui/icons-material/School'
 import ScienceIcon from '@mui/icons-material/Science'
@@ -78,6 +78,8 @@ interface NavigationItemProps {
 }
 
 const NavigationItem: FC<NavigationItemProps> = ({ destination, label, isActive }) => {
+  const theme = useTheme()
+
   return (
     <Box
       component={ScrollLink}
@@ -93,15 +95,19 @@ const NavigationItem: FC<NavigationItemProps> = ({ destination, label, isActive 
         fontWeight: 600,
         display: 'inline-flex',
         alignItems: 'center',
-        justifyContent: 'center',
-        px: { xs: 0, md: 3 },
-        mb: { xs: 3, md: 0 },
-        fontSize: { xs: '1.2rem', md: 'inherit' },
-        transition: 'color 0.3s ease',
+        justifyContent: { xs: 'flex-start', md: 'center' },
+        width: { xs: '100%', md: 'auto' },
+        px: { xs: 1.5, md: 2.25 },
+        py: { xs: 1.1, md: 0.75 },
+        mb: { xs: 0.5, md: 0 },
+        fontSize: { xs: '1rem', md: '0.95rem' },
+        borderRadius: { xs: 2, md: 999 },
+        transition: 'all 0.3s ease',
         '& > div': { display: 'none' },
         '&.current > div': { display: 'block' },
         '&:hover': {
           color: 'primary.main',
+          backgroundColor: { xs: alpha(theme.palette.primary.main, 0.06), md: 'transparent' },
           '& > div': {
             display: 'block',
           },
@@ -128,11 +134,20 @@ const NavigationItem: FC<NavigationItemProps> = ({ destination, label, isActive 
 const CoursesDropdown: FC = () => {
   const theme = useTheme()
   const router = useRouter()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const [isHovered, setIsHovered] = useState(false)
 
   const handleCourseClick = (path: string) => {
     router.push(path)
     setIsHovered(false)
+  }
+
+  const handleToggleOpen = () => {
+    if (isMobile) {
+      setIsHovered((prev) => !prev)
+    } else {
+      setIsHovered(true)
+    }
   }
 
   // Separate featured course (Career Launch Academy)
@@ -145,16 +160,21 @@ const CoursesDropdown: FC = () => {
 
   return (
     <Box
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => !isMobile && setIsHovered(true)}
+      onMouseLeave={() => !isMobile && setIsHovered(false)}
+      onClick={handleToggleOpen}
       sx={{
         position: 'relative',
         display: 'inline-flex',
         alignItems: 'center',
-        px: { xs: 0, md: 3 },
-        mb: { xs: 3, md: 0 },
+        width: { xs: '100%', md: 'auto' },
+        px: { xs: 1.5, md: 2.25 },
+        py: { xs: 1.1, md: 0.75 },
+        mb: { xs: 0.5, md: 0 },
         cursor: 'pointer',
+        borderRadius: { xs: 2, md: 999 },
         '&:hover': {
+          backgroundColor: { xs: alpha(theme.palette.primary.main, 0.06), md: 'transparent' },
           '& .dropdown-arrow': {
             transform: 'rotate(180deg)',
           },
@@ -187,19 +207,20 @@ const CoursesDropdown: FC = () => {
       {/* Dropdown Menu */}
       <Box
         sx={{
-          position: 'absolute',
-          top: '100%',
-          left: '50%',
-          mt: 1.5,
-          minWidth: 360,
+          position: { xs: 'relative', md: 'absolute' },
+          top: { xs: 'auto', md: 'calc(100% + 8px)' },
+          left: { xs: 'auto', md: '50%' },
+          mt: { xs: 1, md: 0 },
+          minWidth: { xs: '100%', md: 340 },
+          width: { xs: '100%', md: 'auto' },
           background: `linear-gradient(135deg, ${theme.palette.background.paper}, ${alpha(theme.palette.primary.main, 0.02)})`,
           backdropFilter: 'blur(20px)',
           borderRadius: 3,
           boxShadow: `0 20px 60px ${alpha(theme.palette.common.black, 0.15)}`,
           border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-          opacity: isHovered ? 1 : 0,
-          visibility: isHovered ? 'visible' : 'hidden',
-          transform: isHovered ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(-10px)',
+          display: isHovered ? 'block' : 'none',
+          pointerEvents: isHovered ? 'auto' : 'none',
+          transform: isHovered ? { xs: 'translateY(0)', md: 'translateX(-50%) translateY(0)' } : { xs: 'translateY(-6px)', md: 'translateX(-50%) translateY(-10px)' },
           transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           zIndex: 1000,
           overflow: 'hidden',
@@ -498,7 +519,7 @@ const CoursesDropdown: FC = () => {
 
 const Navigation: FC = () => {
   return (
-    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center' }}>
+    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: { xs: 'stretch', md: 'center' }, width: { xs: '100%', md: 'auto' }, gap: { xs: 0.25, md: 0.5 }, flexWrap: { md: 'wrap' } }}>
       {navigations.map(({ path: destination, label }) => {
         // Don't render the "Courses" navigation item from the data array
         if (destination === 'courses') {
