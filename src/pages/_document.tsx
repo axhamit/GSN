@@ -18,7 +18,7 @@ class MyDocument extends Document<DocumentProps> {
       <Html lang="en">
         <Head>
           <meta charSet="utf-8" />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" type="image/png" href="/images/logo_blue.png" />
           <meta name="viewport" content="initial-scale=1, width=device-width" />
 
           {/* PWA primary color */}
@@ -28,6 +28,23 @@ class MyDocument extends Document<DocumentProps> {
           <meta content="#fbfbfb" name="msapplication-navbutton-color" />
           <meta content="#fbfbfb" name="apple-mobile-web-app-status-bar-style" />
           <meta content="yes" name="apple-mobile-web-app-capable" />
+
+          {/* Default SEO */}
+          <meta name="description" content="GSN Foundation - Premier EdTech platform offering comprehensive courses in AI, Machine Learning, Career Launch Academy, and competitive exam preparation." />
+          <meta name="keywords" content="GSN Foundation, EdTech, AI courses, Machine Learning, Career Launch Academy, NEET, JEE, Competitive Exams, Online Learning" />
+
+          {/* Open Graph */}
+          <meta property="og:title" content="GSN Foundation - Transform Your Future with Quality Education" />
+          <meta property="og:description" content="Premier EdTech platform offering comprehensive courses in AI, Machine Learning, Career Launch Academy, and competitive exam preparation." />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://www.gsnfoundation.com" />
+          <meta property="og:image" content="https://www.gsnfoundation.com/images/hero.png" />
+
+          {/* Twitter */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="GSN Foundation - Transform Your Future with Quality Education" />
+          <meta name="twitter:description" content="Premier EdTech platform offering comprehensive courses in AI, Machine Learning, Career Launch Academy, and competitive exam preparation." />
+          <meta name="twitter:image" content="https://www.gsnfoundation.com/images/hero.png" />
 
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />

@@ -127,11 +127,13 @@ const EnrollmentForm: FC<EnrollmentFormProps> = ({
         throw new Error(`Request failed with status ${response.status}`)
       }
 
+      const responseData = await response.json()
+
       // Reset form and close dialog
       setFormData({ name: '', email: '', phone: '', message: '' })
       setCountryCode('+91')
       onSuccess?.()
-      
+
       // Close the dialog first
       onClose()
 
@@ -139,6 +141,18 @@ const EnrollmentForm: FC<EnrollmentFormProps> = ({
       setToastType('success')
       setToastMessage('🎉 Thank you! Your enquiry has been submitted successfully. Our team will contact you within 24 hours.')
       setShowToast(true)
+
+      // Trigger brochure download if URL is provided in response
+      if (responseData.brochureUrl) {
+        setTimeout(() => {
+          const link = document.createElement('a')
+          link.href = responseData.brochureUrl
+          link.download = `${courseName.replace(/\s+/g, '-').toLowerCase()}-brochure.pdf`
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link)
+        }, 1000)
+      }
 
     } catch (error) {
       setStatus({ 

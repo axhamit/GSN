@@ -7,11 +7,19 @@ import { NextPageWithLayout } from '@/interfaces/layout'
 import { MainLayout } from '@/components/layout'
 import { data } from '@/components/home/popular-course.data'
 import CoursePageTemplate from '@/components/pages/course-page-template'
+import dynamic from 'next/dynamic'
+
+// Dynamically import AI course pages to avoid SSR issues
+const DynamicAdvancedAgenticAI = dynamic(() => import('./advanced-agentic-generative-ai'), {
+  ssr: false,
+})
+const DynamicAppliedAIMaster = dynamic(() => import('./applied-ai-master-certification'), {
+  ssr: false,
+})
 
 const CourseDetailPage: NextPageWithLayout = () => {
   const router = useRouter()
   const slug = Array.isArray(router.query.slug) ? router.query.slug[0] : router.query.slug
-  const course = data.find((item) => item.slug === slug || String(item.id) === slug)
 
   if (!router.isReady) {
     return (
@@ -20,6 +28,18 @@ const CourseDetailPage: NextPageWithLayout = () => {
       </Box>
     )
   }
+
+  // Route to dedicated AI course pages
+  if (slug === 'advanced-agentic-generative-ai') {
+    return <DynamicAdvancedAgenticAI />
+  }
+
+  if (slug === 'applied-ai-master-certification') {
+    return <DynamicAppliedAIMaster />
+  }
+
+  // Use existing template for other courses
+  const course = data.find((item) => item.slug === slug || String(item.id) === slug)
 
   if (!course) {
     return (

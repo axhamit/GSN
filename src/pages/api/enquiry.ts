@@ -4,9 +4,17 @@ import { EnquiryPayload } from '@/interfaces/enquiry'
 interface EnquiryResponse {
   success: boolean
   message: string
+  brochureUrl?: string
 }
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+// Course brochure mapping
+const COURSE_BROCHURES: Record<string, string> = {
+  'advanced-agentic-generative-ai': '/brochures/advanced-agentic-ai-brochure.pdf',
+  'applied-ai-master-certification': '/brochures/applied-ai-master-brochure.pdf',
+  'career-launch-academy': '/brochures/career-launch-academy-brochure.pdf',
+}
 
 const handler = async (
   req: NextApiRequest,
@@ -22,7 +30,7 @@ const handler = async (
     // never throws an unhandled TypeError (which would surface as a 500).
     const body = (req.body ?? {}) as Partial<EnquiryPayload>
 
-    const { name, email, phone, message, courseName, coursePrice, source } = body
+    const { name, email, phone, message, courseName, coursePrice, source, courseSlug } = body
 
     if (!name?.trim() || !email?.trim() || !phone?.trim() || !courseName?.trim()) {
       return res.status(400).json({ success: false, message: 'Name, email, phone and course are required' })
@@ -53,6 +61,7 @@ const handler = async (
     courseName,
     coursePrice,
     source,
+    courseSlug,
   }),
 });
 
@@ -65,7 +74,14 @@ console.log("Response:", responseText);
       throw new Error(`Google Sheets webhook responded with ${webhookResponse.status}`)
     }
 
-    return res.status(200).json({ success: true, message: 'Enquiry recorded' })
+    // Determine brochure URL based on course slug
+    const brochureUrl = courseSlug ? COURSE_BROCHURES[courseSlug] : undefined
+
+    return res.status(200).json({
+      success: true,
+      message: 'Enquiry recorded',
+      brochureUrl,
+    })
   } catch (error) {
     console.error('Failed to store enquiry in Google Sheets:', error)
     return res.status(502).json({ success: false, message: 'Could not store your enquiry, please try again' })

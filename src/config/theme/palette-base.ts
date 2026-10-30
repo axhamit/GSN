@@ -9,9 +9,15 @@ const paletteBase = {
   },
   secondary: {
     light: '#FFF3E0',
-
     main: '#FB8C00',
     dark: '#E65100',
+    contrastText: '#FFFFFF',
+  },
+  // Blue for AI/Advanced courses
+  ai: {
+    light: '#7DD3FC',
+    main: '#38BDF8',
+    dark: '#0284C7',
     contrastText: '#FFFFFF',
   },
 }

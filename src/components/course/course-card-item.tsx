@@ -28,6 +28,7 @@ const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
   const router = useRouter()
   const [enrollOpen, setEnrollOpen] = useState(false)
   const isCareerLaunch = item.category === 'Career Launch Academy'
+  const isAICourse = item.category === 'Artificial Intelligence'
 
   // Generate dynamic tags
   const getTags = (course: Course): string[] => {
@@ -68,6 +69,19 @@ const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
   const greenColor = '#2e7d32'
   const greenLight = '#4caf50'
 
+  // Purple color for AI courses
+  const purpleColor = '#9c27b0'
+  const purpleLight = '#ba68c8'
+
+  // Get theme color based on course type
+  const getThemeColor = () => {
+    if (isCareerLaunch) return { main: greenColor, light: greenLight }
+    if (isAICourse) return { main: purpleColor, light: purpleLight }
+    return { main: theme.palette.primary.main, light: theme.palette.primary.light }
+  }
+
+  const themeColor = getThemeColor()
+
   return (
     <>
       <motion.div
@@ -106,22 +120,22 @@ const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
             },
           }}
         >
-          {/* Green Tag for Career Launch Academy */}
-          {isCareerLaunch && (
+          {/* Badge for Featured Courses */}
+          {(isCareerLaunch || isAICourse) && (
             <Box
               sx={{
                 position: 'absolute',
                 top: 16,
                 right: 16,
                 zIndex: 10,
-                background: `linear-gradient(135deg, ${greenColor}, ${greenLight})`,
+                background: `linear-gradient(135deg, ${themeColor.main}, ${themeColor.light})`,
                 borderRadius: 50,
                 px: 2,
                 py: 0.75,
                 display: 'flex',
                 alignItems: 'center',
                 gap: 0.75,
-                boxShadow: `0 8px 25px ${alpha(greenColor, 0.4)}`,
+                boxShadow: `0 8px 25px ${alpha(themeColor.main, 0.4)}`,
                 animation: 'pulse 2s infinite',
                 '@keyframes pulse': {
                   '0%': { transform: 'scale(1)' },
@@ -132,29 +146,33 @@ const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
             >
               <StarIcon sx={{ color: 'white', fontSize: 14 }} />
               <Typography variant="caption" sx={{ color: 'white', fontWeight: 700, fontSize: '0.7rem' }}>
-                {item.badge || 'Most Popular'}
+                {item.badge || (isCareerLaunch ? 'Most Popular' : 'New')}
               </Typography>
             </Box>
           )}
 
-          {/* Rocket Icon for Career Launch */}
-          {isCareerLaunch && (
+          {/* Icon for Featured Courses */}
+          {(isCareerLaunch || isAICourse) && (
             <Box
               sx={{
                 position: 'absolute',
                 top: 16,
                 left: 16,
                 zIndex: 10,
-                background: `linear-gradient(135deg, ${alpha(greenColor, 0.12)}, ${alpha(greenLight, 0.05)})`,
+                background: `linear-gradient(135deg, ${alpha(themeColor.main, 0.12)}, ${alpha(themeColor.light, 0.05)})`,
                 borderRadius: 2,
                 p: 1,
-                border: `1px solid ${alpha(greenColor, 0.15)}`,
+                border: `1px solid ${alpha(themeColor.main, 0.15)}`,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
-              <RocketLaunchIcon sx={{ color: greenColor, fontSize: 20 }} />
+              {isCareerLaunch ? (
+                <RocketLaunchIcon sx={{ color: themeColor.main, fontSize: 20 }} />
+              ) : (
+                <RocketLaunchIcon sx={{ color: themeColor.main, fontSize: 20 }} />
+              )}
             </Box>
           )}
 
@@ -196,15 +214,15 @@ const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
                 bottom: 12,
                 left: 12,
                 zIndex: 2,
-                background: isCareerLaunch
-                  ? `linear-gradient(135deg, ${greenColor}, ${greenLight})`
+                background: isCareerLaunch || isAICourse
+                  ? `linear-gradient(135deg, ${themeColor.main}, ${themeColor.light})`
                   : `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.92)}, ${alpha(theme.palette.primary.dark, 0.92)})`,
                 borderRadius: 50,
                 px: 1.5,
                 py: 0.5,
                 backdropFilter: 'blur(8px)',
                 border: `1px solid ${alpha(theme.palette.common.white, 0.15)}`,
-                boxShadow: `0 4px 15px ${alpha(isCareerLaunch ? greenColor : theme.palette.primary.main, 0.25)}`,
+                boxShadow: `0 4px 15px ${alpha(themeColor.main, 0.25)}`,
               }}
             >
               <Typography
@@ -217,7 +235,7 @@ const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
                   textTransform: 'uppercase',
                 }}
               >
-                {isCareerLaunch ? '⭐ Career Launch' : (item.category || 'Popular')}
+                {isCareerLaunch ? '⭐ Career Launch' : isAICourse ? '🤖 AI' : (item.category || 'Popular')}
               </Typography>
             </Box>
 
@@ -378,7 +396,7 @@ const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
               </Box>
             </Box>
 
-            {/* Tags - Show green chip for Career Launch */}
+            {/* Tags - Show themed chip for featured courses */}
             {courseTags.length > 0 && (
               <Stack
                 direction="row"
@@ -395,11 +413,11 @@ const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
                     label={tag}
                     size="small"
                     sx={{
-                      background: isCareerLaunch
-                        ? `linear-gradient(135deg, ${alpha(greenColor, 0.12)}, ${alpha(greenLight, 0.06)})`
+                      background: isCareerLaunch || isAICourse
+                        ? `linear-gradient(135deg, ${alpha(themeColor.main, 0.12)}, ${alpha(themeColor.light, 0.06)})`
                         : `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.08)}, ${alpha(theme.palette.primary.light, 0.04)})`,
-                      border: `1px solid ${alpha(isCareerLaunch ? greenColor : theme.palette.primary.main, 0.1)}`,
-                      color: isCareerLaunch ? greenColor : 'primary.main',
+                      border: `1px solid ${alpha(themeColor.main, 0.1)}`,
+                      color: themeColor.main,
                       fontWeight: 600,
                       fontSize: '0.6rem',
                       height: 22,
@@ -447,25 +465,25 @@ const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
                 Details
               </Button>
 
-              {/* Enroll Now Button - Green for Career Launch */}
+              {/* Enroll Now Button - Themed for featured courses */}
               <Button
                 className="enroll-btn"
                 variant="contained"
                 onClick={handleEnrollClick}
                 fullWidth
                 sx={{
-                  background: isCareerLaunch
-                    ? `linear-gradient(135deg, ${greenColor}, ${greenLight})`
+                  background: isCareerLaunch || isAICourse
+                    ? `linear-gradient(135deg, ${themeColor.main}, ${themeColor.light})`
                     : `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
                   borderRadius: 2,
                   py: 1,
                   fontWeight: 700,
                   fontSize: '0.75rem',
-                  boxShadow: `0 4px 15px ${alpha(isCareerLaunch ? greenColor : theme.palette.primary.main, 0.2)}`,
+                  boxShadow: `0 4px 15px ${alpha(themeColor.main, 0.2)}`,
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-2px)',
-                    boxShadow: `0 8px 25px ${alpha(isCareerLaunch ? greenColor : theme.palette.primary.main, 0.3)}`,
+                    boxShadow: `0 8px 25px ${alpha(themeColor.main, 0.3)}`,
                   },
                 }}
               >

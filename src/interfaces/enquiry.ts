@@ -6,4 +6,5 @@ export interface EnquiryPayload {
   courseName: string
   coursePrice?: number
   source?: string
+  courseSlug?: string
 }

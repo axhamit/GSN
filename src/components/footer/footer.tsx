@@ -10,6 +10,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn'
 import QrCodeIcon from '@mui/icons-material/QrCode'
 import PersonIcon from '@mui/icons-material/Person'
 import { FooterNavigation, FooterSocialLinks } from '@/components/footer'
+import { Logo } from '@/components/logo'
 
 const Footer: FC = () => {
   const theme = useTheme()
@@ -71,22 +72,9 @@ const Footer: FC = () => {
           {/* Left Section - Brand & Info */}
           <Grid item xs={12} md={5}>
             <Box sx={{ pr: { md: 4 } }}>
-              {/* Logo */}
-              <Typography
-                variant="h1"
-                component="h2"
-                sx={{
-                  fontWeight: 900,
-                  mb: 1,
-                  background: `linear-gradient(135deg, ${theme.palette.primary.light}, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  letterSpacing: '-0.02em',
-                }}
-              >
-                GSN Foundation
-              </Typography>
+              <Box sx={{ mb: 1 }}>
+                <Logo variant="secondary" />
+              </Box>
 
               {/* Tagline */}
               <Typography
