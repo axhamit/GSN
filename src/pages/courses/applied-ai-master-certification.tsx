@@ -8,7 +8,6 @@ import {
   AIHeroSection,
   AICourseOverview,
   AILearningOutcomes,
-  AICurriculumTimeline,
   AITechStack,
   AIProjectShowcase,
   AILearningPath,
@@ -18,10 +17,13 @@ import {
   AICTASection,
   AIThemeProvider,
 } from '@/components/AIComponents'
+import CourseRoadmap from '@/components/course/course-roadmap'
+import { data as courseCatalog } from '@/components/home/popular-course.data'
 import EnrollmentForm from '@/components/form/EnrollmentForm'
 
 const AppliedAIMasterPage: NextPageWithLayout = () => {
   const router = useRouter()
+  const course = courseCatalog.find((item) => item.slug === 'applied-ai-master-certification')
   const [enrollOpen, setEnrollOpen] = useState(false)
   const [scrollToEnquiry, setScrollToEnquiry] = useState(false)
 
@@ -48,75 +50,6 @@ const AppliedAIMasterPage: NextPageWithLayout = () => {
     'Evaluate and optimize model performance',
     'Work with large-scale datasets',
     'Understand AI ethics and best practices',
-  ]
-
-  const curriculumModules = [
-    {
-      title: 'Python for AI Fundamentals',
-      duration: '3 Weeks',
-      topics: [
-        'Python Programming Advanced',
-        'NumPy and Matrix Operations',
-        'Pandas for Data Manipulation',
-        'Data Visualization with Matplotlib/Seaborn',
-        'Jupyter Notebooks Best Practices',
-      ],
-    },
-    {
-      title: 'Machine Learning Fundamentals',
-      duration: '4 Weeks',
-      topics: [
-        'Supervised Learning Algorithms',
-        'Unsupervised Learning Techniques',
-        'Feature Engineering',
-        'Model Evaluation Metrics',
-        'Cross-Validation and Hyperparameter Tuning',
-      ],
-    },
-    {
-      title: 'Deep Learning with Neural Networks',
-      duration: '5 Weeks',
-      topics: [
-        'Neural Network Architecture',
-        'Backpropagation and Gradient Descent',
-        'Convolutional Neural Networks (CNNs)',
-        'Recurrent Neural Networks (RNNs)',
-        'Transfer Learning',
-      ],
-    },
-    {
-      title: 'Generative AI and LLMs',
-      duration: '4 Weeks',
-      topics: [
-        'Introduction to Generative Models',
-        'Large Language Model Fundamentals',
-        'Fine-tuning Pre-trained Models',
-        'Prompt Engineering',
-        'Generative AI Applications',
-      ],
-    },
-    {
-      title: 'Applied AI Projects',
-      duration: '4 Weeks',
-      topics: [
-        'End-to-End ML Pipeline',
-        'Computer Vision Applications',
-        'Natural Language Processing',
-        'Time Series Analysis',
-        'Recommendation Systems',
-      ],
-    },
-    {
-      title: 'Model Deployment and MLOps',
-      duration: '3 Weeks',
-      topics: [
-        'Model Serialization',
-        'API Development',
-        'Cloud Deployment (AWS/GCP)',
-        'Monitoring and Logging',
-        'Model Versioning',
-      ],
-    },
   ]
 
   const technologies = ['Python', 'SQL', 'Git', 'Docker']
@@ -331,7 +264,7 @@ const AppliedAIMasterPage: NextPageWithLayout = () => {
 
       <AILearningOutcomes outcomes={learningOutcomes} />
 
-      <AICurriculumTimeline modules={curriculumModules} />
+      {course && <CourseRoadmap course={course} />}
 
       <AITechStack technologies={technologies} frameworks={frameworks} tools={tools} />
 

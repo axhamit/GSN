@@ -40,8 +40,11 @@ const StyledButtonRoot = styled('button', {
   whiteSpace: 'nowrap',
   WebkitTapHighlightColor: 'transparent',
   verticalAlign: 'middle',
-  outline: 'none !important',
   transition: theme.transitions.create(['transform']),
+  '&:focus-visible': {
+    outline: `3px solid ${theme.palette.secondary.main}`,
+    outlineOffset: 3,
+  },
 
   // hover
   '&:hover': {

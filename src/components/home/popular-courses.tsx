@@ -14,9 +14,9 @@ import CourseCardItem from '@/components/course/course-card-item'
 
 // Course Categories - Career Launch Academy added first
 const courseCategories = [
-  { id: 'career-launch', label: '🚀 Career Launch', icon: '🚀' },
+  { id: 'ai-courses', label: 'AI Courses', icon: '✦' },
+  { id: 'career-launch', label: 'Career Launch Program', icon: '🚀' },
   { id: 'all', label: 'All Courses', icon: '📚' },
-  { id: '11th-standard', label: '11th Standard', icon: '🔬' },
   { id: '12th-standard', label: '12th Standard', icon: '🧪' },
   { id: 'engineering-entrance', label: 'Engineering Entrance', icon: '⚙️' },
   { id: 'state-entrance', label: 'State Entrance', icon: '🏛️' },
@@ -26,7 +26,7 @@ const courseCategories = [
 
 const HomePremiumCourses: FC = () => {
   const theme = useTheme()
-  const [activeTab, setActiveTab] = useState('career-launch')
+  const [activeTab, setActiveTab] = useState('ai-courses')
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     setActiveTab(newValue)
@@ -36,7 +36,15 @@ const HomePremiumCourses: FC = () => {
 
   const filteredCourses = useMemo(() => {
     if (activeTab === 'all') {
-      return allCourses
+      return [...allCourses].sort((a, b) => {
+        const order = (course: Course) =>
+          course.category === 'Artificial Intelligence' ? 0 : course.category === 'Career Launch Academy' ? 1 : 2
+        return order(a) - order(b)
+      })
+    }
+
+    if (activeTab === 'ai-courses') {
+      return allCourses.filter(course => course.category === 'Artificial Intelligence')
     }
 
     if (activeTab === 'career-launch') {
@@ -44,7 +52,6 @@ const HomePremiumCourses: FC = () => {
     }
 
     const categoryMap: Record<string, string> = {
-      '11th-standard': '11th Standard',
       '12th-standard': '12th Standard',
       'engineering-entrance': 'Engineering Entrance',
       'state-entrance': 'State Entrance',
@@ -55,9 +62,6 @@ const HomePremiumCourses: FC = () => {
     const category = categoryMap[activeTab]
     return allCourses.filter(course => course.category === category)
   }, [activeTab, allCourses])
-
-  // Check if Career Launch Academy exists in filtered courses
-  const hasCareerLaunch = filteredCourses.some(course => course.category === 'Career Launch Academy')
 
   return (
     <Box
@@ -138,7 +142,7 @@ const HomePremiumCourses: FC = () => {
           <Typography
             variant="h2"
             sx={{
-              fontSize: { xs: '2rem', sm: '2.8rem', md: '3.2rem' },
+              fontSize: { xs: '1.75rem', sm: '2.1rem', md: '2.4rem' },
               fontWeight: 800,
               letterSpacing: '-0.02em',
               mb: 1.5,
@@ -179,7 +183,7 @@ const HomePremiumCourses: FC = () => {
             boxShadow: `0 4px 20px ${alpha(theme.palette.common.black, 0.04)}`,
             overflow: 'auto',
             '& .MuiTabs-flexContainer': {
-              justifyContent: 'center',
+              justifyContent: { xs: 'flex-start', md: 'center' },
             },
           }}
         >
@@ -237,7 +241,7 @@ const HomePremiumCourses: FC = () => {
         <AnimatePresence mode="wait">
           <Grid container spacing={2.5}>
             {filteredCourses.map((course, index) => (
-              <Grid item xs={12} sm={6} lg={4} key={course.id}>
+                <Grid item xs={12} sm={6} lg={course.category === 'Artificial Intelligence' || course.category === 'Career Launch Academy' ? 6 : 4} key={course.id}>
                 <CourseCardItem item={course} index={index} />
               </Grid>
             ))}
@@ -269,6 +273,7 @@ const HomePremiumCourses: FC = () => {
         {filteredCourses.length > 0 && (
           <Box sx={{ textAlign: 'center', mt: 5 }}>
             <Button
+              href="/courses"
               variant="contained"
               size="medium"
               sx={{

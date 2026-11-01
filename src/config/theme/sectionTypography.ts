@@ -7,9 +7,9 @@ export const sectionBadgeSx: SxProps<Theme> = {
 }
 
 export const sectionHeadlineSx: SxProps<Theme> = {
-  fontSize: { xs: '1.75rem', sm: '2.25rem', md: '3rem', lg: '3.5rem' },
-  fontWeight: 900,
-  lineHeight: 1.1,
+  fontSize: { xs: '1.6rem', sm: '1.9rem', md: '2.35rem', lg: '2.6rem' },
+  fontWeight: 800,
+  lineHeight: 1.2,
   letterSpacing: '-0.02em',
 }
 

@@ -100,7 +100,8 @@ const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
             background: theme.palette.background.paper,
             border: `1px solid ${alpha(theme.palette.primary.main, 0.06)}`,
             transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-            boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+            boxShadow: isCareerLaunch || isAICourse ? `0 8px 26px ${alpha(themeColor.main, 0.12)}` : 'var(--shadow-card)',
+            ...(isCareerLaunch || isAICourse ? { border: `1px solid ${alpha(themeColor.main, 0.25)}` } : {}),
             display: 'flex',
             flexDirection: 'column',
             '&:hover': {
@@ -136,7 +137,7 @@ const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
                 alignItems: 'center',
                 gap: 0.75,
                 boxShadow: `0 8px 25px ${alpha(themeColor.main, 0.4)}`,
-                animation: 'pulse 2s infinite',
+                animation: 'pulse 4s ease-in-out infinite',
                 '@keyframes pulse': {
                   '0%': { transform: 'scale(1)' },
                   '50%': { transform: 'scale(1.05)' },
@@ -146,7 +147,7 @@ const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
             >
               <StarIcon sx={{ color: 'white', fontSize: 14 }} />
               <Typography variant="caption" sx={{ color: 'white', fontWeight: 700, fontSize: '0.7rem' }}>
-                {item.badge || (isCareerLaunch ? 'Most Popular' : 'New')}
+                {isCareerLaunch ? item.badge || 'Most Popular' : `Featured${item.badge ? ` · ${item.badge}` : ''}`}
               </Typography>
             </Box>
           )}

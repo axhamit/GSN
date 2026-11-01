@@ -8,7 +8,6 @@ import {
   AIHeroSection,
   AICourseOverview,
   AILearningOutcomes,
-  AICurriculumTimeline,
   AITechStack,
   AIProjectShowcase,
   AIAgentWorkflow,
@@ -19,10 +18,13 @@ import {
   AICTASection,
   AIThemeProvider,
 } from '@/components/AIComponents'
+import CourseRoadmap from '@/components/course/course-roadmap'
+import { data as courseCatalog } from '@/components/home/popular-course.data'
 import EnrollmentForm from '@/components/form/EnrollmentForm'
 
 const AdvancedAgenticAIPage: NextPageWithLayout = () => {
   const router = useRouter()
+  const course = courseCatalog.find((item) => item.slug === 'advanced-agentic-generative-ai')
   const [enrollOpen, setEnrollOpen] = useState(false)
   const [scrollToEnquiry, setScrollToEnquiry] = useState(false)
 
@@ -49,75 +51,6 @@ const AdvancedAgenticAIPage: NextPageWithLayout = () => {
     'Deploy production-ready AI agent systems',
     'Understand agent orchestration frameworks',
     'Create conversational AI experiences',
-  ]
-
-  const curriculumModules = [
-    {
-      title: 'Introduction to Agentic AI',
-      duration: '2 Weeks',
-      topics: [
-        'AI Agents vs Traditional AI',
-        'Autonomy and Decision Making',
-        'Agent Architectures',
-        'Tool Calling Fundamentals',
-        'Prompt Engineering for Agents',
-      ],
-    },
-    {
-      title: 'Large Language Models Deep Dive',
-      duration: '3 Weeks',
-      topics: [
-        'LLM Architecture and Tokenization',
-        'Fine-tuning and PEFT Methods',
-        'Context Window Management',
-        'Output Parsing and Validation',
-        'Hallucination Mitigation',
-      ],
-    },
-    {
-      title: 'Retrieval-Augmented Generation (RAG)',
-      duration: '3 Weeks',
-      topics: [
-        'Vector Databases and Embeddings',
-        'Chunking Strategies',
-        'Retrieval Methods',
-        'RAG Pipeline Architecture',
-        'Advanced RAG Techniques',
-      ],
-    },
-    {
-      title: 'Building AI Agents',
-      duration: '4 Weeks',
-      topics: [
-        'Agent Design Patterns',
-        'Memory Systems',
-        'Planning and Reasoning',
-        'Tool Integration',
-        'Error Handling and Recovery',
-      ],
-    },
-    {
-      title: 'Multi-Agent Systems',
-      duration: '3 Weeks',
-      topics: [
-        'Agent Collaboration',
-        'Communication Protocols',
-        'Task Decomposition',
-        'Swarm Intelligence',
-        'Coordination Strategies',
-      ],
-    },
-    {
-      title: 'Production Deployment',
-      duration: '2 Weeks',
-      topics: [
-        'API Development',
-        'Scalability Considerations',
-        'Monitoring and Observability',
-        'Security Best Practices',
-        'Cost Optimization',
-      ],
-    },
   ]
 
   const technologies = ['Python', 'TypeScript', 'OpenAI API', 'Anthropic API']
@@ -332,7 +265,7 @@ const AdvancedAgenticAIPage: NextPageWithLayout = () => {
 
       <AILearningOutcomes outcomes={learningOutcomes} />
 
-      <AICurriculumTimeline modules={curriculumModules} />
+      {course && <CourseRoadmap course={course} />}
 
       <AITechStack technologies={technologies} frameworks={frameworks} tools={tools} />
 

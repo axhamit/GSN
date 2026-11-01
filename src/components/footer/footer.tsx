@@ -19,7 +19,7 @@ const Footer: FC = () => {
     <Box
       component="footer"
       sx={{
-        background: '#0a0a0a', // Pure dark background
+        background: `linear-gradient(145deg, ${theme.palette.primary.dark}, #10283a)`,
         pt: { xs: 8, md: 12 },
         pb: { xs: 4, md: 6 },
         position: 'relative',

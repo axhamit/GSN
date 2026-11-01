@@ -1,7 +1,7 @@
 import { TypographyOptions } from '@mui/material/styles/createTypography'
 
 export const fontFamily = [
-  '"Cabin",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
+  'Inter,Poppins,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
 ].join(',')
 
 const typography: TypographyOptions = {
