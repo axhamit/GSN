@@ -1,7 +1,6 @@
 export { default as AIHeroSection } from './AIHeroSection'
 export { default as AICourseOverview } from './AICourseOverview'
 export { default as AILearningOutcomes } from './AILearningOutcomes'
-export { default as AICurriculumTimeline } from './AICurriculumTimeline'
 export { default as AITechStack } from './AITechStack'
 export { default as AIProjectShowcase } from './AIProjectShowcase'
 export { default as AIAgentWorkflow } from './AIAgentWorkflow'

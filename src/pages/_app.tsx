@@ -33,7 +33,6 @@ const App: FC<AppPropsWithLayout> = (props: AppPropsWithLayout) => {
         <title>GSN FOUNDATION</title>
         <link rel="icon" type="image/png" href="/images/logo_blue.png" />
         <link rel="apple-touch-icon" href="/images/logo_blue.png" />
-        <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <MUIProvider>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

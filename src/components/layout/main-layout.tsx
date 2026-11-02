@@ -7,9 +7,10 @@ import EnrollmentForm from '@/components/form/EnrollmentForm'
 
 interface Props {
   children: ReactNode
+  showCareerPopup?: boolean
 }
 
-const MainLayout: FC<Props> = ({ children }) => {
+const MainLayout: FC<Props> = ({ children, showCareerPopup = true }) => {
   const [enrollOpen, setEnrollOpen] = useState(false)
 
   return (
@@ -17,7 +18,7 @@ const MainLayout: FC<Props> = ({ children }) => {
       <Header />
       {children}
       <Footer />
-      <CareerPopup onEnrollClick={() => setEnrollOpen(true)} />
+      {showCareerPopup && <CareerPopup onEnrollClick={() => setEnrollOpen(true)} />}
       <EnrollmentForm
         open={enrollOpen}
         onClose={() => setEnrollOpen(false)}

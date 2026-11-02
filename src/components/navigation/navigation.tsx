@@ -1,720 +1,200 @@
 import React, { FC, useState } from 'react'
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Chip from '@mui/material/Chip'
+import Typography from '@mui/material/Typography'
+import { alpha, useTheme } from '@mui/material/styles'
 import { Link as ScrollLink } from 'react-scroll'
 import { useRouter } from 'next/router'
 import { navigations } from './navigation.data'
-import { useTheme, alpha } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
-import SchoolIcon from '@mui/icons-material/School'
-import ScienceIcon from '@mui/icons-material/Science'
-import MedicalServicesIcon from '@mui/icons-material/MedicalServices'
-import EngineeringIcon from '@mui/icons-material/Engineering'
-import MenuBookIcon from '@mui/icons-material/MenuBook'
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
-import StarIcon from '@mui/icons-material/Star'
-import SmartToyIcon from '@mui/icons-material/SmartToy'
-import PsychologyIcon from '@mui/icons-material/Psychology'
 
-// Course dropdown data with Career Launch Academy first
-const courseDropdownItems = [
-  {
-    id: 'career-launch',
-    label: '🚀 Career Launch Academy',
-    icon: <RocketLaunchIcon sx={{ fontSize: 20 }} />,
-    description: 'Complete PCMB 11th & 12th + Competitive Exams',
-    path: '/courses/career-launch-academy',
-    isFeatured: true,
-    badge: 'Most Popular',
-    isAICourse: false,
-    isDivider: false,
-  },
-  {
-    id: '11th-standard',
-    label: '11th Standard PCMB',
-    icon: <ScienceIcon sx={{ fontSize: 20 }} />,
-    description: 'Physics, Chemistry, Maths, Biology',
-    path: '/courses/11th-standard',
-    isAICourse: false,
-    isDivider: false,
-  },
-  {
-    id: '12th-standard',
-    label: '12th Standard PCMB',
-    icon: <ScienceIcon sx={{ fontSize: 20 }} />,
-    description: 'Advanced PCMB preparation',
-    path: '/courses/12th-standard',
-    isAICourse: false,
-    isDivider: false,
-  },
-  {
-    id: 'jee',
-    label: 'JEE Mains & Advanced',
-    icon: <EngineeringIcon sx={{ fontSize: 20 }} />,
-    description: 'Engineering entrance exam prep',
-    path: '/courses/jee',
-    isAICourse: false,
-    isDivider: false,
-  },
-  {
-    id: 'neet',
-    label: 'NEET UG',
-    icon: <MedicalServicesIcon sx={{ fontSize: 20 }} />,
-    description: 'Medical entrance exam prep',
-    path: '/courses/neet',
-    isAICourse: false,
-    isDivider: false,
-  },
-  {
-    id: 'kcet',
-    label: 'KCET',
-    icon: <EmojiEventsIcon sx={{ fontSize: 20 }} />,
-    description: 'Karnataka CET preparation',
-    path: '/courses/kcet',
-    isAICourse: false,
-    isDivider: false,
-  },
-  {
-    id: '10th-standard',
-    label: '10th Standard Board',
-    icon: <MenuBookIcon sx={{ fontSize: 20 }} />,
-    description: 'Board exam preparation',
-    path: '/courses/10th-standard',
-    isAICourse: false,
-    isDivider: false,
-  },
-  {
-    id: 'ai-divider',
-    label: 'AI Programs',
-    icon: null,
-    description: null,
-    path: null,
-    isDivider: true,
-    isAICourse: false,
-  },
-  {
-    id: 'advanced-agentic-ai',
-    label: 'Advanced Agentic AI',
-    icon: <SmartToyIcon sx={{ fontSize: 20 }} />,
-    description: 'LLMs, RAG, AI Agents',
-    path: '/courses/advanced-agentic-generative-ai',
-    isAICourse: true,
-    badge: 'New',
-    isDivider: false,
-  },
-  {
-    id: 'applied-ai-certification',
-    label: 'Applied AI Master',
-    icon: <PsychologyIcon sx={{ fontSize: 20 }} />,
-    description: 'ML, Deep Learning, Python',
-    path: '/courses/applied-ai-master-certification',
-    isAICourse: true,
-    badge: 'Premium',
-    isDivider: false,
-  },
+interface CourseNavigationItem {
+  label: string
+  detail: string
+  path: string
+  badge?: string
+}
+
+const featuredCourses: CourseNavigationItem[] = [
+  { label: 'Advanced Agentic AI', detail: 'LLMs, RAG, AI Agents', path: '/courses/advanced-agentic-generative-ai', badge: 'Featured' },
+  { label: 'Applied AI Master', detail: 'Machine learning, deep learning, Python', path: '/courses/applied-ai-master-certification', badge: 'Featured' },
+  { label: 'Career Launch Program', detail: 'Career readiness and employability training', path: '/courses/career-launch-academy', badge: 'Featured' },
+]
+
+const otherCourses: CourseNavigationItem[] = [
+  { label: '11th Standard PCMB', detail: 'Physics, Chemistry, Maths, Biology', path: '/courses/11th-standard' },
+  { label: '12th Standard PCMB', detail: 'Advanced PCMB preparation', path: '/courses/12th-standard' },
+  { label: 'JEE Mains & Advanced', detail: 'Engineering entrance exam preparation', path: '/courses/jee' },
+  { label: 'NEET UG', detail: 'Medical entrance exam preparation', path: '/courses/neet' },
+  { label: 'KCET', detail: 'Karnataka CET preparation', path: '/courses/kcet' },
+  { label: '10th Standard Board', detail: 'Board exam preparation', path: '/courses/10th-standard' },
 ]
 
 interface NavigationItemProps {
   destination: string
   label: string
-  isActive?: boolean
+  onNavigate?: () => void
 }
 
-const NavigationItem: FC<NavigationItemProps> = ({ destination, label, isActive }) => {
+const NavigationItem: FC<NavigationItemProps> = ({ destination, label, onNavigate }) => {
   const theme = useTheme()
+  const router = useRouter()
 
   return (
     <Box
       component={ScrollLink}
       to={destination}
-      spy={true}
-      smooth={true}
+      spy
+      smooth
       duration={350}
-      activeClass="current"
+      onClick={() => {
+        if (router.pathname !== '/' && destination !== '/') {
+          void router.push(`/#${destination}`)
+        }
+        onNavigate?.()
+      }}
       sx={{
-        position: 'relative',
-        color: isActive ? 'primary.main' : 'text.disabled',
-        cursor: 'pointer',
-        fontWeight: 600,
         display: 'inline-flex',
         alignItems: 'center',
-        justifyContent: { xs: 'flex-start', md: 'center' },
-        width: { xs: '100%', md: 'auto' },
-        px: { xs: 1.5, md: 2.25 },
-        py: { xs: 1.1, md: 0.75 },
-        mb: { xs: 0.5, md: 0 },
-        fontSize: { xs: '1rem', md: '0.95rem' },
-        borderRadius: { xs: 2, md: 999 },
-        transition: 'all 0.3s ease',
-        '& > div': { display: 'none' },
-        '&.current > div': { display: 'block' },
-        '&:hover': {
-          color: 'primary.main',
-          backgroundColor: { xs: alpha(theme.palette.primary.main, 0.06), md: 'transparent' },
-          '& > div': {
-            display: 'block',
-          },
-        },
+        px: { xs: 1.5, md: 1.25 },
+        py: 1,
+        borderRadius: 'var(--radius-button)',
+        color: 'text.primary',
+        fontWeight: 600,
+        cursor: 'pointer',
+        textDecoration: 'none',
+        '&:hover': { color: 'primary.main', bgcolor: alpha(theme.palette.primary.main, 0.06) },
+        '&:focus-visible': { outline: `3px solid ${theme.palette.secondary.main}`, outlineOffset: 2 },
       }}
     >
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 12,
-          transform: 'rotate(3deg)',
-          '& img': { width: 44, height: 'auto' },
-        }}
-      >
-        {/* eslint-disable-next-line */}
-        <img src="/images/headline-curve.svg" alt="Headline curve" />
-      </Box>
       {label}
     </Box>
   )
 }
 
-// Courses Dropdown Component
-const CoursesDropdown: FC = () => {
+interface CoursesDropdownProps {
+  onNavigate?: () => void
+}
+
+const CoursesDropdown: FC<CoursesDropdownProps> = ({ onNavigate }) => {
   const theme = useTheme()
   const router = useRouter()
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
-  const [isHovered, setIsHovered] = useState(false)
+  const [open, setOpen] = useState(false)
 
-  const handleCourseClick = (path: string) => {
-    router.push(path)
-    setIsHovered(false)
-  }
-
-  const handleToggleOpen = () => {
-    if (isMobile) {
-      setIsHovered((prev) => !prev)
-    } else {
-      setIsHovered(true)
-    }
-  }
-
-  // Separate featured course (Career Launch Academy)
-  const featuredCourse = courseDropdownItems.find(item => item.isFeatured && !item.isAICourse)
-  const regularCourses = courseDropdownItems.filter(item => !item.isFeatured && !item.isDivider && !item.isAICourse && item.path)
-  const aiCourses = courseDropdownItems.filter(item => item.isAICourse && item.path)
-
-  // Green color for Career Launch
-  const greenColor = '#2e7d32'
-  const greenLight = '#4caf50'
+  const menuItem = (item: CourseNavigationItem, featured: boolean): React.ReactElement => (
+    <Box
+      key={item.path}
+      component="button"
+      type="button"
+      onClick={() => {
+        void router.push(item.path)
+        setOpen(false)
+        onNavigate?.()
+      }}
+      sx={{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: 2,
+        p: 1.5,
+        border: featured ? `1px solid ${alpha(theme.palette.primary.main, 0.22)}` : '1px solid transparent',
+        borderRadius: 'var(--radius-button)',
+        bgcolor: featured ? alpha(theme.palette.primary.main, 0.045) : 'transparent',
+        color: 'text.primary',
+        textAlign: 'left',
+        cursor: 'pointer',
+        transition: 'background-color 160ms ease, border-color 160ms ease, transform 160ms ease',
+        '&:hover': {
+          transform: 'translateY(-1px)',
+          bgcolor: alpha(theme.palette.primary.main, 0.08),
+          borderColor: alpha(theme.palette.primary.main, 0.3),
+        },
+        '&:focus-visible': { outline: `3px solid ${theme.palette.secondary.main}`, outlineOffset: 2 },
+      }}
+    >
+      <Box>
+        <Typography component="span" sx={{ display: 'block', fontWeight: 700 }}>{item.label}</Typography>
+        <Typography component="span" variant="caption" color="text.secondary">{item.detail}</Typography>
+      </Box>
+      {featured && <Chip label={item.badge} size="small" color="primary" sx={{ fontWeight: 700 }} />}
+    </Box>
+  )
 
   return (
     <Box
-      onMouseEnter={() => !isMobile && setIsHovered(true)}
-      onMouseLeave={() => !isMobile && setIsHovered(false)}
-      onClick={handleToggleOpen}
-      sx={{
-        position: 'relative',
-        display: 'inline-flex',
-        alignItems: 'center',
-        width: { xs: '100%', md: 'auto' },
-        px: { xs: 1.5, md: 2.25 },
-        py: { xs: 1.1, md: 0.75 },
-        mb: { xs: 0.5, md: 0 },
-        cursor: 'pointer',
-        borderRadius: { xs: 2, md: 999 },
-        '&:hover': {
-          backgroundColor: { xs: alpha(theme.palette.primary.main, 0.06), md: 'transparent' },
-          '& .dropdown-arrow': {
-            transform: 'rotate(180deg)',
-          },
-        },
-      }}
+      sx={{ position: 'relative', width: { xs: '100%', md: 'auto' } }}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 0.5,
-          color: 'text.disabled',
-          fontWeight: 600,
-          transition: 'color 0.3s ease',
-          '&:hover': {
-            color: 'primary.main',
-          },
+      <Button
+        aria-expanded={open}
+        aria-controls="courses-navigation-menu"
+        onClick={() => setOpen((value) => !value)}
+        onKeyDown={(event) => {
+          if (event.key === 'Escape') setOpen(false)
         }}
-      >
-        <span>Courses</span>
-        <ArrowDropDownIcon 
-          className="dropdown-arrow" 
-          sx={{ 
-            transition: 'transform 0.3s ease',
-            transform: isHovered ? 'rotate(180deg)' : 'rotate(0deg)',
-          }} 
-        />
-      </Box>
-
-      {/* Dropdown Menu */}
-      <Box
         sx={{
-          position: { xs: 'relative', md: 'absolute' },
-          top: { xs: 'auto', md: 'calc(100% + 8px)' },
-          left: { xs: 'auto', md: '50%' },
-          mt: { xs: 1, md: 0 },
-          minWidth: { xs: '100%', md: 340 },
           width: { xs: '100%', md: 'auto' },
-          background: `linear-gradient(135deg, ${theme.palette.background.paper}, ${alpha(theme.palette.primary.main, 0.02)})`,
-          backdropFilter: 'blur(20px)',
-          borderRadius: 3,
-          boxShadow: `0 20px 60px ${alpha(theme.palette.common.black, 0.15)}`,
-          border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-          display: isHovered ? 'block' : 'none',
-          pointerEvents: isHovered ? 'auto' : 'none',
-          transform: isHovered ? { xs: 'translateY(0)', md: 'translateX(-50%) translateY(0)' } : { xs: 'translateY(-6px)', md: 'translateX(-50%) translateY(-10px)' },
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          zIndex: 1000,
-          overflow: 'hidden',
-          maxHeight: '80vh',
-          overflowY: 'auto',
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            top: -6,
-            left: '50%',
-            transform: 'translateX(-50%) rotate(45deg)',
-            width: 12,
-            height: 12,
-            background: theme.palette.background.paper,
-            borderTop: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-            borderLeft: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
-          },
-          '&::-webkit-scrollbar': {
-            width: 4,
-          },
-          '&::-webkit-scrollbar-track': {
-            background: 'transparent',
-          },
-          '&::-webkit-scrollbar-thumb': {
-            background: alpha(theme.palette.primary.main, 0.3),
-            borderRadius: 10,
-          },
+          justifyContent: { xs: 'flex-start', md: 'center' },
+          minHeight: 44,
+          color: 'text.primary',
+          fontWeight: 700,
+          textTransform: 'none',
+          borderRadius: 'var(--radius-button)',
+          '&:hover': { bgcolor: alpha(theme.palette.primary.main, 0.06) },
         }}
       >
-        <Box sx={{ p: 1.5 }}>
-          <Typography 
-            variant="caption" 
-            sx={{ 
-              px: 1.5, 
-              py: 1, 
-              display: 'block',
-              color: 'text.secondary',
-              fontWeight: 600,
-              letterSpacing: 0.5,
-              fontSize: '0.7rem',
-              textTransform: 'uppercase',
-              borderBottom: `1px solid ${alpha(theme.palette.divider, 0.5)}`,
-            }}
+        Courses
+      </Button>
+      {open && (
+        <Box
+          id="courses-navigation-menu"
+          component="nav"
+          aria-label="Course categories"
+          sx={{
+            position: { xs: 'static', md: 'absolute' },
+            top: { md: 'calc(100% + 8px)' },
+            right: { md: 0 },
+            zIndex: 1400,
+            width: { xs: '100%', md: 380 },
+            maxHeight: { xs: 'none', md: 'min(75vh, 640px)' },
+            overflowY: 'auto',
+            p: 1.5,
+            border: '1px solid var(--color-border)',
+            borderRadius: 'var(--radius-card)',
+            bgcolor: 'background.paper',
+            boxShadow: 'var(--shadow-card-hover)',
+          }}
+        >
+          <Typography variant="overline" sx={{ display: 'block', px: 1.5, color: 'text.secondary', fontWeight: 700 }}>AI Courses</Typography>
+          {featuredCourses.slice(0, 2).map((item) => menuItem(item, true))}
+          <Typography variant="overline" sx={{ display: 'block', px: 1.5, mt: 1.5, color: 'text.secondary', fontWeight: 700 }}>Career Launch Program</Typography>
+          {menuItem(featuredCourses[2], true)}
+          <Typography variant="overline" sx={{ display: 'block', px: 1.5, mt: 1.5, color: 'text.secondary', fontWeight: 700 }}>Other Courses</Typography>
+          {otherCourses.map((item) => menuItem(item, false))}
+          <Button
+            href="/courses"
+            fullWidth
+            onClick={onNavigate}
+            sx={{ mt: 1, minHeight: 44, fontWeight: 700 }}
           >
-            Explore Our Courses
-          </Typography>
-
-          {/* Featured Course - Career Launch Academy */}
-          {featuredCourse && featuredCourse.path && (
-            <Box
-              onClick={() => handleCourseClick(featuredCourse.path)}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 2,
-                p: 1.5,
-                mb: 1.5,
-                borderRadius: 2,
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                background: `linear-gradient(135deg, ${alpha(greenColor, 0.06)}, ${alpha(greenLight, 0.03)})`,
-                border: `1px solid ${alpha(greenColor, 0.15)}`,
-                position: 'relative',
-                '&:hover': {
-                  transform: 'translateX(4px) scale(1.02)',
-                  boxShadow: `0 8px 25px ${alpha(greenColor, 0.15)}`,
-                  borderColor: greenColor,
-                  '& .course-icon': {
-                    background: `linear-gradient(135deg, ${greenColor}, ${greenLight})`,
-                    color: 'white',
-                    transform: 'scale(1.1) rotate(-5deg)',
-                  },
-                },
-              }}
-            >
-              {/* Featured Badge */}
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: -6,
-                  right: -6,
-                  background: `linear-gradient(135deg, ${greenColor}, ${greenLight})`,
-                  borderRadius: 50,
-                  px: 1.5,
-                  py: 0.25,
-                  boxShadow: `0 4px 15px ${alpha(greenColor, 0.4)}`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 0.5,
-                  zIndex: 1,
-                }}
-              >
-                <StarIcon sx={{ fontSize: 10, color: 'white' }} />
-                <Typography variant="caption" sx={{ color: 'white', fontWeight: 700, fontSize: '0.55rem' }}>
-                  POPULAR
-                </Typography>
-              </Box>
-
-              <Box
-                className="course-icon"
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 44,
-                  height: 44,
-                  borderRadius: 2,
-                  background: `linear-gradient(135deg, ${alpha(greenColor, 0.15)}, ${alpha(greenLight, 0.08)})`,
-                  color: greenColor,
-                  transition: 'all 0.3s ease',
-                  flexShrink: 0,
-                  position: 'relative',
-                  zIndex: 1,
-                }}
-              >
-                {featuredCourse.icon}
-              </Box>
-              <Box sx={{ flex: 1, position: 'relative', zIndex: 1 }}>
-                <Typography 
-                  variant="body2" 
-                  sx={{ 
-                    fontWeight: 700,
-                    color: greenColor,
-                    fontSize: '0.95rem',
-                  }}
-                >
-                  {featuredCourse.label}
-                </Typography>
-                <Typography 
-                  variant="caption" 
-                  sx={{ 
-                    color: 'text.secondary',
-                    fontSize: '0.75rem',
-                    display: 'block',
-                  }}
-                >
-                  {featuredCourse.description}
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  color: greenColor,
-                  fontWeight: 700,
-                  fontSize: '0.8rem',
-                  position: 'relative',
-                  zIndex: 1,
-                }}
-              >
-                Enroll Now →
-              </Box>
-            </Box>
-          )}
-
-          {/* Divider */}
-          <Box
-            sx={{
-              height: 1,
-              background: `linear-gradient(90deg, transparent, ${alpha(theme.palette.divider, 0.5)}, transparent)`,
-              my: 1,
-            }}
-          />
-
-          {/* Other Courses */}
-          <Typography 
-            variant="caption" 
-            sx={{ 
-              px: 1.5, 
-              py: 0.5, 
-              display: 'block',
-              color: 'text.disabled',
-              fontWeight: 500,
-              fontSize: '0.65rem',
-              textTransform: 'uppercase',
-              letterSpacing: 0.5,
-            }}
-          >
-            Other Programs
-          </Typography>
-
-          {regularCourses.map((item) => (
-            item.path && (
-              <Box
-                key={item.id}
-                onClick={() => handleCourseClick(item.path)}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 2,
-                  p: 1.5,
-                  borderRadius: 2,
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.08)}, ${alpha(theme.palette.primary.light, 0.04)})`,
-                    transform: 'translateX(4px)',
-                    '& .course-icon': {
-                      background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
-                      color: 'white',
-                      transform: 'scale(1.1)',
-                    },
-                  },
-                }}
-              >
-                <Box
-                  className="course-icon"
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: 40,
-                    height: 40,
-                    borderRadius: 2,
-                    background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.1)}, ${alpha(theme.palette.primary.light, 0.05)})`,
-                    color: 'primary.main',
-                    transition: 'all 0.3s ease',
-                    flexShrink: 0,
-                  }}
-                >
-                  {item.icon}
-                </Box>
-                <Box sx={{ flex: 1 }}>
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      fontWeight: 600,
-                      color: 'text.primary',
-                      fontSize: '0.9rem',
-                    }}
-                  >
-                    {item.label}
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      color: 'text.secondary',
-                      fontSize: '0.75rem',
-                      display: 'block',
-                    }}
-                  >
-                    {item.description}
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    color: 'text.disabled',
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      color: 'primary.main',
-                      transform: 'translateX(4px)',
-                    },
-                  }}
-                >
-                  →
-                </Box>
-              </Box>
-            )
-          ))}
-
-          {/* View All Courses Link */}
-          <Box
-            onClick={() => router.push('/courses')}
-            sx={{
-              mt: 1,
-              p: 1.5,
-              borderRadius: 2,
-              textAlign: 'center',
-              background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.05)}, ${alpha(theme.palette.primary.light, 0.02)})`,
-              border: `1px dashed ${alpha(theme.palette.primary.main, 0.2)}`,
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              '&:hover': {
-                background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.1)}, ${alpha(theme.palette.primary.light, 0.05)})`,
-                borderColor: theme.palette.primary.main,
-                transform: 'scale(1.02)',
-              },
-            }}
-          >
-            <Typography
-              variant="body2"
-              sx={{
-                color: 'primary.main',
-                fontWeight: 600,
-                fontSize: '0.85rem',
-              }}
-            >
-              View All Courses →
-            </Typography>
-          </Box>
-
-          {/* AI Courses Section */}
-          {aiCourses.length > 0 && (
-            <>
-              <Box
-                sx={{
-                  height: 1,
-                  background: `linear-gradient(90deg, transparent, ${alpha(theme.palette.divider, 0.5)}, transparent)`,
-                  my: 1.5,
-                }}
-              />
-              <Typography
-                variant="caption"
-                sx={{
-                  px: 1.5,
-                  py: 0.5,
-                  display: 'block',
-                  color: '#9c27b0',
-                  fontWeight: 600,
-                  fontSize: '0.65rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: 0.5,
-                }}
-              >
-                Artificial Intelligence
-              </Typography>
-              {aiCourses.map((item) => (
-                item.path && (
-                  <Box
-                    key={item.id}
-                    onClick={() => handleCourseClick(item.path)}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 2,
-                      p: 1.5,
-                      borderRadius: 2,
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease',
-                      background: `linear-gradient(135deg, ${alpha('#9c27b0', 0.06)}, ${alpha('#ba68c8', 0.03)})`,
-                      border: `1px solid ${alpha('#9c27b0', 0.15)}`,
-                      position: 'relative',
-                      '&:hover': {
-                        transform: 'translateX(4px)',
-                        boxShadow: `0 8px 25px ${alpha('#9c27b0', 0.15)}`,
-                        borderColor: '#9c27b0',
-                        '& .course-icon': {
-                          background: `linear-gradient(135deg, #9c27b0, #ba68c8)`,
-                          color: 'white',
-                          transform: 'scale(1.1)',
-                        },
-                      },
-                    }}
-                  >
-                  {item.badge && (
-                    <Box
-                      sx={{
-                        position: 'absolute',
-                        top: -6,
-                        right: -6,
-                        background: `linear-gradient(135deg, #9c27b0, #ba68c8)`,
-                        borderRadius: 50,
-                        px: 1.5,
-                        py: 0.25,
-                        boxShadow: `0 4px 15px ${alpha('#9c27b0', 0.4)}`,
-                        zIndex: 1,
-                      }}
-                    >
-                      <Typography variant="caption" sx={{ color: 'white', fontWeight: 700, fontSize: '0.55rem' }}>
-                        {item.badge}
-                      </Typography>
-                    </Box>
-                  )}
-                  <Box
-                    className="course-icon"
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: 40,
-                      height: 40,
-                      borderRadius: 2,
-                      background: `linear-gradient(135deg, ${alpha('#9c27b0', 0.15)}, ${alpha('#ba68c8', 0.08)})`,
-                      color: '#9c27b0',
-                      transition: 'all 0.3s ease',
-                      flexShrink: 0,
-                      position: 'relative',
-                      zIndex: 1,
-                    }}
-                  >
-                    {item.icon}
-                  </Box>
-                  <Box sx={{ flex: 1, position: 'relative', zIndex: 1 }}>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontWeight: 600,
-                        color: '#9c27b0',
-                        fontSize: '0.9rem',
-                      }}
-                    >
-                      {item.label}
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      sx={{
-                        color: 'text.secondary',
-                        fontSize: '0.75rem',
-                        display: 'block',
-                      }}
-                    >
-                      {item.description}
-                    </Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      color: '#9c27b0',
-                      transition: 'all 0.3s ease',
-                      position: 'relative',
-                      zIndex: 1,
-                    }}
-                  >
-                    →
-                  </Box>
-                </Box>
-                  )
-                ))}
-            </>
-          )}
+            View all courses
+          </Button>
         </Box>
-      </Box>
+      )}
     </Box>
   )
 }
 
-const Navigation: FC = () => {
-  return (
-    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: { xs: 'stretch', md: 'center' }, width: { xs: '100%', md: 'auto' }, gap: { xs: 0.25, md: 0.5 }, flexWrap: { md: 'wrap' } }}>
-      {navigations.map(({ path: destination, label }) => {
-        // Don't render the "Courses" navigation item from the data array
-        if (destination === 'courses') {
-          return <CoursesDropdown key={destination} />
-        }
-        return (
-          <NavigationItem 
-            key={destination} 
-            destination={destination} 
-            label={label}
-            isActive={destination === '/'}
-          />
-        )
-      })}
-    </Box>
-  )
+interface NavigationProps {
+  onNavigate?: () => void
 }
+
+const Navigation: FC<NavigationProps> = ({ onNavigate }) => (
+  <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: { xs: 'stretch', md: 'center' }, width: { xs: '100%', md: 'auto' }, gap: { xs: 0.25, md: 0.5 } }}>
+    {navigations.map(({ path, label }) => path === 'courses'
+      ? <CoursesDropdown key={path} onNavigate={onNavigate} />
+      : <NavigationItem key={path} destination={path} label={label} onNavigate={onNavigate} />)}
+  </Box>
+)
 
 export default Navigation

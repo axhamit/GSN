@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import { useRouter } from 'next/router'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
@@ -41,6 +42,7 @@ const AIBrochureEnquiryForm: FC<AIBrochureEnquiryFormProps> = ({
   onSuccess,
 }) => {
   const theme = useTheme()
+  const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
   const [countryCode, setCountryCode] = useState('+91')
@@ -108,30 +110,10 @@ const AIBrochureEnquiryForm: FC<AIBrochureEnquiryFormProps> = ({
         throw new Error(`Request failed with status ${response.status}`)
       }
 
-      const responseData = await response.json()
-
-      // Reset form
       setFormData({ name: '', email: '', phone: '', message: '' })
       setCountryCode('+91')
-
-      setStatus({
-        type: 'success',
-        message: 'Thank you! Your enquiry has been submitted. Your brochure will download shortly.',
-      })
-
       onSuccess?.()
-
-      // Trigger brochure download if URL is provided in response
-      if (responseData.brochureUrl) {
-        setTimeout(() => {
-          const link = document.createElement('a')
-          link.href = responseData.brochureUrl
-          link.download = `${courseSlug}-brochure.pdf`
-          document.body.appendChild(link)
-          link.click()
-          document.body.removeChild(link)
-        }, 1000)
-      }
+      await router.push(`/thank-you?course=${encodeURIComponent(courseSlug)}`)
     } catch (error) {
       setStatus({
         type: 'error',

@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { EnquiryPayload } from '@/interfaces/enquiry'
+import { resolveBrochureSlug } from '@/utils/course-brochure'
 
 interface EnquiryResponse {
   success: boolean
@@ -8,13 +9,6 @@ interface EnquiryResponse {
 }
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-// Course brochure mapping
-const COURSE_BROCHURES: Record<string, string> = {
-  'advanced-agentic-generative-ai': '/brochures/advanced-agentic-ai-brochure.pdf',
-  'applied-ai-master-certification': '/brochures/applied-ai-master-brochure.pdf',
-  'career-launch-academy': '/brochures/career-launch-academy-brochure.pdf',
-}
 
 const handler = async (
   req: NextApiRequest,
@@ -40,6 +34,7 @@ const handler = async (
       return res.status(400).json({ success: false, message: 'Please provide a valid email address' })
     }
 
+    const brochureSlug = resolveBrochureSlug(courseSlug, courseName)
     const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL
 
     if (!webhookUrl) {
@@ -61,7 +56,7 @@ const handler = async (
     courseName,
     coursePrice,
     source,
-    courseSlug,
+    courseSlug: brochureSlug,
   }),
 });
 
@@ -74,8 +69,7 @@ console.log("Response:", responseText);
       throw new Error(`Google Sheets webhook responded with ${webhookResponse.status}`)
     }
 
-    // Determine brochure URL based on course slug
-    const brochureUrl = courseSlug ? COURSE_BROCHURES[courseSlug] : undefined
+    const brochureUrl = `/api/brochure?course=${encodeURIComponent(brochureSlug)}`
 
     return res.status(200).json({
       success: true,
