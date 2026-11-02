@@ -1,297 +1,162 @@
-import React, { FC, useState, useMemo } from 'react'
+import React, { FC, useMemo, useState } from 'react'
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import Container from '@mui/material/Container'
-import Typography from '@mui/material/Typography'
-import { useTheme, alpha } from '@mui/material/styles'
-import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
 import Button from '@mui/material/Button'
-import { AnimatePresence } from 'framer-motion'
+import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid'
+import Tab from '@mui/material/Tab'
+import Tabs from '@mui/material/Tabs'
+import Typography from '@mui/material/Typography'
 import { Course } from '@/interfaces/course'
 import { data } from './popular-course.data'
 import CourseCardItem from '@/components/course/course-card-item'
 
-// Course Categories - Career Launch Academy added first
 const courseCategories = [
-  { id: 'ai-courses', label: 'AI Courses', icon: '✦' },
-  { id: 'career-launch', label: 'Career Launch Program', icon: '🚀' },
-  { id: 'all', label: 'All Courses', icon: '📚' },
-  { id: '12th-standard', label: '12th Standard', icon: '🧪' },
-  { id: 'engineering-entrance', label: 'Engineering Entrance', icon: '⚙️' },
-  { id: 'state-entrance', label: 'State Entrance', icon: '🏛️' },
-  { id: 'test-series', label: 'Test Series', icon: '📝' },
-  { id: '10th-standard', label: '10th Standard', icon: '📖' },
+  { id: 'all', label: 'All courses' },
+  { id: 'ai-courses', label: 'Artificial intelligence' },
+  { id: 'career-launch', label: 'Career launch' },
+  { id: '10th-standard', label: 'Class 10' },
+  { id: '11th-standard', label: 'Class 11' },
+  { id: '12th-standard', label: 'Class 12' },
+  { id: 'neet', label: 'NEET' },
+  { id: 'jee', label: 'JEE' },
+  { id: 'kcet', label: 'KCET' },
+  { id: 'test-series', label: 'Test series' },
 ]
 
+const categoryMap: Record<string, string> = {
+  '10th-standard': '10th Standard',
+  '11th-standard': '11th Standard',
+  '12th-standard': '12th Standard',
+  neet: 'Medical Entrance',
+  jee: 'Engineering Entrance',
+  kcet: 'State Entrance',
+  'test-series': 'Test Series',
+}
+
 const HomePremiumCourses: FC = () => {
-  const theme = useTheme()
   const [activeTab, setActiveTab] = useState('ai-courses')
-
-  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
-    setActiveTab(newValue)
-  }
-
-  const allCourses = data
 
   const filteredCourses = useMemo(() => {
     if (activeTab === 'all') {
-      return [...allCourses].sort((a, b) => {
-        const order = (course: Course) =>
+      return [...data].sort((a, b) => {
+        const order = (course: Course): number =>
           course.category === 'Artificial Intelligence' ? 0 : course.category === 'Career Launch Academy' ? 1 : 2
         return order(a) - order(b)
       })
     }
 
     if (activeTab === 'ai-courses') {
-      return allCourses.filter(course => course.category === 'Artificial Intelligence')
+      return data.filter((course) => course.category === 'Artificial Intelligence')
     }
 
     if (activeTab === 'career-launch') {
-      return allCourses.filter(course => course.category === 'Career Launch Academy')
+      return data.filter((course) => course.category === 'Career Launch Academy')
     }
 
-    const categoryMap: Record<string, string> = {
-      '12th-standard': '12th Standard',
-      'engineering-entrance': 'Engineering Entrance',
-      'state-entrance': 'State Entrance',
-      'test-series': 'Test Series',
-      '10th-standard': '10th Standard',
-    }
-
-    const category = categoryMap[activeTab]
-    return allCourses.filter(course => course.category === category)
-  }, [activeTab, allCourses])
+    return data.filter((course) => course.category === categoryMap[activeTab])
+  }, [activeTab])
 
   return (
     <Box
       id="premium-courses"
-      sx={{
-        py: { xs: 6, md: 10 },
-        position: 'relative',
-        overflow: 'hidden',
-        background: `linear-gradient(180deg, ${alpha(theme.palette.primary.dark, 0.02)} 0%, ${theme.palette.background.default} 50%, ${alpha(theme.palette.secondary.dark, 0.02)} 100%)`,
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: -100,
-          right: -100,
-          width: 300,
-          height: 300,
-          background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.04)} 0%, transparent 70%)`,
-          borderRadius: '50%',
-          pointerEvents: 'none',
-        },
-        '&::after': {
-          content: '""',
-          position: 'absolute',
-          bottom: -80,
-          left: -80,
-          width: 250,
-          height: 250,
-          background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.03)} 0%, transparent 70%)`,
-          borderRadius: '50%',
-          pointerEvents: 'none',
-        },
-      }}
+      component="section"
+      sx={{ py: { xs: 7, md: 10 }, backgroundColor: '#f6f8fa' }}
     >
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-        {/* Header Section */}
-        <Box sx={{ mb: 5, textAlign: 'center' }}>
-          <Box
-            sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 1,
-              px: 2.5,
-              py: 0.75,
-              borderRadius: 50,
-              background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.12)}, ${alpha(theme.palette.primary.light, 0.04)})`,
-              border: `1px solid ${alpha(theme.palette.primary.main, 0.12)}`,
-              mb: 2.5,
-              backdropFilter: 'blur(10px)',
-            }}
-          >
-            <Box
-              sx={{
-                width: 6,
-                height: 6,
-                borderRadius: '50%',
-                background: theme.palette.success.main,
-                animation: 'blink 1.5s infinite',
-                '@keyframes blink': {
-                  '0%, 100%': { opacity: 1 },
-                  '50%': { opacity: 0.3 },
-                },
-              }}
-            />
-            <Typography
-              variant="caption"
-              sx={{
-                color: 'text.secondary',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: 1,
-                fontSize: '0.7rem',
-              }}
-            >
-              🎯 Premium Learning Paths
-            </Typography>
-          </Box>
-
+      <Container maxWidth="lg">
+        <Box sx={{ mb: 4, maxWidth: 620 }}>
           <Typography
-            variant="h2"
+            component="p"
             sx={{
-              fontSize: { xs: '1.75rem', sm: '2.1rem', md: '2.4rem' },
-              fontWeight: 800,
-              letterSpacing: '-0.02em',
-              mb: 1.5,
-              background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+              mb: 1,
+              color: 'primary.main',
+              fontSize: '0.78rem',
+              fontWeight: 700,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
             }}
           >
-            Choose Your Path to Success
+            Find your next step
           </Typography>
-
           <Typography
-            variant="body2"
+            component="h2"
             sx={{
-              color: 'text.secondary',
-              maxWidth: 550,
-              mx: 'auto',
-              fontSize: '0.95rem',
-              lineHeight: 1.7,
+              mb: 1.25,
+              color: '#172b3c',
+              fontSize: { xs: '2rem', md: '2.6rem' },
+              fontWeight: 750,
+              letterSpacing: '-0.035em',
+              lineHeight: 1.2,
             }}
           >
-            Explore our comprehensive course catalog designed to help you ace every exam with confidence
+            Learning paths built around you
+          </Typography>
+          <Typography sx={{ color: 'text.secondary', fontSize: '1rem', lineHeight: 1.7 }}>
+            Practical teaching, supportive mentors, and clear milestones for every goal.
           </Typography>
         </Box>
 
-        {/* Tabs Section */}
         <Box
           sx={{
-            mb: 4,
-            display: 'flex',
-            justifyContent: 'center',
-            background: `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.8)}, ${alpha(theme.palette.background.default, 0.6)})`,
-            backdropFilter: 'blur(20px)',
-            borderRadius: 3,
-            p: 1,
-            border: `1px solid ${alpha(theme.palette.primary.main, 0.06)}`,
-            boxShadow: `0 4px 20px ${alpha(theme.palette.common.black, 0.04)}`,
-            overflow: 'auto',
-            '& .MuiTabs-flexContainer': {
-              justifyContent: { xs: 'flex-start', md: 'center' },
+            mb: 3.5,
+            borderBottom: '1px solid #dfe6eb',
+            '& .MuiTabs-indicator': { height: 2, borderRadius: 2 },
+            '& .MuiTab-root': {
+              minHeight: 48,
+              px: 1.75,
+              color: '#647586',
+              fontWeight: 600,
+              fontSize: '0.85rem',
+              textTransform: 'none',
+              '&.Mui-selected': { color: '#17324d' },
             },
           }}
         >
           <Tabs
             value={activeTab}
-            onChange={handleTabChange}
+            onChange={(_, value: string) => setActiveTab(value)}
             variant="scrollable"
             scrollButtons="auto"
             allowScrollButtonsMobile
-            sx={{
-              '& .MuiTab-root': {
-                minHeight: 36,
-                px: 2.5,
-                py: 0.75,
-                borderRadius: 2,
-                color: 'text.secondary',
-                fontWeight: 600,
-                fontSize: '0.8rem',
-                textTransform: 'none',
-                transition: 'all 0.3s ease',
-                '&.Mui-selected': {
-                  color: 'white',
-                  background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
-                  boxShadow: `0 4px 15px ${alpha(theme.palette.primary.main, 0.3)}`,
-                },
-                '&:hover': {
-                  background: alpha(theme.palette.primary.main, 0.05),
-                  transform: 'translateY(-1px)',
-                },
-                '&:not(.Mui-selected):hover': {
-                  background: alpha(theme.palette.primary.main, 0.08),
-                },
-              },
-              '& .MuiTabs-indicator': {
-                display: 'none',
-              },
-            }}
+            aria-label="Filter courses by category"
           >
             {courseCategories.map((category) => (
-              <Tab
-                key={category.id}
-                value={category.id}
-                label={
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
-                    <span style={{ fontSize: '1rem' }}>{category.icon}</span>
-                    <span style={{ fontSize: '0.8rem' }}>{category.label}</span>
-                  </Box>
-                }
-              />
+              <Tab key={category.id} value={category.id} label={category.label} />
             ))}
           </Tabs>
         </Box>
 
-        {/* Course Grid */}
-        <AnimatePresence mode="wait">
-          <Grid container spacing={2.5}>
+        {filteredCourses.length > 0 ? (
+          <Grid container spacing={2.5} alignItems="stretch">
             {filteredCourses.map((course, index) => (
-                <Grid item xs={12} sm={6} lg={course.category === 'Artificial Intelligence' || course.category === 'Career Launch Academy' ? 6 : 4} key={course.id}>
+              <Grid item xs={12} sm={6} lg={4} key={course.id}>
                 <CourseCardItem item={course} index={index} />
               </Grid>
             ))}
           </Grid>
-        </AnimatePresence>
-
-        {/* Empty State */}
-        {filteredCourses.length === 0 && (
+        ) : (
           <Box
             sx={{
+              py: 7,
+              px: 3,
+              border: '1px solid #e3e9ee',
+              borderRadius: 3,
+              backgroundColor: '#fff',
               textAlign: 'center',
-              py: 6,
-              px: 4,
-              borderRadius: 4,
-              background: `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.8)}, ${alpha(theme.palette.background.default, 0.6)})`,
-              border: `1px solid ${alpha(theme.palette.primary.main, 0.06)}`,
             }}
           >
-            <Typography variant="h6" sx={{ mb: 1, color: 'text.secondary', fontWeight: 700 }}>
-              No courses available
+            <Typography component="h3" sx={{ mb: 0.75, color: '#172b3c', fontWeight: 700 }}>
+              Courses coming soon
             </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              We're adding more courses soon. Check back later!
+            <Typography color="text.secondary">
+              We&apos;re adding new courses. Please check back soon.
             </Typography>
           </Box>
         )}
 
-        {/* Bottom CTA */}
-        {filteredCourses.length > 0 && (
-          <Box sx={{ textAlign: 'center', mt: 5 }}>
-            <Button
-              href="/courses"
-              variant="contained"
-              size="medium"
-              sx={{
-                background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
-                borderRadius: 50,
-                px: 5,
-                py: 1.5,
-                fontWeight: 700,
-                fontSize: '0.95rem',
-                boxShadow: `0 4px 20px ${alpha(theme.palette.primary.main, 0.3)}`,
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  transform: 'translateY(-2px)',
-                  boxShadow: `0 8px 30px ${alpha(theme.palette.primary.main, 0.4)}`,
-                },
-              }}
-            >
-              View All Courses
+        {activeTab !== 'all' && (
+          <Box sx={{ mt: 4, textAlign: 'center' }}>
+            <Button variant="outlined" onClick={() => setActiveTab('all')}>
+              Browse all courses
             </Button>
           </Box>
         )}

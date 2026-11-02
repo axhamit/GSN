@@ -4,12 +4,14 @@ export const data: Array<Course> = [
   {
     id: 1,
     slug: 'career-launch-academy',
-    cover: '/images/courses/true-agency-o4UhdLv5jbQ-unsplash.jpg',
-    title: '🚀 Career Launch Academy - Complete PCMB 11th & 12th + Competitive Exams',
+    cover: '/images/courses/Career Launch Program_ Future-Ready Learning.png',
+    title: 'Career Launch Academy - Career Readiness & Employability Program',
     rating: 5,
     ratingCount: 458,
     price: 34999,
     category: 'Career Launch Academy',
+    description:
+      'Build professional communication, strengthen your personal brand, explore workplace tools and domains, and prepare for interviews with guided practice.',
     tags: ['Comprehensive', 'All-in-One', 'Premium'],
     duration: '2 Years',
     instructor: 'Dr. Sharma & Team',
@@ -118,7 +120,7 @@ export const data: Array<Course> = [
   {
     id: 9,
     slug: 'advanced-agentic-generative-ai',
-    cover: '/images/courses/annie-spratt-QckxruozjRg-unsplash.jpg',
+    cover: '/images/courses/Advanced Agentic AI Workspace.png',
     title: 'Advanced Agentic AI and Generative AI',
     rating: 5,
     ratingCount: 89,
@@ -134,7 +136,7 @@ export const data: Array<Course> = [
   {
     id: 10,
     slug: 'applied-ai-master-certification',
-    cover: '/images/courses/sai-kiran-anagani-5Ntkpxqt54Y-unsplash.jpg',
+    cover: '/images/courses/Applied AI Master Certification.png',
     title: 'Applied AI Master Certification',
     rating: 5,
     ratingCount: 67,

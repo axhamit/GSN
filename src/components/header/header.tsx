@@ -4,7 +4,7 @@ import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { Logo } from '@/components/logo'
-import { Navigation, AuthNavigation } from '@/components/navigation'
+import { Navigation } from '@/components/navigation'
 import { useTheme } from '@mui/material/styles'
 import { Menu, Close } from '@mui/icons-material'
 
@@ -41,7 +41,6 @@ const Header: FC = () => {
             }}
           >
             <Navigation />
-            <AuthNavigation />
           </Box>
 
           {matchMobileView && (
@@ -79,8 +78,7 @@ const Header: FC = () => {
               </IconButton>
 
               <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1.5, mt: 6 }}>
-                <Navigation />
-                <AuthNavigation />
+                <Navigation onNavigate={() => setVisibleMenu(false)} />
               </Box>
             </Box>
           )}

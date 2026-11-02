@@ -8,6 +8,8 @@ import { MainLayout } from '@/components/layout'
 const DynamicHomeHero = dynamic(() => import('../components/home/hero'))
 const DynamicHomeFeature = dynamic(() => import('../components/home/feature'))
 const DynamicHomePopularCourse = dynamic(() => import('../components/home/popular-courses'), { ssr: false })
+const DynamicLearningPaths = dynamic(() => import('../components/home/learning-paths'))
+const DynamicStudentStories = dynamic(() => import('../components/home/student-stories'))
 const DynamicAboutGSN = dynamic(() => import('../components/home/aboutGsn/aboutGsn'), { ssr: false })
 const DynamicGapAnalysis = dynamic(() => import('../components/GapAnalysis/GapAnalysis'), { ssr: false })
 const DynamicWhyPartner = dynamic(() => import('../components/WhyPartner/WhyPartner'), { ssr: false })
@@ -60,10 +62,12 @@ const Home: NextPageWithLayout = () => {
         />
       </Head>
       <DynamicHomeHero />
+      <DynamicLearningPaths />
       <DynamicHomePopularCourse />
       <DynamicHomeFeature />
       <DynamicAvishkarCareer/>
       <DynamicAboutGSN />
+      <DynamicStudentStories />
       <DynamicGapAnalysis />
       <DynamicWhyPartner />
       <DynamicTrainingMethodology />

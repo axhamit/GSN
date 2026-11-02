@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import { useRouter } from 'next/router'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Dialog from '@mui/material/Dialog'
@@ -11,11 +12,11 @@ import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import SchoolIcon from '@mui/icons-material/School'
 import Alert from '@mui/material/Alert'
-import Snackbar from '@mui/material/Snackbar'
 import { useTheme, alpha } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { EnquiryPayload } from '@/interfaces/enquiry'
 import { SHOW_FEES } from '@/utils/config'
+import { resolveBrochureSlug } from '@/utils/course-brochure'
 import InputAdornment from '@mui/material/InputAdornment'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
@@ -53,13 +54,11 @@ const EnrollmentForm: FC<EnrollmentFormProps> = ({
   onSuccess
 }) => {
   const theme = useTheme()
+  const router = useRouter()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
   const [countryCode, setCountryCode] = useState('+91')
-  const [showToast, setShowToast] = useState(false)
-  const [toastMessage, setToastMessage] = useState('')
-  const [toastType, setToastType] = useState<'success' | 'error'>('success')
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -115,6 +114,7 @@ const EnrollmentForm: FC<EnrollmentFormProps> = ({
         courseName,
         coursePrice,
         source,
+        courseSlug: resolveBrochureSlug(undefined, courseName),
       }
 
       const response = await fetch('/api/enquiry', {
@@ -127,33 +127,12 @@ const EnrollmentForm: FC<EnrollmentFormProps> = ({
         throw new Error(`Request failed with status ${response.status}`)
       }
 
-      const responseData = await response.json()
-
-      // Reset form and close dialog
       setFormData({ name: '', email: '', phone: '', message: '' })
       setCountryCode('+91')
       onSuccess?.()
-
-      // Close the dialog first
       onClose()
-
-      // Show toast notification after dialog closes
-      setToastType('success')
-      setToastMessage('🎉 Thank you! Your enquiry has been submitted successfully. Our team will contact you within 24 hours.')
-      setShowToast(true)
-
-      // Trigger brochure download if URL is provided in response
-      if (responseData.brochureUrl) {
-        setTimeout(() => {
-          const link = document.createElement('a')
-          link.href = responseData.brochureUrl
-          link.download = `${courseName.replace(/\s+/g, '-').toLowerCase()}-brochure.pdf`
-          document.body.appendChild(link)
-          link.click()
-          document.body.removeChild(link)
-        }, 1000)
-      }
-
+      const brochureSlug = resolveBrochureSlug(undefined, courseName)
+      await router.push(`/thank-you?course=${encodeURIComponent(brochureSlug)}`)
     } catch (error) {
       setStatus({ 
         type: 'error', 
@@ -169,13 +148,6 @@ const EnrollmentForm: FC<EnrollmentFormProps> = ({
     setFormData({ name: '', email: '', phone: '', message: '' })
     setCountryCode('+91')
     onClose()
-  }
-
-  const handleToastClose = (event?: React.SyntheticEvent | Event, reason?: string): void => {
-    if (reason === 'clickaway') {
-      return
-    }
-    setShowToast(false)
   }
 
   return (
@@ -442,55 +414,6 @@ const EnrollmentForm: FC<EnrollmentFormProps> = ({
         </DialogActions>
       </Dialog>
 
-      {/* Toast Notification - Top Right */}
-      <Snackbar
-        open={showToast}
-        autoHideDuration={6000}
-        onClose={handleToastClose}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        sx={{
-          '& .MuiSnackbar-root': {
-            top: { xs: 16, sm: 24 },
-          },
-        }}
-      >
-        <Alert
-          onClose={handleToastClose}
-          severity={toastType}
-          variant="filled"
-          elevation={6}
-          sx={{
-            width: '100%',
-            maxWidth: '500px',
-            borderRadius: 2,
-            fontSize: { xs: '0.9rem', sm: '1rem' },
-            fontWeight: 500,
-            boxShadow: `0 8px 32px ${alpha(theme.palette.common.black, 0.2)}`,
-            '& .MuiAlert-icon': {
-              fontSize: '1.5rem',
-              alignItems: 'center',
-            },
-            '& .MuiAlert-message': {
-              py: 1,
-              display: 'flex',
-              alignItems: 'center',
-            },
-            animation: 'slideInRight 0.5s ease-out',
-            '@keyframes slideInRight': {
-              '0%': {
-                transform: 'translateX(100%)',
-                opacity: 0,
-              },
-              '100%': {
-                transform: 'translateX(0)',
-                opacity: 1,
-              },
-            },
-          }}
-        >
-          {toastMessage}
-        </Alert>
-      </Snackbar>
     </>
   )
 }

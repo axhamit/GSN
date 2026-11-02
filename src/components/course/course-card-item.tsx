@@ -2,19 +2,14 @@ import React, { FC, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import { useTheme, alpha } from '@mui/material/styles'
-import Chip from '@mui/material/Chip'
-import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
-import Rating from '@mui/material/Rating'
-import PeopleIcon from '@mui/icons-material/People'
+import Chip from '@mui/material/Chip'
+import Typography from '@mui/material/Typography'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
-import StarIcon from '@mui/icons-material/Star'
+import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline'
+import StarRoundedIcon from '@mui/icons-material/StarRounded'
 import { motion } from 'framer-motion'
-import { Course } from '@/interfaces/course'
+import type { Course } from '@/interfaces/course'
 import EnrollmentForm from '@/components/form/EnrollmentForm'
 import { SHOW_FEES } from '@/utils/config'
 
@@ -24,478 +19,211 @@ interface CourseCardItemProps {
 }
 
 const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
-  const theme = useTheme()
   const router = useRouter()
   const [enrollOpen, setEnrollOpen] = useState(false)
-  const isCareerLaunch = item.category === 'Career Launch Academy'
-  const isAICourse = item.category === 'Artificial Intelligence'
+  const title = item.title.replace(/^🚀\s*/, '').replace(/^Career Launch Academy - /, '')
 
-  // Generate dynamic tags
-  const getTags = (course: Course): string[] => {
-    if (course.tags && course.tags.length > 0) {
-      return course.tags.slice(0, 2)
-    }
-    const tags: string[] = []
-    if (course.category?.includes('11th') || course.category?.includes('12th')) {
-      tags.push('Board Prep')
-    }
-    if (course.category?.includes('Entrance') || course.category?.includes('Medical') || course.category?.includes('Engineering')) {
-      tags.push('Competitive')
-    }
-    if (course.price && course.price > 20000) {
-      tags.push('Premium')
-    }
-    if (course.rating && course.rating >= 4.5) {
-      tags.push('Top Rated')
-    }
-    if (tags.length === 0) {
-      tags.push('Popular')
-    }
-    return tags.slice(0, 2)
+  const handleViewDetails = (): void => {
+    void router.push(`/courses/${item.slug || item.id}`)
   }
-
-  const courseTags = getTags(item)
-
-  const handleEnrollClick = () => {
-    setEnrollOpen(true)
-  }
-
-  const handleViewDetails = () => {
-    const slug = item.slug || item.id
-    router.push(`/courses/${slug}`)
-  }
-
-  // Green color for Career Launch tag
-  const greenColor = '#2e7d32'
-  const greenLight = '#4caf50'
-
-  // Purple color for AI courses
-  const purpleColor = '#9c27b0'
-  const purpleLight = '#ba68c8'
-
-  // Get theme color based on course type
-  const getThemeColor = () => {
-    if (isCareerLaunch) return { main: greenColor, light: greenLight }
-    if (isAICourse) return { main: purpleColor, light: purpleLight }
-    return { main: theme.palette.primary.main, light: theme.palette.primary.light }
-  }
-
-  const themeColor = getThemeColor()
 
   return (
     <>
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.06 }}
-        whileHover={{ y: -6 }}
+        transition={{ duration: 0.3, delay: Math.min(index * 0.04, 0.2) }}
         style={{ height: '100%' }}
       >
         <Box
+          component="article"
           sx={{
-            height: '100%',
-            borderRadius: 4,
-            overflow: 'hidden',
-            position: 'relative',
-            background: theme.palette.background.paper,
-            border: `1px solid ${alpha(theme.palette.primary.main, 0.06)}`,
-            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-            boxShadow: isCareerLaunch || isAICourse ? `0 8px 26px ${alpha(themeColor.main, 0.12)}` : 'var(--shadow-card)',
-            ...(isCareerLaunch || isAICourse ? { border: `1px solid ${alpha(themeColor.main, 0.25)}` } : {}),
             display: 'flex',
+            height: '100%',
             flexDirection: 'column',
+            overflow: 'hidden',
+            border: '1px solid #e3e9ee',
+            borderRadius: 3,
+            backgroundColor: '#fff',
+            transition: 'border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease',
             '&:hover': {
-              boxShadow: `0 12px 40px ${alpha(theme.palette.primary.main, 0.12)}`,
-              borderColor: alpha(theme.palette.primary.main, 0.15),
-              '& .card-image': {
-                transform: 'scale(1.05)',
-              },
-              '& .view-details-btn': {
-                backgroundColor: 'primary.main',
-                color: 'white',
-                borderColor: 'primary.main',
-              },
-              '& .enroll-btn': {
-                transform: 'scale(1.02)',
-              },
+              transform: 'translateY(-3px)',
+              borderColor: '#c4d2dd',
+              boxShadow: '0 12px 30px rgb(23 43 60 / 9%)',
             },
+            '&:hover .course-card-image': { transform: 'scale(1.035)' },
           }}
         >
-          {/* Badge for Featured Courses */}
-          {(isCareerLaunch || isAICourse) && (
-            <Box
-              sx={{
-                position: 'absolute',
-                top: 16,
-                right: 16,
-                zIndex: 10,
-                background: `linear-gradient(135deg, ${themeColor.main}, ${themeColor.light})`,
-                borderRadius: 50,
-                px: 2,
-                py: 0.75,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 0.75,
-                boxShadow: `0 8px 25px ${alpha(themeColor.main, 0.4)}`,
-                animation: 'pulse 4s ease-in-out infinite',
-                '@keyframes pulse': {
-                  '0%': { transform: 'scale(1)' },
-                  '50%': { transform: 'scale(1.05)' },
-                  '100%': { transform: 'scale(1)' },
-                },
-              }}
-            >
-              <StarIcon sx={{ color: 'white', fontSize: 14 }} />
-              <Typography variant="caption" sx={{ color: 'white', fontWeight: 700, fontSize: '0.7rem' }}>
-                {isCareerLaunch ? item.badge || 'Most Popular' : `Featured${item.badge ? ` · ${item.badge}` : ''}`}
-              </Typography>
-            </Box>
-          )}
-
-          {/* Icon for Featured Courses */}
-          {(isCareerLaunch || isAICourse) && (
-            <Box
-              sx={{
-                position: 'absolute',
-                top: 16,
-                left: 16,
-                zIndex: 10,
-                background: `linear-gradient(135deg, ${alpha(themeColor.main, 0.12)}, ${alpha(themeColor.light, 0.05)})`,
-                borderRadius: 2,
-                p: 1,
-                border: `1px solid ${alpha(themeColor.main, 0.15)}`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              {isCareerLaunch ? (
-                <RocketLaunchIcon sx={{ color: themeColor.main, fontSize: 20 }} />
-              ) : (
-                <RocketLaunchIcon sx={{ color: themeColor.main, fontSize: 20 }} />
-              )}
-            </Box>
-          )}
-
-          {/* Image Section */}
           <Box
             sx={{
               position: 'relative',
-              width: '100%',
-              height: 180,
+              aspectRatio: '16 / 10',
               overflow: 'hidden',
-              flexShrink: 0,
+              backgroundColor: '#edf2f5',
             }}
           >
             <Image
               src={item.cover}
               alt={item.title}
               fill
-              className="card-image"
-              style={{
-                objectFit: 'cover',
-                transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-              }}
+              sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="course-card-image"
+              style={{ objectFit: 'cover', transition: 'transform 300ms ease' }}
             />
-
-            {/* Gradient Overlay */}
             <Box
               sx={{
                 position: 'absolute',
-                inset: 0,
-                background: `linear-gradient(180deg, transparent 50%, ${alpha(theme.palette.background.paper, 0.9)})`,
-                zIndex: 1,
-              }}
-            />
-
-            {/* Category Badge */}
-            <Box
-              sx={{
-                position: 'absolute',
+                right: 12,
                 bottom: 12,
                 left: 12,
-                zIndex: 2,
-                background: isCareerLaunch || isAICourse
-                  ? `linear-gradient(135deg, ${themeColor.main}, ${themeColor.light})`
-                  : `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.92)}, ${alpha(theme.palette.primary.dark, 0.92)})`,
-                borderRadius: 50,
-                px: 1.5,
-                py: 0.5,
-                backdropFilter: 'blur(8px)',
-                border: `1px solid ${alpha(theme.palette.common.white, 0.15)}`,
-                boxShadow: `0 4px 15px ${alpha(themeColor.main, 0.25)}`,
-              }}
-            >
-              <Typography
-                variant="caption"
-                sx={{
-                  color: 'white',
-                  fontWeight: 700,
-                  fontSize: '0.6rem',
-                  letterSpacing: 0.5,
-                  textTransform: 'uppercase',
-                }}
-              >
-                {isCareerLaunch ? '⭐ Career Launch' : isAICourse ? '🤖 AI' : (item.category || 'Popular')}
-              </Typography>
-            </Box>
-
-            {/* Rating Badge */}
-            <Box
-              sx={{
-                position: 'absolute',
-                top: 12,
-                right: 12,
-                zIndex: 2,
                 display: 'flex',
                 alignItems: 'center',
-                gap: 0.5,
-                background: `linear-gradient(135deg, ${alpha(theme.palette.warning.main, 0.92)}, ${alpha(theme.palette.warning.dark, 0.92)})`,
-                borderRadius: 50,
-                px: 1.5,
-                py: 0.5,
-                backdropFilter: 'blur(8px)',
-                border: `1px solid ${alpha(theme.palette.common.white, 0.15)}`,
-                boxShadow: `0 4px 15px ${alpha(theme.palette.warning.main, 0.25)}`,
+                justifyContent: 'space-between',
+                gap: 1,
               }}
             >
-              <Typography
+              <Chip
+                label={item.category}
+                size="small"
                 sx={{
-                  color: 'white',
-                  fontWeight: 700,
-                  fontSize: '0.7rem',
+                  maxWidth: '80%',
+                  color: '#17324d',
+                  backgroundColor: 'rgba(255,255,255,0.94)',
+                  fontWeight: 650,
+                  '& .MuiChip-label': { overflow: 'hidden', textOverflow: 'ellipsis' },
                 }}
-              >
-                ⭐ {item.rating}
-              </Typography>
-              <Typography
-                sx={{
-                  color: alpha(theme.palette.common.white, 0.8),
-                  fontWeight: 500,
-                  fontSize: '0.6rem',
-                }}
-              >
-                ({item.ratingCount})
-              </Typography>
-            </Box>
-
-            {/* Price Badge (hidden when SHOW_FEES is false) */}
-            {SHOW_FEES && (
-              <Box
-                sx={{
-                  position: 'absolute',
-                  bottom: 12,
-                  right: 12,
-                  zIndex: 2,
-                  background: `linear-gradient(135deg, ${alpha(theme.palette.success.main, 0.92)}, ${alpha(theme.palette.success.dark, 0.92)})`,
-                  borderRadius: 2,
-                  px: 1.5,
-                  py: 0.5,
-                  backdropFilter: 'blur(8px)',
-                  border: `1px solid ${alpha(theme.palette.common.white, 0.15)}`,
-                  boxShadow: `0 4px 15px ${alpha(theme.palette.success.main, 0.25)}`,
-                }}
-              >
+              />
+              {item.badge && (
                 <Typography
+                  component="span"
                   sx={{
-                    color: 'white',
-                    fontWeight: 800,
-                    fontSize: '0.9rem',
-                    letterSpacing: 0.3,
+                    flexShrink: 0,
+                    px: 1,
+                    py: 0.5,
+                    borderRadius: 1,
+                    color: '#fff',
+                    backgroundColor: '#17324d',
+                    fontSize: '0.68rem',
+                    fontWeight: 700,
                   }}
                 >
-                  ₹{item.price.toLocaleString()}
+                  {item.badge}
                 </Typography>
-              </Box>
-            )}
+              )}
+            </Box>
           </Box>
 
-          {/* Content Section */}
-          <Box
-            sx={{
-              p: 2.5,
-              flexGrow: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 1,
-            }}
-          >
-            {/* Title with Career Launch Highlight */}
+          <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column', p: { xs: 2.25, md: 2.5 } }}>
             <Typography
+              component="h3"
               sx={{
-                fontSize: '1rem',
+                minHeight: '3.2em',
+                mb: 1.25,
+                color: '#172b3c',
+                fontSize: '1.08rem',
                 fontWeight: 700,
-                lineHeight: 1.3,
-                color: 'text.primary',
+                lineHeight: 1.5,
                 display: '-webkit-box',
-                WebkitLineClamp: 2,
                 WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 2,
                 overflow: 'hidden',
-                minHeight: 42,
-                mb: 0.5,
               }}
             >
-              {isCareerLaunch ? (
-                <>
-                  <Box component="span" sx={{ color: greenColor }}>🚀 Career Launch Academy</Box>
-                  <Box component="span" sx={{ color: 'text.secondary', fontSize: '0.85rem', display: 'block' }}>
-                    {item.title.replace('🚀 Career Launch Academy - ', '')}
-                  </Box>
-                </>
-              ) : (
-                item.title
-              )}
+              {title}
             </Typography>
 
-            {/* Rating Row */}
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.5 }}>
-              <Rating
-                value={item.rating}
-                max={5}
-                sx={{
-                  color: '#ffce31',
-                  mr: 1,
-                  '& .MuiRating-icon': {
-                    fontSize: '0.9rem',
-                  },
-                }}
-                readOnly
-              />
-              <Typography
-                variant="caption"
-                sx={{
-                  color: 'text.secondary',
-                  fontWeight: 500,
-                }}
-              >
-                ({item.ratingCount})
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 1.75 }}>
+              <StarRoundedIcon sx={{ color: '#b77932', fontSize: 18 }} />
+              <Typography variant="body2" sx={{ color: '#33485a', fontWeight: 650 }}>
+                {item.rating.toFixed(1)}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                ({item.ratingCount.toLocaleString()} ratings)
               </Typography>
             </Box>
 
-            {/* Stats Row */}
             <Box
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: 2,
-                mb: 1,
-                pb: 1,
-                borderBottom: `1px solid ${alpha(theme.palette.divider, 0.4)}`,
+                flexWrap: 'wrap',
+                gap: 1.75,
+                mb: 2,
+                color: 'text.secondary',
               }}
             >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                <PeopleIcon sx={{ fontSize: 14, color: 'text.secondary' }} />
-                <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500, fontSize: '0.7rem' }}>
-                  {item.students || item.ratingCount || 0}
-                </Typography>
-              </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                <AccessTimeIcon sx={{ fontSize: 14, color: 'text.secondary' }} />
-                <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500, fontSize: '0.7rem' }}>
-                  {item.duration || '6 Mo'}
-                </Typography>
+              {item.duration && (
+                <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.6 }}>
+                  <AccessTimeIcon sx={{ fontSize: 17 }} />
+                  <Typography variant="body2">{item.duration}</Typography>
+                </Box>
+              )}
+              <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.6 }}>
+                <PeopleOutlineIcon sx={{ fontSize: 18 }} />
+                <Typography variant="body2">{(item.students || item.ratingCount).toLocaleString()} learners</Typography>
               </Box>
             </Box>
 
-            {/* Tags - Show themed chip for featured courses */}
-            {courseTags.length > 0 && (
-              <Stack
-                direction="row"
-                spacing={0.5}
-                sx={{
-                  mb: 1.5,
-                  flexWrap: 'wrap',
-                  gap: 0.5,
-                }}
-              >
-                {courseTags.map((tag) => (
+            {item.tags && item.tags.length > 0 && (
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75, mb: 2.5 }}>
+                {item.tags.slice(0, 2).map((tag) => (
                   <Chip
                     key={tag}
                     label={tag}
                     size="small"
+                    variant="outlined"
                     sx={{
-                      background: isCareerLaunch || isAICourse
-                        ? `linear-gradient(135deg, ${alpha(themeColor.main, 0.12)}, ${alpha(themeColor.light, 0.06)})`
-                        : `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.08)}, ${alpha(theme.palette.primary.light, 0.04)})`,
-                      border: `1px solid ${alpha(themeColor.main, 0.1)}`,
-                      color: themeColor.main,
-                      fontWeight: 600,
-                      fontSize: '0.6rem',
-                      height: 22,
-                      '& .MuiChip-label': {
-                        px: 1,
-                      },
+                      height: 25,
+                      borderColor: '#dce4ea',
+                      color: '#526579',
+                      fontSize: '0.72rem',
                     }}
                   />
                 ))}
-              </Stack>
+              </Box>
             )}
 
-            {/* Two Action Buttons */}
             <Box
               sx={{
                 display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
                 gap: 1,
                 mt: 'auto',
+                pt: 2,
+                borderTop: '1px solid #edf0f2',
               }}
             >
-              {/* View Details Button */}
-              <Button
-                className="view-details-btn"
-                variant="outlined"
-                startIcon={<VisibilityIcon sx={{ fontSize: 16 }} />}
-                onClick={handleViewDetails}
-                fullWidth
-                sx={{
-                  borderColor: alpha(theme.palette.primary.main, 0.3),
-                  color: 'primary.main',
-                  borderRadius: 2,
-                  py: 1,
-                  fontWeight: 600,
-                  fontSize: '0.75rem',
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    backgroundColor: 'primary.main',
-                    color: 'white',
-                    borderColor: 'primary.main',
-                    boxShadow: `0 4px 15px ${alpha(theme.palette.primary.main, 0.2)}`,
-                    transform: 'translateY(-2px)',
-                  },
-                }}
-              >
-                Details
-              </Button>
-
-              {/* Enroll Now Button - Themed for featured courses */}
-              <Button
-                className="enroll-btn"
-                variant="contained"
-                onClick={handleEnrollClick}
-                fullWidth
-                sx={{
-                  background: isCareerLaunch || isAICourse
-                    ? `linear-gradient(135deg, ${themeColor.main}, ${themeColor.light})`
-                    : `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
-                  borderRadius: 2,
-                  py: 1,
-                  fontWeight: 700,
-                  fontSize: '0.75rem',
-                  boxShadow: `0 4px 15px ${alpha(themeColor.main, 0.2)}`,
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    transform: 'translateY(-2px)',
-                    boxShadow: `0 8px 25px ${alpha(themeColor.main, 0.3)}`,
-                  },
-                }}
-              >
-                Enroll Now
-              </Button>
+              {SHOW_FEES ? (
+                <Typography sx={{ color: '#172b3c', fontSize: '1.1rem', fontWeight: 750 }}>
+                  ₹{item.price.toLocaleString('en-IN')}
+                </Typography>
+              ) : (
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                  Course details
+                </Typography>
+              )}
+              <Box sx={{ display: 'flex', gap: 1 }}>
+                <Button
+                  variant="outlined"
+                  onClick={handleViewDetails}
+                  sx={{ minWidth: 0, px: 1.5 }}
+                >
+                  Details
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={() => setEnrollOpen(true)}
+                  sx={{ minWidth: 0, px: 1.5 }}
+                >
+                  Enquire
+                </Button>
+              </Box>
             </Box>
           </Box>
         </Box>
       </motion.div>
 
-      {/* Enrollment Form Dialog */}
       <EnrollmentForm
         open={enrollOpen}
         onClose={() => setEnrollOpen(false)}

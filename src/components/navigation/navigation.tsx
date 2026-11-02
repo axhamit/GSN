@@ -33,10 +33,12 @@ const otherCourses: CourseNavigationItem[] = [
 interface NavigationItemProps {
   destination: string
   label: string
+  onNavigate?: () => void
 }
 
-const NavigationItem: FC<NavigationItemProps> = ({ destination, label }) => {
+const NavigationItem: FC<NavigationItemProps> = ({ destination, label, onNavigate }) => {
   const theme = useTheme()
+  const router = useRouter()
 
   return (
     <Box
@@ -45,6 +47,12 @@ const NavigationItem: FC<NavigationItemProps> = ({ destination, label }) => {
       spy
       smooth
       duration={350}
+      onClick={() => {
+        if (router.pathname !== '/' && destination !== '/') {
+          void router.push(`/#${destination}`)
+        }
+        onNavigate?.()
+      }}
       sx={{
         display: 'inline-flex',
         alignItems: 'center',
@@ -64,12 +72,16 @@ const NavigationItem: FC<NavigationItemProps> = ({ destination, label }) => {
   )
 }
 
-const CoursesDropdown: FC = () => {
+interface CoursesDropdownProps {
+  onNavigate?: () => void
+}
+
+const CoursesDropdown: FC<CoursesDropdownProps> = ({ onNavigate }) => {
   const theme = useTheme()
   const router = useRouter()
   const [open, setOpen] = useState(false)
 
-  const menuItem = (item: CourseNavigationItem, featured: boolean) => (
+  const menuItem = (item: CourseNavigationItem, featured: boolean): React.ReactElement => (
     <Box
       key={item.path}
       component="button"
@@ -77,6 +89,7 @@ const CoursesDropdown: FC = () => {
       onClick={() => {
         void router.push(item.path)
         setOpen(false)
+        onNavigate?.()
       }}
       sx={{
         width: '100%',
@@ -111,8 +124,6 @@ const CoursesDropdown: FC = () => {
   return (
     <Box
       sx={{ position: 'relative', width: { xs: '100%', md: 'auto' } }}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
     >
       <Button
         aria-expanded={open}
@@ -160,18 +171,29 @@ const CoursesDropdown: FC = () => {
           {menuItem(featuredCourses[2], true)}
           <Typography variant="overline" sx={{ display: 'block', px: 1.5, mt: 1.5, color: 'text.secondary', fontWeight: 700 }}>Other Courses</Typography>
           {otherCourses.map((item) => menuItem(item, false))}
-          <Button href="/courses" fullWidth sx={{ mt: 1, minHeight: 44, fontWeight: 700 }}>View all courses</Button>
+          <Button
+            href="/courses"
+            fullWidth
+            onClick={onNavigate}
+            sx={{ mt: 1, minHeight: 44, fontWeight: 700 }}
+          >
+            View all courses
+          </Button>
         </Box>
       )}
     </Box>
   )
 }
 
-const Navigation: FC = () => (
+interface NavigationProps {
+  onNavigate?: () => void
+}
+
+const Navigation: FC<NavigationProps> = ({ onNavigate }) => (
   <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: { xs: 'stretch', md: 'center' }, width: { xs: '100%', md: 'auto' }, gap: { xs: 0.25, md: 0.5 } }}>
     {navigations.map(({ path, label }) => path === 'courses'
-      ? <CoursesDropdown key={path} />
-      : <NavigationItem key={path} destination={path} label={label} />)}
+      ? <CoursesDropdown key={path} onNavigate={onNavigate} />
+      : <NavigationItem key={path} destination={path} label={label} onNavigate={onNavigate} />)}
   </Box>
 )
 
