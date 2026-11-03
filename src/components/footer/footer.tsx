@@ -61,7 +61,7 @@ const Footer: FC = () => (
               lineHeight: 1.75,
             }}
           >
-            Expert-led learning for school, competitive exams, and the skills shaping tomorrow.
+            Expert-led learning in Artificial Intelligence, Generative AI, Agentic AI, and advanced technology skills to accelerate careers and drive innovation.
           </Typography>
         </Grid>
 
