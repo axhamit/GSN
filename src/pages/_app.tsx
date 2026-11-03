@@ -31,7 +31,7 @@ const App: FC<AppPropsWithLayout> = (props: AppPropsWithLayout) => {
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>GSN FOUNDATION</title>
-        <link rel="icon" type="image/png" href="/images/logo_blue.png" />
+        <link rel="icon" type="image/png" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/images/logo_blue.png" />
       </Head>
       <MUIProvider>
