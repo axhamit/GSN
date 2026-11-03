@@ -1,7 +1,5 @@
-import React, { FC, useState } from 'react'
-import { useRouter } from 'next/router'
+import React, { useState } from 'react'
 import Head from 'next/head'
-import Box from '@mui/material/Box'
 import { NextPageWithLayout } from '@/interfaces/layout'
 import { MainLayout } from '@/components/layout'
 import {
@@ -23,23 +21,16 @@ import { data as courseCatalog } from '@/components/home/popular-course.data'
 import EnrollmentForm from '@/components/form/EnrollmentForm'
 
 const AdvancedAgenticAIPage: NextPageWithLayout = () => {
-  const router = useRouter()
   const course = courseCatalog.find((item) => item.slug === 'advanced-agentic-generative-ai')
   const [enrollOpen, setEnrollOpen] = useState(false)
-  const [scrollToEnquiry, setScrollToEnquiry] = useState(false)
+  const [brochureOpen, setBrochureOpen] = useState(false)
 
-  const handleEnrollClick = () => {
+  const handleEnrollClick = (): void => {
     setEnrollOpen(true)
   }
 
-  const handleBrochureClick = () => {
-    setScrollToEnquiry(true)
-    setTimeout(() => {
-      const enquirySection = document.getElementById('enquiry-section')
-      if (enquirySection) {
-        enquirySection.scrollIntoView({ behavior: 'smooth' })
-      }
-    }, 100)
+  const handleBrochureClick = (): void => {
+    setBrochureOpen(true)
   }
 
   const learningOutcomes = [
@@ -186,13 +177,13 @@ const AdvancedAgenticAIPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Advanced Agentic AI and Generative AI Course | GSN Foundation</title>
+        <title>Advanced Gen AI and Agentic AI Course | GSN Foundation</title>
         <meta name="description" content="Master AI agents, Large Language Models, and Retrieval-Augmented Generation in this comprehensive 4-month program. Build autonomous AI systems with hands-on projects." />
         <meta name="keywords" content="Agentic AI, Generative AI, LLM, RAG, AI Agents, LangChain, AI course, machine learning, Python AI" />
         <link rel="canonical" href="https://www.gsnfoundation.com/courses/advanced-agentic-generative-ai" />
 
         {/* Open Graph */}
-        <meta property="og:title" content="Advanced Agentic AI and Generative AI Course | GSN Foundation" />
+        <meta property="og:title" content="Advanced Gen AI and Agentic AI Course | GSN Foundation" />
         <meta property="og:description" content="Master AI agents, Large Language Models, and Retrieval-Augmented Generation in this comprehensive 4-month program." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.gsnfoundation.com/courses/advanced-agentic-generative-ai" />
@@ -200,7 +191,7 @@ const AdvancedAgenticAIPage: NextPageWithLayout = () => {
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Advanced Agentic AI and Generative AI Course | GSN Foundation" />
+        <meta name="twitter:title" content="Advanced Gen AI and Agentic AI Course | GSN Foundation" />
         <meta name="twitter:description" content="Master AI agents, Large Language Models, and Retrieval-Augmented Generation in this comprehensive 4-month program." />
         <meta name="twitter:image" content="https://www.gsnfoundation.com/images/courses/annie-spratt-QckxruozjRg-unsplash.jpg" />
 
@@ -211,7 +202,7 @@ const AdvancedAgenticAIPage: NextPageWithLayout = () => {
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'Course',
-              name: 'Advanced Agentic AI and Generative AI',
+              name: 'Advanced Gen AI and Agentic AI',
               description: 'Master AI agents, Large Language Models, and Retrieval-Augmented Generation in this comprehensive 4-month program.',
               provider: {
                 '@type': 'Organization',
@@ -235,7 +226,7 @@ const AdvancedAgenticAIPage: NextPageWithLayout = () => {
       </Head>
       <AIThemeProvider>
       <AIHeroSection
-        title="Advanced Agentic AI and Generative AI"
+        title="Advanced Gen AI and Agentic AI"
         subtitle="Artificial Intelligence"
         description="Master the cutting-edge technologies behind AI agents, Large Language Models, and Retrieval-Augmented Generation. Build autonomous systems that can reason, plan, and execute complex tasks in this comprehensive 4-month program."
         badge="New Course"
@@ -283,13 +274,12 @@ const AdvancedAgenticAIPage: NextPageWithLayout = () => {
 
       <AICourseFAQ faqs={faqs} />
 
-      <Box id="enquiry-section">
-        <AIBrochureEnquiryForm
-          courseName="Advanced Agentic AI and Generative AI"
-          courseSlug="advanced-agentic-generative-ai"
-          onSuccess={() => setScrollToEnquiry(false)}
-        />
-      </Box>
+      <AIBrochureEnquiryForm
+        open={brochureOpen}
+        onClose={() => setBrochureOpen(false)}
+        courseName="Advanced Gen AI and Agentic AI"
+        courseSlug="advanced-agentic-generative-ai"
+      />
 
       <AICTASection
         title="Ready to Master Agentic AI?"
@@ -303,7 +293,7 @@ const AdvancedAgenticAIPage: NextPageWithLayout = () => {
       <EnrollmentForm
         open={enrollOpen}
         onClose={() => setEnrollOpen(false)}
-        courseName="Advanced Agentic AI and Generative AI"
+        courseName="Advanced Gen AI and Agentic AI"
         coursePrice={59999}
       />
       </AIThemeProvider>

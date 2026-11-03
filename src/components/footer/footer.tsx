@@ -12,12 +12,14 @@ const linkGroups = [
   {
     title: 'Courses',
     links: [
+      { label: 'Advanced Gen AI and Agentic AI', href: '/courses/advanced-agentic-generative-ai' },
+      { label: 'Applied AI Master Certification', href: '/courses/applied-ai-master-certification' },
+ { label: 'career launch Program', href: '/courses/career-launch-academy' },
       { label: 'Class 10', href: '/courses/10th-standard' },
-      { label: 'Class 11', href: '/courses/11th-standard' },
       { label: 'Class 12', href: '/courses/12th-standard' },
       { label: 'NEET preparation', href: '/courses/neet' },
       { label: 'JEE preparation', href: '/courses/jee' },
-      { label: 'Artificial intelligence', href: '/courses/advanced-agentic-generative-ai' },
+      
     ],
   },
   {
@@ -34,7 +36,9 @@ const linkGroups = [
 const Footer: FC = () => (
   <Box
     component="footer"
+    id="contact"
     sx={{
+      scrollMarginTop: 80,
       color: '#e8eef3',
       backgroundColor: '#142b3d',
     }}
@@ -123,7 +127,7 @@ const Footer: FC = () => (
             </Box>
             <Box
               component="a"
-              href="tel:+918217591455"
+              href="tel:+918217735799"
               sx={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -135,7 +139,7 @@ const Footer: FC = () => (
               }}
             >
               <PhoneOutlinedIcon sx={{ fontSize: 18 }} />
-              +91 82175 91455
+              +91 8217735799
             </Box>
             <Box
               component="a"

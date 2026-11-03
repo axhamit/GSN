@@ -103,13 +103,13 @@ const AICourseOverview: FC<AICourseOverviewProps> = ({
                 sx={{
                   height: '100%',
                   borderRadius: 3,
-                  background: `linear-gradient(135deg, ${theme.palette.background.paper}, ${alpha('#38bdf8', 0.02)})`,
-                  border: `1px solid ${alpha('#38bdf8', 0.08)}`,
+                  background: `linear-gradient(135deg, ${theme.palette.background.paper}, ${alpha(theme.palette.primary.light, 0.02)})`,
+                  border: `1px solid ${alpha(theme.palette.primary.light, 0.08)}`,
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-4px)',
-                    boxShadow: `0 12px 40px ${alpha('#38bdf8', 0.15)}`,
-                    borderColor: alpha('#38bdf8', 0.2),
+                    boxShadow: `0 12px 40px ${alpha(theme.palette.primary.main, 0.15)}`,
+                    borderColor: alpha(theme.palette.primary.light, 0.2),
                   },
                 }}
               >
@@ -120,7 +120,7 @@ const AICourseOverview: FC<AICourseOverviewProps> = ({
                       alignItems: 'center',
                       gap: 1.5,
                       mb: 2,
-                      color: '#38bdf8',
+                      color: theme.palette.primary.light,
                     }}
                   >
                     {item.icon}
@@ -159,11 +159,11 @@ const AICourseOverview: FC<AICourseOverviewProps> = ({
                       gap: 1.5,
                       p: 2,
                       borderRadius: 2,
-                      background: alpha('#38bdf8', 0.03),
-                      border: `1px solid ${alpha('#38bdf8', 0.08)}`,
+                      background: alpha(theme.palette.primary.light, 0.03),
+                      border: `1px solid ${alpha(theme.palette.primary.light, 0.08)}`,
                     }}
                   >
-                    <SchoolIcon sx={{ color: '#38bdf8', fontSize: 20 }} />
+                    <SchoolIcon sx={{ color: theme.palette.primary.light, fontSize: 20 }} />
                     <Typography variant="body2" sx={{ fontWeight: 500 }}>
                       {highlight}
                     </Typography>

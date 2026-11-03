@@ -6,9 +6,6 @@ import Typography from '@mui/material/Typography'
 import { alpha, useTheme } from '@mui/material/styles'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import SchoolIcon from '@mui/icons-material/School'
-import AssignmentIcon from '@mui/icons-material/Assignment'
-import TrendingUpIcon from '@mui/icons-material/TrendingUp'
-import PlayCircleIcon from '@mui/icons-material/PlayCircle'
 import PsychologyIcon from '@mui/icons-material/Psychology'
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
@@ -23,19 +20,12 @@ import {
 const TrainingMethodology: FC = () => {
   const theme = useTheme()
 
-  const getPaletteColor = (color: string) => {
-    const paletteColor = (theme.palette as Record<string, any>)[color] ?? theme.palette.primary
-    return paletteColor as { main: string; light: string; dark: string }
-  }
-
   const steps = [
     {
       number: '01',
       title: 'Learn & Practice',
       description: 'Immersive, hands-on modules focusing on doing rather than just listening.',
       icon: <SchoolIcon />,
-      color: 'primary',
-      gradient: 'primary',
       details: [
         'Hands-on practical sessions',
         'Real-world project work',
@@ -47,8 +37,6 @@ const TrainingMethodology: FC = () => {
       title: 'Mentor & Assess',
       description: 'Continuous feedback loops from industry experts to refine skills.',
       icon: <PsychologyIcon />,
-      color: 'secondary',
-      gradient: 'secondary',
       details: [
         'Expert mentorship program',
         'Regular skill assessments',
@@ -60,8 +48,6 @@ const TrainingMethodology: FC = () => {
       title: 'Improve & Place',
       description: 'Targeted mock interviews leading to successful corporate placements.',
       icon: <WorkspacePremiumIcon />,
-      color: 'warning',
-      gradient: 'warning',
       details: [
         'Mock interview sessions',
         'Placement preparation',
@@ -81,7 +67,7 @@ const TrainingMethodology: FC = () => {
           linear-gradient(165deg, 
             ${alpha(theme.palette.background.default, 0.98)} 0%, 
             ${alpha(theme.palette.primary.dark, 0.08)} 20%, 
-            ${alpha(theme.palette.secondary.dark, 0.04)} 40%, 
+            ${alpha(theme.palette.common.black, 0.035)} 40%, 
             ${alpha(theme.palette.primary.dark, 0.06)} 60%,
             ${alpha(theme.palette.common.black, 0.2)} 100%
           )
@@ -104,7 +90,7 @@ const TrainingMethodology: FC = () => {
           left: '-5%',
           width: '40%',
           height: '40%',
-          background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.03)} 0%, transparent 70%)`,
+          background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.035)} 0%, transparent 70%)`,
           borderRadius: '50%',
           pointerEvents: 'none',
         },
@@ -118,7 +104,7 @@ const TrainingMethodology: FC = () => {
           left: 0,
           right: 0,
           height: 3,
-          background: `linear-gradient(90deg, transparent, ${theme.palette.primary.main}, ${theme.palette.secondary.main}, ${theme.palette.primary.main}, transparent)`,
+          background: `linear-gradient(90deg, transparent, ${theme.palette.common.black}, ${theme.palette.primary.main}, ${theme.palette.common.black}, transparent)`,
           backgroundSize: '300% 100%',
           animation: 'gradientMove 4s ease-in-out infinite',
           '@keyframes gradientMove': {
@@ -193,7 +179,7 @@ const TrainingMethodology: FC = () => {
                   sx={{
                     fontSize: 'inherit',
                     fontWeight: 'inherit',
-                    background: `linear-gradient(135deg, ${theme.palette.primary.light}, ${theme.palette.primary.main}, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,
+                    background: `linear-gradient(135deg, ${theme.palette.primary.light}, ${theme.palette.primary.main}, ${theme.palette.common.black})`,
                     backgroundSize: '300% 300%',
                     backgroundClip: 'text',
                     WebkitBackgroundClip: 'text',
@@ -218,7 +204,7 @@ const TrainingMethodology: FC = () => {
                     left: 0,
                     right: 0,
                     height: 6,
-                    background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,
+                    background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.common.black}, ${theme.palette.primary.main})`,
                     backgroundSize: '200% 100%',
                     borderRadius: 4,
                     filter: 'blur(4px)',
@@ -285,7 +271,7 @@ const TrainingMethodology: FC = () => {
               ...sectionDescriptionSx,
             }}
           >
-            A proven three-step approach to transform students into industry-ready professionals
+         From learning new skills to achieving career goals, we guide every individual towards professional success.
           </Typography>
         </Box>
 
@@ -300,7 +286,7 @@ const TrainingMethodology: FC = () => {
                   height: '100%',
                   background: `linear-gradient(145deg, ${alpha(theme.palette.background.paper, 0.95)}, ${alpha(theme.palette.background.default, 0.85)})`,
                   backdropFilter: 'blur(20px)',
-                  border: `1px solid ${alpha(getPaletteColor(step.color).main, 0.08)}`,
+                  border: `1px solid ${alpha(theme.palette.primary.main, 0.12)}`,
                   boxShadow: `
                     0 20px 60px ${alpha(theme.palette.common.black, 0.15)},
                     inset 0 1px 0 ${alpha(theme.palette.common.white, 0.05)}
@@ -315,15 +301,15 @@ const TrainingMethodology: FC = () => {
                     right: -80,
                     width: 160,
                     height: 160,
-                    background: `radial-gradient(circle, ${alpha(getPaletteColor(step.color).main, 0.04)}, transparent 70%)`,
+                    background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.06)}, transparent 70%)`,
                     borderRadius: '50%',
                     transition: 'all 0.6s ease',
                   },
                   '&:hover': {
                     transform: 'translateY(-12px) scale(1.02)',
-                    borderColor: alpha(getPaletteColor(step.color).main, 0.3),
+                    borderColor: alpha(theme.palette.primary.main, 0.35),
                     boxShadow: `
-                      0 30px 80px ${alpha(getPaletteColor(step.color).main, 0.15)},
+                      0 30px 80px ${alpha(theme.palette.primary.main, 0.15)},
                       inset 0 1px 0 ${alpha(theme.palette.common.white, 0.1)}
                     `,
                     '&::before': {
@@ -343,8 +329,8 @@ const TrainingMethodology: FC = () => {
                       minWidth: 56,
                       height: 56,
                       borderRadius: 3,
-                      background: `linear-gradient(135deg, ${getPaletteColor(step.color).main}, ${getPaletteColor(step.color).dark})`,
-                      boxShadow: `0 8px 30px ${alpha(getPaletteColor(step.color).main, 0.3)}`,
+                      background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
+                      boxShadow: `0 8px 30px ${alpha(theme.palette.primary.main, 0.3)}`,
                       fontFamily: 'monospace',
                       fontSize: '1.4rem',
                       fontWeight: 800,
@@ -357,12 +343,12 @@ const TrainingMethodology: FC = () => {
                     sx={{
                       p: 1,
                       borderRadius: 2,
-                      background: `linear-gradient(135deg, ${alpha(getPaletteColor(step.color).main, 0.1)}, ${alpha(getPaletteColor(step.color).main, 0.03)})`,
-                      border: `1px solid ${alpha(getPaletteColor(step.color).main, 0.05)}`,
+                      background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.1)}, ${alpha(theme.palette.primary.main, 0.03)})`,
+                      border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
                       display: 'flex',
                       '& svg': {
                         fontSize: 28,
-                        color: getPaletteColor(step.color).main,
+                        color: theme.palette.primary.main,
                       },
                     }}
                   >
@@ -377,10 +363,7 @@ const TrainingMethodology: FC = () => {
                     ...sectionCardTitleSx,
                     fontWeight: 800,
                     mb: 2,
-                    background: `linear-gradient(135deg, ${getPaletteColor(step.color).light}, ${getPaletteColor(step.color).main})`,
-                    backgroundClip: 'text',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
+                    color: 'text.primary',
                   }}
                 >
                   {step.title}
@@ -412,11 +395,11 @@ const TrainingMethodology: FC = () => {
                         gap: 1.5,
                         p: 1.5,
                         borderRadius: 2,
-                        background: alpha(getPaletteColor(step.color).main, 0.03),
-                        border: `1px solid ${alpha(getPaletteColor(step.color).main, 0.05)}`,
+                        background: alpha(theme.palette.primary.main, 0.035),
+                        border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
                         transition: 'all 0.3s ease',
                         '&:hover': {
-                          background: alpha(getPaletteColor(step.color).main, 0.06),
+                          background: alpha(theme.palette.primary.main, 0.07),
                           transform: 'translateX(4px)',
                         },
                       }}
@@ -424,7 +407,7 @@ const TrainingMethodology: FC = () => {
                       <ArrowForwardIcon
                         sx={{
                           fontSize: 16,
-                          color: getPaletteColor(step.color).main,
+                          color: theme.palette.primary.main,
                         }}
                       />
                       <Typography
@@ -468,7 +451,7 @@ const TrainingMethodology: FC = () => {
               width: 12,
               height: 12,
               borderRadius: '50%',
-              background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+              background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.common.black})`,
               boxShadow: `0 0 30px ${alpha(theme.palette.primary.main, 0.3)}`,
               animation: 'pulse 2s ease-in-out infinite',
               '@keyframes pulse': {
@@ -481,7 +464,7 @@ const TrainingMethodology: FC = () => {
             sx={{
               width: 60,
               height: 2,
-              background: `linear-gradient(90deg, ${theme.palette.secondary.main}, transparent)`,
+              background: `linear-gradient(90deg, ${theme.palette.common.black}, transparent)`,
               borderRadius: 1,
             }}
           />

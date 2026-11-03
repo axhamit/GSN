@@ -4,40 +4,40 @@ export const data: Array<Testimonial> = [
   {
     id: 1,
     name: 'Aarav Patil',
-    title: 'Expert Guidance for Every Exam',
+    title: 'A Great Learning Experience in Artificial Intelligence',
     content:
-      'The coaching is extremely comprehensive for PCMB 11th & 12th. The teachers explain every concept clearly and guide us personally through KCET and JEE preparation.',
+      'The course provided excellent insights into Artificial Intelligence and Generative AI. The hands-on sessions and practical projects helped me understand how AI tools work and how to apply them to real-world challenges.',
     user: {
       id: 1,
       name: 'Aarav Patil',
-      professional: 'PCMB Student',
-      photo: '1.jpg',
+      // professional: 'PCMB Student',
+      photo: 'student-boy-1.svg',
     },
   },
   {
     id: 2,
     name: 'Diya Sharma',
-    title: 'Perfect for Competitive Exams',
+    title: 'Making AI Concepts Easy to Understand',
     content:
-      'I joined for NEET coaching and the study plans are very structured. The personalised approach and doubt-clearing sessions helped me improve my accuracy a lot.',
+      'I gained valuable knowledge of Generative AI, Agentic AI, and intelligent automation. The practical approach and expert guidance helped me explore new AI technologies and build confidence in using them.',
     user: {
       id: 2,
       name: 'Diya Sharma',
-      professional: 'NEET Aspirant',
-      photo: '2.jpg',
+      // professional: 'NEET Aspirant',
+      photo: 'student-boy-2.svg',
     },
   },
   {
     id: 3,
     name: 'Rahul Mehra',
-    title: 'Best Coaching for 10th Board',
+    title: 'Building Future-Ready Skills with AI',
     content:
-      'Their 10th Standard Board preparation is excellent. The teachers make concepts easy and the regular tests helped me score better.',
+      'This program helped me develop practical AI skills and understand how AI is transforming different industries. The real-world applications and project-based learning made the experience valuable for my professional growth.',
     user: {
       id: 3,
       name: 'Rahul Mehra',
-      professional: 'Class 10 Student',
-      photo: '3.jpg',
+      // professional: 'Class 10 Student',
+      photo: 'student-boy-3.svg',
     },
   },
   {
@@ -50,7 +50,7 @@ export const data: Array<Testimonial> = [
       id: 4,
       name: 'Sneha Kulkarni',
       professional: 'KCET Student',
-      photo: '4.jpg',
+      photo: 'student-boy-4.svg',
     },
   },
   {
@@ -63,7 +63,7 @@ export const data: Array<Testimonial> = [
       id: 5,
       name: 'Vikram Rao',
       professional: 'JEE Aspirant',
-      photo: '5.jpg',
+      photo: 'student-boy-5.svg',
     },
   },
 ]

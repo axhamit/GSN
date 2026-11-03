@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
@@ -10,10 +11,10 @@ import BusinessCenterIcon from '@mui/icons-material/BusinessCenter'
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows'
 import TrendingUpIcon from '@mui/icons-material/TrendingUp'
 import PsychologyIcon from '@mui/icons-material/Psychology'
-import GroupsIcon from '@mui/icons-material/Groups'
 import ComputerIcon from '@mui/icons-material/Computer'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import CancelIcon from '@mui/icons-material/Cancel'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import {
   sectionBadgeSx,
   sectionCardTitleSx,
@@ -24,49 +25,49 @@ import {
 const GapAnalysis: FC = () => {
   const theme = useTheme()
 
-  const campusFeatures = [
+  const otherCourseFeatures = [
     {
       icon: <SchoolIcon />,
-      title: 'Focus on Theory',
-      description: 'Curriculum heavily leans towards academic concepts and examinations.',
+      title: 'Learning style varies',
+      description: 'Some courses focus more on concepts than end-to-end implementation.',
     },
     {
       icon: <PsychologyIcon />,
-      title: 'Structured Learning',
-      description: 'Predictable syllabus with clear right and wrong answers.',
+      title: 'Project depth can vary',
+      description: 'Hands-on practice and portfolio-ready projects depend on the program.',
     },
     {
       icon: <TrendingUpIcon />,
-      title: 'Individual Effort',
-      description: 'Success is measured primarily by individual grades and test scores.',
+      title: 'Different areas of focus',
+      description: 'Some courses specialize in a single tool or area of AI.',
     },
     {
       icon: <ComputerIcon />,
-      title: 'Standardized Tech',
-      description: 'Basic technological exposure lacking modern corporate tools.',
+      title: 'Career support varies',
+      description: 'Mentoring, interview preparation, and portfolio guidance differ by provider.',
     },
   ]
 
-  const corporateFeatures = [
+  const gsnFeatures = [
     {
-      icon: <BusinessCenterIcon />,
-      title: 'Focus on Application',
-      description: 'Immediate need for practical execution and measurable results.',
+      icon: <PsychologyIcon />,
+      title: 'Build a complete AI skill set',
+      description: 'Learn Python, machine learning, deep learning, and generative AI.',
     },
     {
-      icon: <GroupsIcon />,
-      title: 'Ambiguity Management',
-      description: 'Navigating complex, dynamic challenges without a textbook answer.',
-    },
-    {
-      icon: <GroupsIcon />,
-      title: 'Collaborative Success',
-      description: 'Projects require seamless teamwork, communication, and leadership.',
+      icon: <ComputerIcon />,
+      title: 'Learn by building',
+      description: 'Practice through 100+ hours of hands-on labs and real-world projects.',
     },
     {
       icon: <AutoAwesomeIcon />,
-      title: 'Advanced Proficiency',
-      description: 'Mastery of modern tools, Gen AI, CRM, and advanced data analytics.',
+      title: 'Prepare for production work',
+      description: 'Train, evaluate, optimize, and deploy AI models using modern tools.',
+    },
+    {
+      icon: <BusinessCenterIcon />,
+      title: 'Get career-focused guidance',
+      description: 'Earn an industry-recognized certification, complete a mentor-guided capstone, and get support with your portfolio, resume, and interview preparation.',
     },
   ]
 
@@ -81,9 +82,9 @@ const GapAnalysis: FC = () => {
           linear-gradient(165deg, 
             ${alpha(theme.palette.background.default, 0.98)} 0%, 
             ${alpha(theme.palette.primary.dark, 0.08)} 25%, 
-            ${alpha(theme.palette.error.dark, 0.04)} 50%, 
-            ${alpha(theme.palette.secondary.dark, 0.06)} 75%,
-            ${alpha(theme.palette.common.black, 0.2)} 100%
+            ${alpha(theme.palette.text.secondary, 0.025)} 50%, 
+            ${alpha(theme.palette.primary.dark, 0.05)} 75%,
+            ${alpha(theme.palette.common.black, 0.035)} 100%
           )
         `,
         '&::before': {
@@ -104,7 +105,7 @@ const GapAnalysis: FC = () => {
           left: '-5%',
           width: '40%',
           height: '40%',
-          background: `radial-gradient(circle, ${alpha(theme.palette.error.main, 0.03)} 0%, transparent 70%)`,
+          background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.03)} 0%, transparent 70%)`,
           borderRadius: '50%',
           pointerEvents: 'none',
         },
@@ -118,7 +119,7 @@ const GapAnalysis: FC = () => {
           left: 0,
           right: 0,
           height: 3,
-          background: `linear-gradient(90deg, transparent, ${theme.palette.error.main}, ${theme.palette.primary.main}, ${theme.palette.error.main}, transparent)`,
+          background: `linear-gradient(90deg, transparent, ${theme.palette.common.black}, ${theme.palette.primary.main}, ${theme.palette.common.black}, transparent)`,
           backgroundSize: '300% 100%',
           animation: 'gradientMove 4s ease-in-out infinite',
           '@keyframes gradientMove': {
@@ -140,20 +141,20 @@ const GapAnalysis: FC = () => {
               px: 3,
               py: 1.2,
               borderRadius: 50,
-              background: `linear-gradient(135deg, ${alpha(theme.palette.error.main, 0.12)}, ${alpha(theme.palette.primary.main, 0.05)})`,
-              border: `1px solid ${alpha(theme.palette.error.main, 0.15)}`,
+              background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.1)}, ${alpha(theme.palette.common.black, 0.025)})`,
+              border: `1px solid ${alpha(theme.palette.primary.main, 0.14)}`,
               mb: 3,
               backdropFilter: 'blur(20px)',
               animation: 'glowPulse 3s ease-in-out infinite',
               '@keyframes glowPulse': {
-                '0%, 100%': { boxShadow: `0 0 20px ${alpha(theme.palette.error.main, 0.1)}` },
-                '50%': { boxShadow: `0 0 40px ${alpha(theme.palette.error.main, 0.2)}` },
+                '0%, 100%': { boxShadow: `0 0 20px ${alpha(theme.palette.primary.main, 0.08)}` },
+                '50%': { boxShadow: `0 0 32px ${alpha(theme.palette.primary.main, 0.14)}` },
               },
             }}
           >
-            <CompareArrowsIcon sx={{ color: theme.palette.error.main, fontSize: 18 }} />
+            <CompareArrowsIcon sx={{ color: theme.palette.primary.main, fontSize: 18 }} />
             <Typography variant="caption" sx={{ color: 'text.primary', ...sectionBadgeSx }}>
-              The Gap
+              Applied AI, built for your next step
             </Typography>
           </Box>
 
@@ -163,41 +164,39 @@ const GapAnalysis: FC = () => {
             sx={{
               ...sectionHeadlineSx,
               textAlign: 'center',
+              color: theme.palette.common.black,
             }}
           >
-  <Box
-    component="span"
-    sx={{
-      display: "inline-block",
-      background: `linear-gradient(135deg,
-        ${theme.palette.error.main},
-        ${theme.palette.primary.main}
-      )`,
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: "transparent",
-      backgroundClip: "text",
-    }}
-  >
-    Campus vs Corporate
-  </Box>
-</Typography>
+            <Box
+              component="span"
+              sx={{
+                display: 'inline-block',
+                background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.common.black})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              GSN AI Training vs Other Courses
+            </Box>
+          </Typography>
 
           <Typography
             sx={{
               mt: 3,
               mx: 'auto',
-              maxWidth: 600,
-              color: alpha(theme.palette.text.secondary, 0.7),
+              maxWidth: 720,
+              color: 'text.secondary',
               ...sectionDescriptionSx,
             }}
           >
-            Understanding the critical gap between academic learning and industry expectations
+            Build practical AI skills with guided projects, modern tools, and career support designed to help you take your next professional step.
           </Typography>
         </Box>
 
         {/* Comparison Grid with VS in between */}
         <Grid container spacing={0} alignItems="stretch">
-          {/* Campus Column */}
+          {/* Other AI courses */}
           <Grid item xs={12} md={5.5}>
             <Box
               sx={{
@@ -206,11 +205,11 @@ const GapAnalysis: FC = () => {
                 height: '100%',
                 background: `linear-gradient(145deg, ${alpha(theme.palette.background.paper, 0.95)}, ${alpha(theme.palette.background.default, 0.85)})`,
                 backdropFilter: 'blur(20px)',
-                border: { xs: `1px solid ${alpha(theme.palette.error.main, 0.1)}`, md: 'none' },
-                borderRight: { md: `1px solid ${alpha(theme.palette.error.main, 0.1)}` },
-                borderLeft: { md: `1px solid ${alpha(theme.palette.error.main, 0.1)}` },
-                borderTop: { md: `1px solid ${alpha(theme.palette.error.main, 0.1)}` },
-                borderBottom: { md: `1px solid ${alpha(theme.palette.error.main, 0.1)}` },
+                border: { xs: `1px solid ${alpha(theme.palette.text.secondary, 0.14)}`, md: 'none' },
+                borderRight: { md: `1px solid ${alpha(theme.palette.text.secondary, 0.14)}` },
+                borderLeft: { md: `1px solid ${alpha(theme.palette.text.secondary, 0.14)}` },
+                borderTop: { md: `1px solid ${alpha(theme.palette.text.secondary, 0.14)}` },
+                borderBottom: { md: `1px solid ${alpha(theme.palette.text.secondary, 0.14)}` },
                 boxShadow: `
                   0 20px 60px ${alpha(theme.palette.common.black, 0.2)},
                   inset 0 1px 0 ${alpha(theme.palette.common.white, 0.05)}
@@ -224,7 +223,7 @@ const GapAnalysis: FC = () => {
                   right: -50,
                   width: 150,
                   height: 150,
-                  background: `radial-gradient(circle, ${alpha(theme.palette.error.main, 0.05)}, transparent 70%)`,
+                  background: `radial-gradient(circle, ${alpha(theme.palette.text.secondary, 0.06)}, transparent 70%)`,
                   borderRadius: '50%',
                 },
               }}
@@ -235,11 +234,11 @@ const GapAnalysis: FC = () => {
                   sx={{
                     p: 1.5,
                     borderRadius: 3,
-                    background: `linear-gradient(135deg, ${theme.palette.error.main}, ${theme.palette.error.dark})`,
-                    boxShadow: `0 8px 30px ${alpha(theme.palette.error.main, 0.3)}`,
+                    background: `linear-gradient(135deg, ${theme.palette.text.secondary}, ${theme.palette.text.primary})`,
+                    boxShadow: `0 8px 24px ${alpha(theme.palette.text.primary, 0.18)}`,
                   }}
                 >
-                  <SchoolIcon sx={{ color: 'white', fontSize: 32 }} />
+                  <SchoolIcon sx={{ color: 'white', fontSize: 30 }} />
                 </Box>
                 <Box>
                   <Typography
@@ -247,23 +246,20 @@ const GapAnalysis: FC = () => {
                     sx={{
                       ...sectionCardTitleSx,
                       fontWeight: 800,
-                      background: `linear-gradient(135deg, ${theme.palette.error.light}, ${theme.palette.error.main})`,
-                      backgroundClip: 'text',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
+                      color: 'text.primary',
                     }}
                   >
-                    College Environment
+                    Other AI Courses
                   </Typography>
                   <Typography variant="caption" sx={{ color: alpha(theme.palette.text.secondary, 0.6) }}>
-                    Academic Reality
+                    A different learning experience
                   </Typography>
                 </Box>
               </Box>
 
               {/* Features List */}
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
-                {campusFeatures.map((feature, index) => (
+                {otherCourseFeatures.map((feature, index) => (
                   <Box
                     key={index}
                     sx={{
@@ -272,17 +268,17 @@ const GapAnalysis: FC = () => {
                       p: 2,
                       borderRadius: 3,
                       transition: 'all 0.3s ease',
-                      background: alpha(theme.palette.error.main, 0.03),
-                      border: `1px solid ${alpha(theme.palette.error.main, 0.05)}`,
+                      background: alpha(theme.palette.text.secondary, 0.035),
+                      border: `1px solid ${alpha(theme.palette.text.secondary, 0.08)}`,
                       '&:hover': {
                         transform: 'translateX(8px)',
-                        background: alpha(theme.palette.error.main, 0.06),
-                        borderColor: alpha(theme.palette.error.main, 0.1),
+                        background: alpha(theme.palette.text.secondary, 0.06),
+                        borderColor: alpha(theme.palette.text.secondary, 0.16),
                       },
                     }}
                   >
                     <Box sx={{ flexShrink: 0, mt: 0.5 }}>
-                      <CancelIcon sx={{ color: theme.palette.error.main, fontSize: 22 }} />
+                      <InfoOutlinedIcon sx={{ color: 'text.secondary', fontSize: 22 }} />
                     </Box>
                     <Box>
                       <Typography
@@ -327,19 +323,26 @@ const GapAnalysis: FC = () => {
               zIndex: 3,
             }}
           >
-              <Typography
-  sx={{
-    fontSize: "1rem",
-    fontWeight: 700,
-    color: "text.secondary",
-    px: 2,
-  }}
->
-  VS
-</Typography>
+            <Box
+              sx={{
+                display: 'grid',
+                width: 44,
+                height: 44,
+                placeItems: 'center',
+                borderRadius: '50%',
+                color: 'text.secondary',
+                backgroundColor: 'background.paper',
+                border: `1px solid ${alpha(theme.palette.primary.main, 0.14)}`,
+                boxShadow: `0 6px 20px ${alpha(theme.palette.common.black, 0.08)}`,
+                fontSize: '0.8rem',
+                fontWeight: 800,
+              }}
+            >
+                VS
+              </Box>
           </Grid>
 
-          {/* Corporate Column */}
+          {/* GSN Applied AI */}
           <Grid item xs={12} md={5.5}>
             <Box
               sx={{
@@ -348,11 +351,11 @@ const GapAnalysis: FC = () => {
                 height: '100%',
                 background: `linear-gradient(145deg, ${alpha(theme.palette.background.paper, 0.95)}, ${alpha(theme.palette.background.default, 0.85)})`,
                 backdropFilter: 'blur(20px)',
-                border: { xs: `1px solid ${alpha(theme.palette.success.main, 0.1)}`, md: 'none' },
-                borderRight: { md: `1px solid ${alpha(theme.palette.success.main, 0.1)}` },
-                borderLeft: { md: `1px solid ${alpha(theme.palette.success.main, 0.1)}` },
-                borderTop: { md: `1px solid ${alpha(theme.palette.success.main, 0.1)}` },
-                borderBottom: { md: `1px solid ${alpha(theme.palette.success.main, 0.1)}` },
+                border: { xs: `1px solid ${alpha(theme.palette.primary.main, 0.12)}`, md: 'none' },
+                borderRight: { md: `1px solid ${alpha(theme.palette.primary.main, 0.12)}` },
+                borderLeft: { md: `1px solid ${alpha(theme.palette.primary.main, 0.12)}` },
+                borderTop: { md: `1px solid ${alpha(theme.palette.primary.main, 0.12)}` },
+                borderBottom: { md: `1px solid ${alpha(theme.palette.primary.main, 0.12)}` },
                 boxShadow: `
                   0 20px 60px ${alpha(theme.palette.common.black, 0.2)},
                   inset 0 1px 0 ${alpha(theme.palette.common.white, 0.05)}
@@ -366,7 +369,7 @@ const GapAnalysis: FC = () => {
                   right: -50,
                   width: 150,
                   height: 150,
-                  background: `radial-gradient(circle, ${alpha(theme.palette.success.main, 0.05)}, transparent 70%)`,
+                  background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.05)}, transparent 70%)`,
                   borderRadius: '50%',
                 },
               }}
@@ -377,8 +380,8 @@ const GapAnalysis: FC = () => {
                   sx={{
                     p: 1.5,
                     borderRadius: 3,
-                    background: `linear-gradient(135deg, ${theme.palette.success.main}, ${theme.palette.success.dark})`,
-                    boxShadow: `0 8px 30px ${alpha(theme.palette.success.main, 0.3)}`,
+                    background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
+                    boxShadow: `0 8px 30px ${alpha(theme.palette.primary.main, 0.3)}`,
                   }}
                 >
                   <BusinessCenterIcon sx={{ color: 'white', fontSize: 32 }} />
@@ -389,23 +392,20 @@ const GapAnalysis: FC = () => {
                     sx={{
                       ...sectionCardTitleSx,
                       fontWeight: 800,
-                      background: `linear-gradient(135deg, ${theme.palette.success.light}, ${theme.palette.success.main})`,
-                      backgroundClip: 'text',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
+                      color: theme.palette.primary.main,
                     }}
                   >
-                    Industry Expectations
+                    GSN Applied AI
                   </Typography>
                   <Typography variant="caption" sx={{ color: alpha(theme.palette.text.secondary, 0.6) }}>
-                    Corporate Reality
+                    Four-month professional certification
                   </Typography>
                 </Box>
               </Box>
 
               {/* Features List */}
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
-                {corporateFeatures.map((feature, index) => (
+                {gsnFeatures.map((feature, index) => (
                   <Box
                     key={index}
                     sx={{
@@ -414,17 +414,17 @@ const GapAnalysis: FC = () => {
                       p: 2,
                       borderRadius: 3,
                       transition: 'all 0.3s ease',
-                      background: alpha(theme.palette.success.main, 0.03),
-                      border: `1px solid ${alpha(theme.palette.success.main, 0.05)}`,
+                      background: alpha(theme.palette.primary.main, 0.03),
+                      border: `1px solid ${alpha(theme.palette.primary.main, 0.08)}`,
                       '&:hover': {
                         transform: 'translateX(8px)',
-                        background: alpha(theme.palette.success.main, 0.06),
-                        borderColor: alpha(theme.palette.success.main, 0.1),
+                        background: alpha(theme.palette.primary.main, 0.06),
+                        borderColor: alpha(theme.palette.primary.main, 0.14),
                       },
                     }}
                   >
                     <Box sx={{ flexShrink: 0, mt: 0.5 }}>
-                      <CheckCircleIcon sx={{ color: theme.palette.success.main, fontSize: 22 }} />
+                      <CheckCircleIcon sx={{ color: theme.palette.primary.main, fontSize: 22 }} />
                     </Box>
                     <Box>
                       <Typography
@@ -456,6 +456,24 @@ const GapAnalysis: FC = () => {
           </Grid>
         </Grid>
 
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: { xs: 4, md: 5 } }}>
+          <Button
+            variant="contained"
+            href="/courses/applied-ai-master-certification"
+            endIcon={<ArrowForwardIcon />}
+            sx={{
+              minHeight: 48,
+              px: 3,
+              borderRadius: 2,
+              fontWeight: 700,
+              textTransform: 'none',
+              boxShadow: `0 8px 24px ${alpha(theme.palette.primary.main, 0.2)}`,
+            }}
+          >
+            Explore the Applied AI program
+          </Button>
+        </Box>
+
         {/* Bottom Decorative Line */}
         <Box
           sx={{
@@ -470,7 +488,7 @@ const GapAnalysis: FC = () => {
             sx={{
               width: 60,
               height: 2,
-              background: `linear-gradient(90deg, transparent, ${theme.palette.error.main})`,
+              background: `linear-gradient(90deg, transparent, ${theme.palette.primary.main})`,
               borderRadius: 1,
             }}
           />
@@ -479,8 +497,8 @@ const GapAnalysis: FC = () => {
               width: 12,
               height: 12,
               borderRadius: '50%',
-              background: `linear-gradient(135deg, ${theme.palette.error.main}, ${theme.palette.primary.main})`,
-              boxShadow: `0 0 30px ${alpha(theme.palette.error.main, 0.3)}`,
+              background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.common.black})`,
+              boxShadow: `0 0 30px ${alpha(theme.palette.primary.main, 0.24)}`,
               animation: 'pulse 2s ease-in-out infinite',
               '@keyframes pulse': {
                 '0%, 100%': { transform: 'scale(1)', opacity: 1 },
@@ -492,7 +510,7 @@ const GapAnalysis: FC = () => {
             sx={{
               width: 60,
               height: 2,
-              background: `linear-gradient(90deg, ${theme.palette.success.main}, transparent)`,
+              background: `linear-gradient(90deg, ${theme.palette.primary.main}, transparent)`,
               borderRadius: 1,
             }}
           />

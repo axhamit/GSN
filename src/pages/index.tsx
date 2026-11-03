@@ -64,15 +64,15 @@ const Home: NextPageWithLayout = () => {
       <DynamicHomeHero />
       <DynamicLearningPaths />
       <DynamicHomePopularCourse />
-      <DynamicHomeFeature />
+      {/* <DynamicHomeFeature /> */}
       <DynamicAvishkarCareer/>
       <DynamicAboutGSN />
       <DynamicStudentStories />
       <DynamicGapAnalysis />
-      <DynamicWhyPartner />
+      {/* <DynamicWhyPartner /> */}
       <DynamicTrainingMethodology />
-      <DynamicCareerLaunchProgram />
-      <DynamicCommunicationExcellence />
+      {/* <DynamicCareerLaunchProgram /> */}
+      {/* <DynamicCommunicationExcellence /> */}
       <DynamicEmployabilityChallenge />
       <DynamicGenerativeAIProgram />
       <DynamicPartnershipModels />

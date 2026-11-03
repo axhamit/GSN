@@ -42,31 +42,60 @@ const handler = async (
       return res.status(500).json({ success: false, message: 'Enquiry storage is not configured' })
     }
 
-   const webhookResponse = await fetch(webhookUrl, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    timestamp: new Date().toISOString(),
-    name,
-    email,
-    phone,
-    message,
-    courseName,
-    coursePrice,
-    source,
-    courseSlug: brochureSlug,
-  }),
-});
+    const requestReferer = req.headers.referer
+    let pageUrl = ''
+    let pagePath = ''
+    let referrerUrl = ''
 
-const responseText = await webhookResponse.text();
+    if (requestReferer) {
+      try {
+        const referer = new URL(requestReferer)
+        if (referer.protocol === 'http:' || referer.protocol === 'https:') {
+          pagePath = referer.pathname
+          pageUrl = `${referer.origin}${referer.pathname}`
+          referrerUrl = pageUrl
+        }
+      } catch {
+        // Ignore invalid referrer headers; the form source still identifies the submission surface.
+      }
+    }
 
-console.log("Status:", webhookResponse.status);
-console.log("Response:", responseText);
+    const webhookResponse = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        timestamp: new Date().toISOString(),
+        name,
+        email,
+        phone,
+        message,
+        courseName,
+        coursePrice,
+        source: source || 'website',
+        courseSlug: brochureSlug,
+        pageUrl,
+        pagePath,
+        referrerUrl,
+      }),
+    })
 
     if (!webhookResponse.ok) {
+      if (webhookResponse.status === 401 || webhookResponse.status === 403) {
+        console.error(`Google Sheets webhook denied access with ${webhookResponse.status}`)
+        return res.status(502).json({
+          success: false,
+          message: 'Google Sheets denied access. Redeploy the Apps Script web app with access set to Anyone, then try again.',
+        })
+      }
+
       throw new Error(`Google Sheets webhook responded with ${webhookResponse.status}`)
+    }
+
+    const webhookResult = await webhookResponse.json() as { success?: boolean }
+    if (webhookResult.success !== true) {
+      throw new Error('Google Sheets webhook did not confirm that the enquiry was stored')
     }
 
     const brochureUrl = `/api/brochure?course=${encodeURIComponent(brochureSlug)}`

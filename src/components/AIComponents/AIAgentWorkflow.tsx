@@ -27,7 +27,7 @@ const AIAgentWorkflow: FC<AIAgentWorkflowProps> = ({
   const theme = useTheme()
 
   return (
-    <Box sx={{ py: { xs: 6, md: 8 }, background: alpha('#38bdf8', 0.02) }}>
+    <Box sx={{ py: { xs: 6, md: 8 }, background: alpha(theme.palette.primary.light, 0.02) }}>
       <Container maxWidth="lg">
         <Typography
           variant="h3"
@@ -63,13 +63,13 @@ const AIAgentWorkflow: FC<AIAgentWorkflowProps> = ({
                       height: '100%',
                       borderRadius: 3,
                       background: theme.palette.background.paper,
-                      border: `1px solid ${alpha('#38bdf8', 0.1)}`,
+                      border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
                       transition: 'all 0.3s ease',
                       position: 'relative',
                       '&:hover': {
                         transform: 'translateY(-4px)',
-                        boxShadow: `0 12px 40px ${alpha('#38bdf8', 0.15)}`,
-                        borderColor: alpha('#38bdf8', 0.3),
+                        boxShadow: `0 12px 40px ${alpha(theme.palette.primary.main, 0.15)}`,
+                        borderColor: alpha(theme.palette.primary.light, 0.3),
                       },
                     }}
                   >
@@ -82,8 +82,8 @@ const AIAgentWorkflow: FC<AIAgentWorkflowProps> = ({
                           width: 60,
                           height: 60,
                           borderRadius: '50%',
-                          background: `linear-gradient(135deg, ${alpha('#38bdf8', 0.15)}, ${alpha('#60a5fa', 0.1)})`,
-                          color: '#38bdf8',
+                          background: `linear-gradient(135deg, ${alpha(theme.palette.primary.light, 0.15)}, ${alpha(theme.palette.ai.light, 0.1)})`,
+                          color: theme.palette.primary.light,
                           fontSize: '1.5rem',
                           fontWeight: 800,
                           mx: 'auto',
@@ -110,7 +110,7 @@ const AIAgentWorkflow: FC<AIAgentWorkflowProps> = ({
                         alignItems: 'center',
                         justifyContent: 'center',
                         height: '100%',
-                        color: '#38bdf8',
+                        color: theme.palette.primary.light,
                         fontSize: '2rem',
                         fontWeight: 700,
                       }}

@@ -4,7 +4,7 @@ This directory should contain PDF brochures for each course.
 
 ## Required Brochures
 
-1. **advanced-agentic-ai-brochure.pdf** - Brochure for Advanced Agentic AI and Generative AI course
+1. **advanced-agentic-ai-brochure.pdf** - Brochure for Advanced Gen AI and Agentic AI course
 2. **applied-ai-master-brochure.pdf** - Brochure for Applied AI Master Certification course
 3. **career-launch-academy-brochure.pdf** - Brochure for Career Launch Academy course
 

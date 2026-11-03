@@ -210,8 +210,7 @@ const GenerativeAIProgram: FC = () => {
                 ...sectionDescriptionSx,
               }}
             >
-              Equip your students with the most sought-after skill of the decade. We train candidates to leverage AI 
-              tools to multiply their output and efficiency in any corporate role.
+             Empower your career with future-ready AI skills. We help graduates and professionals master AI tools, automate everyday tasks, and build the capabilities needed to succeed in the modern workplace.
             </Typography>
           </Box>
         </Box>

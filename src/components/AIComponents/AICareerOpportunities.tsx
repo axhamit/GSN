@@ -30,7 +30,7 @@ const AICareerOpportunities: FC<AICareerOpportunitiesProps> = ({ roles, industry
   const theme = useTheme()
 
   return (
-    <Box sx={{ py: { xs: 6, md: 8 }, background: alpha('#38bdf8', 0.02) }}>
+    <Box sx={{ py: { xs: 6, md: 8 }, background: alpha(theme.palette.primary.light, 0.02) }}>
       <Container maxWidth="lg">
         <Typography
           variant="h3"
@@ -64,18 +64,18 @@ const AICareerOpportunities: FC<AICareerOpportunitiesProps> = ({ roles, industry
                   height: '100%',
                   borderRadius: 3,
                   background: theme.palette.background.paper,
-                  border: `1px solid ${alpha('#38bdf8', 0.08)}`,
+                  border: `1px solid ${alpha(theme.palette.primary.light, 0.08)}`,
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-4px)',
-                    boxShadow: `0 12px 40px ${alpha('#38bdf8', 0.15)}`,
-                    borderColor: alpha('#38bdf8', 0.2),
+                    boxShadow: `0 12px 40px ${alpha(theme.palette.primary.main, 0.15)}`,
+                    borderColor: alpha(theme.palette.primary.light, 0.2),
                   },
                 }}
               >
                 <CardContent sx={{ p: 3 }}>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
-                    <WorkIcon sx={{ color: '#38bdf8', fontSize: 28 }} />
+                    <WorkIcon sx={{ color: theme.palette.primary.light, fontSize: 28 }} />
                     <Typography variant="h6" sx={{ fontWeight: 700 }}>
                       {role.title}
                     </Typography>
@@ -94,8 +94,8 @@ const AICareerOpportunities: FC<AICareerOpportunitiesProps> = ({ roles, industry
 
                   {role.salaryRange && (
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                      <TrendingUpIcon sx={{ color: '#1e88e5', fontSize: 18 }} />
-                      <Typography variant="caption" sx={{ fontWeight: 600, color: '#1e88e5' }}>
+                      <TrendingUpIcon sx={{ color: theme.palette.ai.main, fontSize: 18 }} />
+                      <Typography variant="caption" sx={{ fontWeight: 600, color: theme.palette.ai.main }}>
                         Salary: {role.salaryRange}
                       </Typography>
                     </Box>
@@ -103,8 +103,8 @@ const AICareerOpportunities: FC<AICareerOpportunitiesProps> = ({ roles, industry
 
                   {role.growth && (
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <SchoolIcon sx={{ color: '#fb8c00', fontSize: 18 }} />
-                      <Typography variant="caption" sx={{ fontWeight: 600, color: '#fb8c00' }}>
+                      <SchoolIcon sx={{ color: theme.palette.secondary.main, fontSize: 18 }} />
+                      <Typography variant="caption" sx={{ fontWeight: 600, color: theme.palette.secondary.main }}>
                         Growth: {role.growth}
                       </Typography>
                     </Box>
@@ -134,8 +134,8 @@ const AICareerOpportunities: FC<AICareerOpportunitiesProps> = ({ roles, industry
                     sx={{
                       p: 3,
                       borderRadius: 3,
-                      background: `linear-gradient(135deg, ${alpha('#38bdf8', 0.1)}, ${alpha('#60a5fa', 0.05)})`,
-                      border: `1px solid ${alpha('#38bdf8', 0.15)}`,
+                      background: `linear-gradient(135deg, ${alpha(theme.palette.primary.light, 0.1)}, ${alpha(theme.palette.ai.light, 0.05)})`,
+                      border: `1px solid ${alpha(theme.palette.primary.light, 0.15)}`,
                       textAlign: 'center',
                     }}
                   >
@@ -143,7 +143,7 @@ const AICareerOpportunities: FC<AICareerOpportunitiesProps> = ({ roles, industry
                       variant="h3"
                       sx={{
                         fontWeight: 800,
-                        color: '#38bdf8',
+                        color: theme.palette.primary.light,
                         mb: 1,
                         fontSize: { xs: '2rem', md: '2.5rem' },
                       }}

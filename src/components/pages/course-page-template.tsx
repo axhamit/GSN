@@ -6,6 +6,7 @@ import Chip from '@mui/material/Chip'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import EnrollmentForm from '@/components/form/EnrollmentForm'
+import AIBrochureEnquiryForm from '@/components/AIComponents/AIBrochureEnquiryForm'
 import CareerLaunchHero from '@/courses/CareerLaunchHero/CareerLaunchHero'
 import AdvancedExcel from '@/components/AdvancedExcel/AdvancedExcel'
 import HomeFeature from '@/components/home/feature'
@@ -26,13 +27,17 @@ interface CoursePageTemplateProps {
 
 const CoursePageTemplate: FC<CoursePageTemplateProps> = ({ course }) => {
   const [enrollOpen, setEnrollOpen] = useState(false)
+  const [brochureOpen, setBrochureOpen] = useState(false)
   const isCareerLaunch = course.category === 'Career Launch Academy'
   const isFeatured = isCareerLaunch || course.category === 'Artificial Intelligence'
 
   return (
     <Box component="main">
       {isCareerLaunch ? (
-        <CareerLaunchHero onEnrollClick={() => setEnrollOpen(true)} />
+        <CareerLaunchHero
+          onEnrollClick={() => setEnrollOpen(true)}
+          onBrochureClick={() => setBrochureOpen(true)}
+        />
       ) : (
         <Box component="section" sx={{ py: { xs: 7, md: 11 }, bgcolor: 'background.paper' }}>
           <Container maxWidth="lg">
@@ -78,6 +83,14 @@ const CoursePageTemplate: FC<CoursePageTemplateProps> = ({ course }) => {
       <HomeFeature />
       <AboutGSN />
       <EnrollmentForm open={enrollOpen} onClose={() => setEnrollOpen(false)} courseName={course.title} coursePrice={course.price} />
+      {isCareerLaunch && (
+        <AIBrochureEnquiryForm
+          open={brochureOpen}
+          onClose={() => setBrochureOpen(false)}
+          courseName={course.title}
+          courseSlug={course.slug || 'career-launch-academy'}
+        />
+      )}
     </Box>
   )
 }

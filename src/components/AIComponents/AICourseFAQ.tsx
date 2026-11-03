@@ -22,7 +22,7 @@ const AICourseFAQ: FC<AICourseFAQProps> = ({ faqs }) => {
   const theme = useTheme()
 
   return (
-    <Box sx={{ py: { xs: 6, md: 8 }, background: alpha('#38bdf8', 0.02) }}>
+    <Box sx={{ py: { xs: 6, md: 8 }, background: alpha(theme.palette.primary.light, 0.02) }}>
       <Container maxWidth="lg">
         <Typography
           variant="h3"
@@ -56,17 +56,17 @@ const AICourseFAQ: FC<AICourseFAQProps> = ({ faqs }) => {
                 mb: 2,
                 borderRadius: 3,
                 background: theme.palette.background.paper,
-                border: `1px solid ${alpha('#38bdf8', 0.08)}`,
+                border: `1px solid ${alpha(theme.palette.primary.light, 0.08)}`,
                 '&:before': { display: 'none' },
                 '&.Mui-expanded': {
                   margin: '8px 0',
-                  borderColor: alpha('#38bdf8', 0.2),
-                  boxShadow: `0 8px 30px ${alpha('#38bdf8', 0.1)}`,
+                  borderColor: alpha(theme.palette.primary.light, 0.2),
+                  boxShadow: `0 8px 30px ${alpha(theme.palette.primary.main, 0.1)}`,
                 },
               }}
             >
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon sx={{ color: '#38bdf8' }} />}
+                expandIcon={<ExpandMoreIcon sx={{ color: theme.palette.primary.light }} />}
                 sx={{
                   px: 3,
                   py: 2.5,
@@ -76,7 +76,7 @@ const AICourseFAQ: FC<AICourseFAQProps> = ({ faqs }) => {
                 }}
               >
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1 }}>
-                  <HelpIcon sx={{ color: '#38bdf8', fontSize: 24 }} />
+                  <HelpIcon sx={{ color: theme.palette.primary.light, fontSize: 24 }} />
                   <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
                     {faq.question}
                   </Typography>
