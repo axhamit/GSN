@@ -30,7 +30,26 @@ const App: FC<AppPropsWithLayout> = (props: AppPropsWithLayout) => {
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title>GSN FOUNDATION</title>
+        <title>GSN Foundation | Career, AI and Exam Preparation</title>
+        <meta
+          name="description"
+          content="Explore career readiness, AI, and competitive exam preparation programmes from GSN Foundation."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="GSN Foundation" />
+        <meta property="og:title" content="GSN Foundation | Career, AI and Exam Preparation" />
+        <meta
+          property="og:description"
+          content="Explore career readiness, AI, and competitive exam preparation programmes from GSN Foundation."
+        />
+        <meta property="og:image" content="https://www.gsnfoundation.com/images/hero.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="GSN Foundation | Career, AI and Exam Preparation" />
+        <meta
+          name="twitter:description"
+          content="Explore career readiness, AI, and competitive exam preparation programmes from GSN Foundation."
+        />
+        <meta name="twitter:image" content="https://www.gsnfoundation.com/images/hero.png" />
         <link rel="icon" type="image/png" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/images/logo_blue.png" />
       </Head>

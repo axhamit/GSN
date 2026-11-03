@@ -20,6 +20,27 @@ const CareerLaunchAcademyPage: NextPageWithLayout = () => {
           name="description"
           content="Build professional communication, personal branding, workplace skills, and interview readiness with GSN Foundation's Career Launch Academy."
         />
+        <link rel="canonical" href="https://www.gsnfoundation.com/courses/career-launch-academy" />
+        <meta property="og:title" content="Career Launch Academy | GSN Foundation" />
+        <meta
+          property="og:description"
+          content="Build professional communication, personal branding, workplace skills, and interview readiness with GSN Foundation's Career Launch Academy."
+        />
+        <meta property="og:url" content="https://www.gsnfoundation.com/courses/career-launch-academy" />
+        <meta
+          property="og:image"
+          content="https://www.gsnfoundation.com/images/courses/Career%20Launch%20Program_%20Future-Ready%20Learning.png"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Career Launch Academy | GSN Foundation" />
+        <meta
+          name="twitter:description"
+          content="Build professional communication, personal branding, workplace skills, and interview readiness with GSN Foundation's Career Launch Academy."
+        />
+        <meta
+          name="twitter:image"
+          content="https://www.gsnfoundation.com/images/courses/Career%20Launch%20Program_%20Future-Ready%20Learning.png"
+        />
       </Head>
       <CareerLaunchCoursePage course={course} />
     </>

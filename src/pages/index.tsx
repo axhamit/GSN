@@ -26,7 +26,6 @@ const Home: NextPageWithLayout = () => {
       <Head>
         <title>GSN Foundation - Premier EdTech Platform for AI, Career Launch & Competitive Exams</title>
         <meta name="description" content="GSN Foundation offers comprehensive courses in AI, Machine Learning, Career Launch Academy, NEET, JEE, and competitive exam preparation. Transform your future with quality education." />
-        <meta name="keywords" content="GSN Foundation, EdTech, AI courses, Machine Learning, Career Launch Academy, NEET, JEE, Competitive Exams, Online Learning, PCMB" />
         <link rel="canonical" href="https://www.gsnfoundation.com" />
 
         {/* Open Graph */}
@@ -48,15 +47,20 @@ const Home: NextPageWithLayout = () => {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'WebSite',
-              name: 'GSN Foundation',
-              url: 'https://www.gsnfoundation.com',
-              description: 'Premier EdTech platform offering comprehensive courses in AI, Machine Learning, Career Launch Academy, and competitive exam preparation.',
-              potentialAction: {
-                '@type': 'SearchAction',
-                target: 'https://www.gsnfoundation.com/search?q={search_term_string}',
-                'query-input': 'required name=search_term_string',
-              },
+              '@graph': [
+                {
+                  '@type': 'Organization',
+                  name: 'GSN Foundation',
+                  url: 'https://www.gsnfoundation.com',
+                  logo: 'https://www.gsnfoundation.com/images/logo_blue.png',
+                },
+                {
+                  '@type': 'WebSite',
+                  name: 'GSN Foundation',
+                  url: 'https://www.gsnfoundation.com',
+                  inLanguage: 'en',
+                },
+              ],
             }),
           }}
         />

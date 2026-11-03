@@ -218,7 +218,7 @@ const AdvancedAgenticAIPage: NextPageWithLayout = () => {
               hasCourseInstance: {
                 '@type': 'CourseInstance',
                 courseMode: 'online',
-                courseWorkload: 'PT4M',
+                courseWorkload: 'P4M',
               },
             }),
           }}

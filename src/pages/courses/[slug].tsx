@@ -1,63 +1,61 @@
 import React from 'react'
-import { useRouter } from 'next/router'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
+import Head from 'next/head'
+import type { GetServerSideProps, NextPage } from 'next'
 import { NextPageWithLayout } from '@/interfaces/layout'
 import { MainLayout } from '@/components/layout'
 import { data } from '@/components/home/popular-course.data'
 import CoursePageTemplate from '@/components/pages/course-page-template'
-import dynamic from 'next/dynamic'
+import type { Course } from '@/interfaces/course'
 
-// Dynamically import AI course pages to avoid SSR issues
-const DynamicAdvancedAgenticAI = dynamic(() => import('./advanced-agentic-generative-ai'), {
-  ssr: false,
-})
-const DynamicAppliedAIMaster = dynamic(() => import('./applied-ai-master-certification'), {
-  ssr: false,
-})
+interface CourseDetailPageProps {
+  course: Course
+  slug: string
+}
 
-const CourseDetailPage: NextPageWithLayout = () => {
-  const router = useRouter()
-  const slug = Array.isArray(router.query.slug) ? router.query.slug[0] : router.query.slug
+const SITE_URL = 'https://www.gsnfoundation.com'
 
-  if (!router.isReady) {
-    return (
-      <Box sx={{ py: 10, textAlign: 'center' }}>
-        <Typography variant="h5">Loading course details...</Typography>
-      </Box>
-    )
-  }
+const CourseDetailPage: NextPage<CourseDetailPageProps> & Pick<NextPageWithLayout, 'getLayout'> = ({
+  course,
+  slug,
+}) => {
+  const title = `${course.title} | GSN Foundation`
+  const description =
+    course.description ||
+    `Explore the ${course.title} at GSN Foundation, including course topics, program duration, and enrollment information.`
+  const canonicalUrl = `${SITE_URL}/courses/${slug}`
+  const imageUrl = new URL(course.cover, SITE_URL).href
 
-  // Route to dedicated AI course pages
-  if (slug === 'advanced-agentic-generative-ai') {
-    return <DynamicAdvancedAgenticAI />
-  }
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={imageUrl} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={imageUrl} />
+      </Head>
+      <CoursePageTemplate course={course} />
+    </>
+  )
+}
 
-  if (slug === 'applied-ai-master-certification') {
-    return <DynamicAppliedAIMaster />
-  }
-
-  // Use existing template for other courses
-  const course = data.find((item) => item.slug === slug || String(item.id) === slug)
+export const getServerSideProps: GetServerSideProps<CourseDetailPageProps> = async ({ params }) => {
+  const slug = typeof params?.slug === 'string' ? params.slug : ''
+  const course = data.find((item) => item.slug === slug)
 
   if (!course) {
-    return (
-      <Box sx={{ py: 12, textAlign: 'center' }}>
-        <Typography variant="h4" sx={{ mb: 2, fontWeight: 700 }}>
-          Course not found
-        </Typography>
-        <Typography color="text.secondary" sx={{ mb: 3 }}>
-          The course you are looking for does not exist or has been moved.
-        </Typography>
-        <Button variant="contained" onClick={() => router.push('/')}>
-          Back to Home
-        </Button>
-      </Box>
-    )
+    return { notFound: true }
   }
 
-  return <CoursePageTemplate course={course} />
+  return {
+    props: { course, slug },
+  }
 }
 
 CourseDetailPage.getLayout = (page) => <MainLayout>{page}</MainLayout>
