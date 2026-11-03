@@ -10,74 +10,67 @@ import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
+import {
+  homepageSectionDescriptionSx,
+  homepageSectionEyebrowSx,
+  homepageSectionTitleSx,
+} from '@/config/theme/sectionTypography'
 
 const paths = [
-  {
-    title: 'School & board preparation',
-    description: 'Build strong foundations for Class 10, 11, and 12.',
-    href: '/courses/10th-standard',
-    icon: <MenuBookIcon />,
+   {
+    title: 'Artificial intelligence',
+    description: 'Build smarter, work faster, and master Generative AI, Agentic AI, AI tools, and intelligent automation with practical training.',
+    href: '/courses/advanced-agentic-generative-ai',
+    icon: <AutoAwesomeIcon />,
   },
   {
+    title: 'Career launch',
+    description: 'Build essential workplace skills and prepare for your first career opportunity.',
+    href: '/courses/career-launch-academy',
+    icon: <RocketLaunchIcon />,
+  },
+ {
     title: 'Competitive exams',
     description: 'Prepare for NEET, JEE, and KCET with expert guidance.',
     href: '/courses/neet',
     icon: <ScienceIcon />,
   },
   {
-    title: 'Career launch',
-    description: 'Grow communication, employability, and workplace skills.',
-    href: '/courses/career-launch-academy',
-    icon: <RocketLaunchIcon />,
+    title: 'School & board preparation',
+    description: 'Build strong foundations for Class 10th & 12th.',
+    href: '/courses/10th-standard',
+    icon: <MenuBookIcon />,
   },
-  {
-    title: 'Artificial intelligence',
-    description: 'Explore generative AI, machine learning, and new tools.',
-    href: '/courses/advanced-agentic-generative-ai',
-    icon: <AutoAwesomeIcon />,
-  },
+  
+  
 ]
 
 const LearningPaths: FC = () => (
   <Box
     component="section"
     id="learning-paths"
-    sx={{ py: { xs: 7, md: 9 }, backgroundColor: '#fff' }}
+    sx={{ py: { xs: 7, md: 9 }, backgroundColor: '#f6f8fa' }}
   >
     <Container maxWidth="lg">
-      <Box sx={{ mb: 4, maxWidth: 620 }}>
+      <Box sx={{ mb: { xs: 3, md: 4 }, maxWidth: 680, mx: 'auto', textAlign: 'center' }}>
         <Typography
           component="p"
-          sx={{
-            mb: 1,
-            color: 'primary.main',
-            fontSize: '0.78rem',
-            fontWeight: 700,
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-          }}
+          sx={homepageSectionEyebrowSx}
         >
           Explore learning paths
         </Typography>
         <Typography
           component="h2"
-          sx={{
-            mb: 1.25,
-            color: '#172b3c',
-            fontSize: { xs: '2rem', md: '2.5rem' },
-            fontWeight: 750,
-            letterSpacing: '-0.035em',
-            lineHeight: 1.2,
-          }}
+          sx={homepageSectionTitleSx}
         >
           Start with what you want to achieve
         </Typography>
-        <Typography sx={{ color: 'text.secondary', fontSize: '1rem', lineHeight: 1.7 }}>
-          From school success to future-ready skills, find the learning path that suits you.
+        <Typography sx={homepageSectionDescriptionSx}>
+          From AI to career skills, discover the right learning path for your goals.
         </Typography>
       </Box>
 
-      <Grid container spacing={2}>
+      <Grid container spacing={{ xs: 2, md: 2.5 }} alignItems="stretch">
         {paths.map((path) => (
           <Grid item xs={12} sm={6} lg={3} key={path.title}>
             <Box
@@ -85,12 +78,12 @@ const LearningPaths: FC = () => (
               sx={{
                 display: 'flex',
                 height: '100%',
-                minHeight: 230,
+                minHeight: 240,
                 flexDirection: 'column',
                 alignItems: 'flex-start',
                 p: { xs: 2.5, md: 3 },
                 border: '1px solid #e3e9ee',
-                borderRadius: 3,
+                borderRadius: 4,
                 backgroundColor: '#fff',
                 transition: 'border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease',
                 '&:hover': {

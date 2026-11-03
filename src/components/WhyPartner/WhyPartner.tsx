@@ -65,7 +65,7 @@ const WhyPartner: FC = () => {
 
   const stats = [
     { value: '6', label: 'Years of Excellence', icon: <StarIcon /> },
-    { value: '24', label: 'Partner Institutions', icon: <PeopleIcon /> },
+    { value: '24+', label: 'Partner Institutions', icon: <PeopleIcon /> },
     { value: '95%', label: 'Placement Rate', icon: <WorkspacePremiumIcon /> },
   ]
 

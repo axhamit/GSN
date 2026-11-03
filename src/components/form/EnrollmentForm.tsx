@@ -17,6 +17,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { EnquiryPayload } from '@/interfaces/enquiry'
 import { SHOW_FEES } from '@/utils/config'
 import { resolveBrochureSlug } from '@/utils/course-brochure'
+import { triggerBrochureDownload } from '@/utils/download-brochure'
 import InputAdornment from '@mui/material/InputAdornment'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
@@ -123,15 +124,20 @@ const EnrollmentForm: FC<EnrollmentFormProps> = ({
         body: JSON.stringify(payload),
       })
 
+      const result = await response.json() as { brochureUrl?: string }
       if (!response.ok) {
         throw new Error(`Request failed with status ${response.status}`)
+      }
+      if (!result.brochureUrl) {
+        throw new Error('The enquiry was recorded but no brochure URL was returned')
       }
 
       setFormData({ name: '', email: '', phone: '', message: '' })
       setCountryCode('+91')
+      const brochureSlug = resolveBrochureSlug(undefined, courseName)
+      triggerBrochureDownload(result.brochureUrl, `${brochureSlug}-brochure.pdf`)
       onSuccess?.()
       onClose()
-      const brochureSlug = resolveBrochureSlug(undefined, courseName)
       await router.push(`/thank-you?course=${encodeURIComponent(brochureSlug)}`)
     } catch (error) {
       setStatus({ 

@@ -133,7 +133,7 @@ const CourseCardItem: FC<CourseCardItemProps> = ({ item, index = 0 }) => {
             </Typography>
 
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 1.75 }}>
-              <StarRoundedIcon sx={{ color: '#b77932', fontSize: 18 }} />
+              <StarRoundedIcon sx={{ color: 'primary.main', fontSize: 18 }} />
               <Typography variant="body2" sx={{ color: '#33485a', fontWeight: 650 }}>
                 {item.rating.toFixed(1)}
               </Typography>

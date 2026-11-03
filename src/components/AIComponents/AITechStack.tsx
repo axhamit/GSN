@@ -17,7 +17,7 @@ const AITechStack: FC<AITechStackProps> = ({ technologies, frameworks = [], tool
   const theme = useTheme()
 
   return (
-    <Box sx={{ py: { xs: 6, md: 8 }, background: alpha('#38bdf8', 0.02) }}>
+    <Box sx={{ py: { xs: 6, md: 8 }, background: alpha(theme.palette.primary.light, 0.02) }}>
       <Container maxWidth="lg">
         <Typography
           variant="h3"
@@ -51,7 +51,7 @@ const AITechStack: FC<AITechStackProps> = ({ technologies, frameworks = [], tool
                 sx={{
                   fontWeight: 700,
                   mb: 3,
-                  color: '#38bdf8',
+                  color: theme.palette.primary.light,
                   textAlign: 'center',
                 }}
               >
@@ -64,12 +64,12 @@ const AITechStack: FC<AITechStackProps> = ({ technologies, frameworks = [], tool
                     sx={{
                       borderRadius: 2,
                       background: theme.palette.background.paper,
-                      border: `1px solid ${alpha('#38bdf8', 0.1)}`,
+                      border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
                       transition: 'all 0.3s ease',
                       '&:hover': {
                         transform: 'translateY(-2px)',
-                        boxShadow: `0 8px 25px ${alpha('#38bdf8', 0.15)}`,
-                        borderColor: alpha('#38bdf8', 0.3),
+                        boxShadow: `0 8px 25px ${alpha(theme.palette.primary.main, 0.15)}`,
+                        borderColor: alpha(theme.palette.primary.light, 0.3),
                       },
                     }}
                   >
@@ -91,7 +91,7 @@ const AITechStack: FC<AITechStackProps> = ({ technologies, frameworks = [], tool
                 sx={{
                   fontWeight: 700,
                   mb: 3,
-                  color: '#1e88e5',
+                  color: theme.palette.ai.main,
                   textAlign: 'center',
                 }}
               >
@@ -104,12 +104,12 @@ const AITechStack: FC<AITechStackProps> = ({ technologies, frameworks = [], tool
                     sx={{
                       borderRadius: 2,
                       background: theme.palette.background.paper,
-                      border: `1px solid ${alpha('#1e88e5', 0.1)}`,
+                      border: `1px solid ${alpha(theme.palette.ai.main, 0.1)}`,
                       transition: 'all 0.3s ease',
                       '&:hover': {
                         transform: 'translateY(-2px)',
-                        boxShadow: `0 8px 25px ${alpha('#1e88e5', 0.15)}`,
-                        borderColor: alpha('#1e88e5', 0.3),
+                        boxShadow: `0 8px 25px ${alpha(theme.palette.ai.main, 0.15)}`,
+                        borderColor: alpha(theme.palette.ai.main, 0.3),
                       },
                     }}
                   >
@@ -131,7 +131,7 @@ const AITechStack: FC<AITechStackProps> = ({ technologies, frameworks = [], tool
                 sx={{
                   fontWeight: 700,
                   mb: 3,
-                  color: '#fb8c00',
+                  color: theme.palette.secondary.main,
                   textAlign: 'center',
                 }}
               >
@@ -144,12 +144,12 @@ const AITechStack: FC<AITechStackProps> = ({ technologies, frameworks = [], tool
                     sx={{
                       borderRadius: 2,
                       background: theme.palette.background.paper,
-                      border: `1px solid ${alpha('#fb8c00', 0.1)}`,
+                      border: `1px solid ${alpha(theme.palette.secondary.main, 0.1)}`,
                       transition: 'all 0.3s ease',
                       '&:hover': {
                         transform: 'translateY(-2px)',
-                        boxShadow: `0 8px 25px ${alpha('#fb8c00', 0.15)}`,
-                        borderColor: alpha('#fb8c00', 0.3),
+                        boxShadow: `0 8px 25px ${alpha(theme.palette.secondary.main, 0.15)}`,
+                        borderColor: alpha(theme.palette.secondary.main, 0.3),
                       },
                     }}
                   >

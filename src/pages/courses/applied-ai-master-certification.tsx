@@ -1,7 +1,5 @@
-import React, { FC, useState } from 'react'
-import { useRouter } from 'next/router'
+import React, { useState } from 'react'
 import Head from 'next/head'
-import Box from '@mui/material/Box'
 import { NextPageWithLayout } from '@/interfaces/layout'
 import { MainLayout } from '@/components/layout'
 import {
@@ -22,23 +20,16 @@ import { data as courseCatalog } from '@/components/home/popular-course.data'
 import EnrollmentForm from '@/components/form/EnrollmentForm'
 
 const AppliedAIMasterPage: NextPageWithLayout = () => {
-  const router = useRouter()
   const course = courseCatalog.find((item) => item.slug === 'applied-ai-master-certification')
   const [enrollOpen, setEnrollOpen] = useState(false)
-  const [scrollToEnquiry, setScrollToEnquiry] = useState(false)
+  const [brochureOpen, setBrochureOpen] = useState(false)
 
-  const handleEnrollClick = () => {
+  const handleEnrollClick = (): void => {
     setEnrollOpen(true)
   }
 
-  const handleBrochureClick = () => {
-    setScrollToEnquiry(true)
-    setTimeout(() => {
-      const enquirySection = document.getElementById('enquiry-section')
-      if (enquirySection) {
-        enquirySection.scrollIntoView({ behavior: 'smooth' })
-      }
-    }, 100)
+  const handleBrochureClick = (): void => {
+    setBrochureOpen(true)
   }
 
   const learningOutcomes = [
@@ -158,7 +149,7 @@ const AppliedAIMasterPage: NextPageWithLayout = () => {
     },
     {
       question: 'How long is the course and what is the format?',
-      answer: 'The course is 6 months long with live sessions, hands-on labs, project work, and mentor support. The curriculum is designed to accommodate working professionals with flexible schedules.',
+      answer: 'The course is 4 months long with live sessions, hands-on labs, project work, and mentor support. The curriculum is designed to accommodate working professionals with flexible schedules.',
     },
     {
       question: 'Will I receive a certification?',
@@ -186,7 +177,7 @@ const AppliedAIMasterPage: NextPageWithLayout = () => {
     <>
       <Head>
         <title>Applied AI Master Certification | GSN Foundation</title>
-        <meta name="description" content="Become a complete AI professional with comprehensive training in machine learning, deep learning, and generative AI. Master Python, build production-ready models in this 6-month certification." />
+        <meta name="description" content="Become a complete AI professional with comprehensive training in machine learning, deep learning, and generative AI. Master Python, build production-ready models in this 4-month certification." />
         <meta name="keywords" content="Applied AI, Machine Learning, Deep Learning, Python AI, AI Certification, TensorFlow, PyTorch, Neural Networks" />
         <link rel="canonical" href="https://www.gsnfoundation.com/courses/applied-ai-master-certification" />
 
@@ -226,7 +217,7 @@ const AppliedAIMasterPage: NextPageWithLayout = () => {
               hasCourseInstance: {
                 '@type': 'CourseInstance',
                 courseMode: 'online',
-                courseWorkload: 'PT6M',
+                courseWorkload: 'P4M',
               },
             }),
           }}
@@ -236,7 +227,7 @@ const AppliedAIMasterPage: NextPageWithLayout = () => {
       <AIHeroSection
         title="Applied AI Master Certification"
         subtitle="Artificial Intelligence"
-        description="Become a complete AI professional with comprehensive training in machine learning, deep learning, and generative AI. Master Python, build production-ready models, and deploy AI systems in this intensive 6-month certification program."
+        description="Become a complete AI professional with comprehensive training in machine learning, deep learning, and generative AI. Master Python, build production-ready models, and deploy AI systems in this intensive 4-month certification program."
         badge="Premium"
         ctaText="Enroll Now"
         onCtaClick={handleEnrollClick}
@@ -245,7 +236,7 @@ const AppliedAIMasterPage: NextPageWithLayout = () => {
       />
 
       <AICourseOverview
-        duration="6 Months"
+        duration="4 Months"
         students={67}
         rating={5}
         ratingCount={67}
@@ -276,13 +267,12 @@ const AppliedAIMasterPage: NextPageWithLayout = () => {
 
       <AICourseFAQ faqs={faqs} />
 
-      <Box id="enquiry-section">
-        <AIBrochureEnquiryForm
-          courseName="Applied AI Master Certification"
-          courseSlug="applied-ai-master-certification"
-          onSuccess={() => setScrollToEnquiry(false)}
-        />
-      </Box>
+      <AIBrochureEnquiryForm
+        open={brochureOpen}
+        onClose={() => setBrochureOpen(false)}
+        courseName="Applied AI Master Certification"
+        courseSlug="applied-ai-master-certification"
+      />
 
       <AICTASection
         title="Ready to Become an AI Professional?"

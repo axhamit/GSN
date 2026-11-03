@@ -14,39 +14,39 @@ const typography: TypographyOptions = {
 
   h1: {
     fontSize: '6rem', // 96px
-    fontWeight: 900,
+    fontWeight: 700,
     lineHeight: 1.05,
     letterSpacing: '-0.04em',
   },
 
   h2: {
     fontSize: '4.5rem', // 72px
-    fontWeight: 900,
+    fontWeight: 700,
     lineHeight: 1.05,
     letterSpacing: '-0.04em',
   },
 
   h3: {
     fontSize: '3.5rem', // 56px
-    fontWeight: 800,
+    fontWeight: 700,
     lineHeight: 1.1,
   },
 
   h4: {
     fontSize: '2.5rem', // 40px
-    fontWeight: 800,
+    fontWeight: 700,
     lineHeight: 1.15,
   },
 
   h5: {
     fontSize: '2rem', // 32px
-    fontWeight: 700,
+    fontWeight: 600,
     lineHeight: 1.2,
   },
 
   h6: {
     fontSize: '1.5rem', // 24px
-    fontWeight: 700,
+    fontWeight: 600,
     lineHeight: 1.3,
   },
 

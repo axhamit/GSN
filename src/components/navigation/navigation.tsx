@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'
 import Chip from '@mui/material/Chip'
 import Typography from '@mui/material/Typography'
 import { alpha, useTheme } from '@mui/material/styles'
+import Link from 'next/link'
 import { Link as ScrollLink } from 'react-scroll'
 import { useRouter } from 'next/router'
 import { navigations } from './navigation.data'
@@ -39,6 +40,32 @@ interface NavigationItemProps {
 const NavigationItem: FC<NavigationItemProps> = ({ destination, label, onNavigate }) => {
   const theme = useTheme()
   const router = useRouter()
+  const linkSx = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    px: { xs: 1.5, md: 1.25 },
+    py: 1,
+    borderRadius: 'var(--radius-button)',
+    color: 'text.primary',
+    fontWeight: 600,
+    cursor: 'pointer',
+    textDecoration: 'none',
+    '&:hover': { color: 'primary.main', bgcolor: alpha(theme.palette.primary.main, 0.06) },
+    '&:focus-visible': { outline: `3px solid ${theme.palette.secondary.main}`, outlineOffset: 2 },
+  }
+
+  if (destination === '/' || destination === 'contact') {
+    return (
+      <Box
+        component={Link}
+        href={destination === 'contact' ? '/#contact' : '/'}
+        onClick={onNavigate}
+        sx={linkSx}
+      >
+        {label}
+      </Box>
+    )
+  }
 
   return (
     <Box
@@ -53,19 +80,7 @@ const NavigationItem: FC<NavigationItemProps> = ({ destination, label, onNavigat
         }
         onNavigate?.()
       }}
-      sx={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        px: { xs: 1.5, md: 1.25 },
-        py: 1,
-        borderRadius: 'var(--radius-button)',
-        color: 'text.primary',
-        fontWeight: 600,
-        cursor: 'pointer',
-        textDecoration: 'none',
-        '&:hover': { color: 'primary.main', bgcolor: alpha(theme.palette.primary.main, 0.06) },
-        '&:focus-visible': { outline: `3px solid ${theme.palette.secondary.main}`, outlineOffset: 2 },
-      }}
+      sx={linkSx}
     >
       {label}
     </Box>

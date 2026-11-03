@@ -64,22 +64,22 @@ const AICourseComparison: FC<AICourseComparisonProps> = ({
           sx={{
             borderRadius: 3,
             overflow: 'hidden',
-            boxShadow: `0 8px 30px ${alpha('#38bdf8', 0.1)}`,
-            border: `1px solid ${alpha('#38bdf8', 0.1)}`,
+            boxShadow: `0 8px 30px ${alpha(theme.palette.primary.main, 0.1)}`,
+            border: `1px solid ${alpha(theme.palette.primary.light, 0.1)}`,
           }}
         >
           <Table sx={{ minWidth: 650 }} aria-label="course comparison table">
             <TableHead>
               <TableRow
                 sx={{
-                  background: `linear-gradient(135deg, ${alpha('#38bdf8', 0.1)}, ${alpha('#60a5fa', 0.05)})`,
+                  background: `linear-gradient(135deg, ${alpha(theme.palette.primary.light, 0.1)}, ${alpha(theme.palette.ai.light, 0.05)})`,
                 }}
               >
                 <TableCell sx={{ fontWeight: 700, fontSize: '1rem' }}>Feature</TableCell>
-                <TableCell sx={{ fontWeight: 700, fontSize: '1rem', color: '#38bdf8' }}>
+                <TableCell sx={{ fontWeight: 700, fontSize: '1rem', color: theme.palette.primary.light }}>
                   {course1Name}
                 </TableCell>
-                <TableCell sx={{ fontWeight: 700, fontSize: '1rem', color: '#1e88e5' }}>
+                <TableCell sx={{ fontWeight: 700, fontSize: '1rem', color: theme.palette.ai.main }}>
                   {course2Name}
                 </TableCell>
               </TableRow>
@@ -90,10 +90,10 @@ const AICourseComparison: FC<AICourseComparisonProps> = ({
                   key={index}
                   sx={{
                     '&:nth-of-type(even)': {
-                      background: alpha('#38bdf8', 0.02),
+                      background: alpha(theme.palette.primary.light, 0.02),
                     },
                     '&:hover': {
-                      background: alpha('#38bdf8', 0.05),
+                      background: alpha(theme.palette.primary.light, 0.05),
                     },
                   }}
                 >

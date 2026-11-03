@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography'
 import { alpha, useTheme } from '@mui/material/styles'
 import { Link as ScrollLink } from 'react-scroll'
 import { StyledButton } from '@/components/styled-button'
-import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
@@ -23,9 +22,10 @@ import {
 
 interface CareerLaunchHeroProps {
   onEnrollClick?: () => void
+  onBrochureClick?: () => void
 }
 
-const CareerLaunchHero: FC<CareerLaunchHeroProps> = ({ onEnrollClick }) => {
+const CareerLaunchHero: FC<CareerLaunchHeroProps> = ({ onEnrollClick, onBrochureClick }) => {
   const theme = useTheme()
 
   const highlights = [
@@ -138,7 +138,7 @@ const CareerLaunchHero: FC<CareerLaunchHeroProps> = ({ onEnrollClick }) => {
           <Grid item xs={12} md={6}>
             <Box
               sx={{
-                textAlign: { xs: 'center', md: 'left' },
+                textAlign: 'center',
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
@@ -158,7 +158,7 @@ const CareerLaunchHero: FC<CareerLaunchHeroProps> = ({ onEnrollClick }) => {
                   border: `1px solid ${alpha(theme.palette.primary.main, 0.15)}`,
                   mb: 3,
                   width: 'fit-content',
-                  mx: { xs: 'auto', md: 0 },
+                  mx: 'auto',
                   backdropFilter: 'blur(20px)',
                   animation: 'glowPulse 3s ease-in-out infinite',
                   '@keyframes glowPulse': {
@@ -368,6 +368,23 @@ const CareerLaunchHero: FC<CareerLaunchHeroProps> = ({ onEnrollClick }) => {
                 >
                   <RocketLaunchIcon sx={{ mr: 1, fontSize: 20 }} />
                   Enroll Now
+                </StyledButton>
+                <StyledButton
+                  color="primary"
+                  size="large"
+                  variant="outlined"
+                  onClick={onBrochureClick}
+                  sx={{
+                    borderColor: alpha(theme.palette.primary.main, 0.3),
+                    color: theme.palette.text.primary,
+                    '&:hover': {
+                      borderColor: theme.palette.primary.main,
+                      background: alpha(theme.palette.primary.main, 0.05),
+                      transform: 'translateY(-3px)',
+                    },
+                  }}
+                >
+                  Download Brochure
                 </StyledButton>
                 <ScrollLink to="career-launch" spy={true} smooth={true} offset={0} duration={350}>
                   <StyledButton

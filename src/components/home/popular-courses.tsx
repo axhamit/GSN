@@ -9,13 +9,18 @@ import Typography from '@mui/material/Typography'
 import { Course } from '@/interfaces/course'
 import { data } from './popular-course.data'
 import CourseCardItem from '@/components/course/course-card-item'
+import {
+  homepageSectionDescriptionSx,
+  homepageSectionEyebrowSx,
+  homepageSectionTitleSx,
+} from '@/config/theme/sectionTypography'
 
 const courseCategories = [
   { id: 'all', label: 'All courses' },
   { id: 'ai-courses', label: 'Artificial intelligence' },
   { id: 'career-launch', label: 'Career launch' },
   { id: '10th-standard', label: 'Class 10' },
-  { id: '11th-standard', label: 'Class 11' },
+  // { id: '11th-standard', label: 'Class 11' },
   { id: '12th-standard', label: 'Class 12' },
   { id: 'neet', label: 'NEET' },
   { id: 'jee', label: 'JEE' },
@@ -60,37 +65,23 @@ const HomePremiumCourses: FC = () => {
     <Box
       id="premium-courses"
       component="section"
-      sx={{ py: { xs: 7, md: 10 }, backgroundColor: '#f6f8fa' }}
+      sx={{ py: { xs: 7, md: 9 }, backgroundColor: '#fff' }}
     >
       <Container maxWidth="lg">
-        <Box sx={{ mb: 4, maxWidth: 620 }}>
+        <Box sx={{ mb: { xs: 3, md: 4 }, maxWidth: 680, mx: 'auto', textAlign: 'center' }}>
           <Typography
             component="p"
-            sx={{
-              mb: 1,
-              color: 'primary.main',
-              fontSize: '0.78rem',
-              fontWeight: 700,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-            }}
+            sx={homepageSectionEyebrowSx}
           >
             Find your next step
           </Typography>
           <Typography
             component="h2"
-            sx={{
-              mb: 1.25,
-              color: '#172b3c',
-              fontSize: { xs: '2rem', md: '2.6rem' },
-              fontWeight: 750,
-              letterSpacing: '-0.035em',
-              lineHeight: 1.2,
-            }}
+            sx={homepageSectionTitleSx}
           >
             Learning paths built around you
           </Typography>
-          <Typography sx={{ color: 'text.secondary', fontSize: '1rem', lineHeight: 1.7 }}>
+          <Typography sx={homepageSectionDescriptionSx}>
             Practical teaching, supportive mentors, and clear milestones for every goal.
           </Typography>
         </Box>

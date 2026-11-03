@@ -13,7 +13,7 @@ const HomeHero: FC = () => (
     id="hero"
     component="section"
     sx={{
-      py: { xs: 7, md: 11 },
+      py: { xs: 7, md: 9 },
       backgroundColor: '#fff',
     }}
   >
@@ -39,8 +39,8 @@ const HomeHero: FC = () => (
               sx={{
                 mb: 2.5,
                 color: '#172b3c',
-                fontSize: { xs: '2.7rem', sm: '3.5rem', md: '4rem' },
-                fontWeight: 750,
+                fontSize: { xs: '2.7rem', sm: '3.5rem', md: '3.75rem' },
+                fontWeight: 800,
                 letterSpacing: '-0.045em',
                 lineHeight: 1.08,
               }}
@@ -60,7 +60,7 @@ const HomeHero: FC = () => (
                 lineHeight: 1.8,
               }}
             >
-              Expert-led learning for school, competitive exams, and the skills shaping tomorrow. Find a path that fits your goals.
+              Master core technical and non-technical skills with industry experts. Upgrade your expertise, bridge the gap, and advance your career.
             </Typography>
             <Stack
               direction={{ xs: 'column', sm: 'row' }}

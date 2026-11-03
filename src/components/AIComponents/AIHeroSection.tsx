@@ -72,7 +72,7 @@ const AIHeroSection: FC<AIHeroSectionProps> = ({
 
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Grid container spacing={4} alignItems="center">
-          <Grid item xs={12} md={7}>
+          <Grid item xs={12} md={7} sx={{ textAlign: 'center' }}>
             {badge && (
               <Box
                 sx={{
@@ -85,6 +85,7 @@ const AIHeroSection: FC<AIHeroSectionProps> = ({
                   background: `linear-gradient(135deg, ${alpha('#38bdf8', 0.1)}, ${alpha('#60a5fa', 0.05)})`,
                   border: `1px solid ${alpha('#38bdf8', 0.2)}`,
                   mb: 3,
+                  mx: 'auto',
                 }}
               >
                 <AutoAwesomeIcon sx={{ fontSize: 18, color: '#38bdf8' }} />
@@ -119,7 +120,7 @@ const AIHeroSection: FC<AIHeroSectionProps> = ({
             <Typography
               variant="h2"
               sx={{
-                fontWeight: 800,
+                fontWeight: 700,
                 mb: 3,
                 background: `linear-gradient(135deg, ${theme.palette.text.primary}, ${alpha('#38bdf8', 0.8)})`,
                 backgroundClip: 'text',
@@ -140,12 +141,13 @@ const AIHeroSection: FC<AIHeroSectionProps> = ({
                 fontSize: { xs: '1rem', md: '1.125rem' },
                 lineHeight: 1.8,
                 maxWidth: 600,
+                mx: 'auto',
               }}
             >
               {description}
             </Typography>
 
-            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2, mb: 4 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: { xs: 'column', sm: 'row' }, gap: 2, mb: 4 }}>
               <Button
                 variant="contained"
                 size="large"

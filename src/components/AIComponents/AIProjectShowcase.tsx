@@ -57,19 +57,19 @@ const AIProjectShowcase: FC<AIProjectShowcaseProps> = ({ projects }) => {
                 sx={{
                   height: '100%',
                   borderRadius: 3,
-                  background: `linear-gradient(135deg, ${theme.palette.background.paper}, ${alpha('#38bdf8', 0.02)})`,
-                  border: `1px solid ${alpha('#38bdf8', 0.08)}`,
+                  background: `linear-gradient(135deg, ${theme.palette.background.paper}, ${alpha(theme.palette.primary.light, 0.02)})`,
+                  border: `1px solid ${alpha(theme.palette.primary.light, 0.08)}`,
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-4px)',
-                    boxShadow: `0 12px 40px ${alpha('#38bdf8', 0.15)}`,
-                    borderColor: alpha('#38bdf8', 0.2),
+                    boxShadow: `0 12px 40px ${alpha(theme.palette.primary.main, 0.15)}`,
+                    borderColor: alpha(theme.palette.primary.light, 0.2),
                   },
                 }}
               >
                 <CardContent sx={{ p: 3 }}>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
-                    <CodeIcon sx={{ color: '#38bdf8', fontSize: 28 }} />
+                    <CodeIcon sx={{ color: theme.palette.primary.light, fontSize: 28 }} />
                     <Typography variant="h6" sx={{ fontWeight: 700 }}>
                       {project.title}
                     </Typography>
@@ -91,7 +91,7 @@ const AIProjectShowcase: FC<AIProjectShowcaseProps> = ({ projects }) => {
                       variant="caption"
                       sx={{
                         fontWeight: 600,
-                        color: '#38bdf8',
+                        color: theme.palette.primary.light,
                         display: 'block',
                         mb: 1,
                       }}
@@ -106,8 +106,8 @@ const AIProjectShowcase: FC<AIProjectShowcaseProps> = ({ projects }) => {
                             px: 1.5,
                             py: 0.5,
                             borderRadius: 1,
-                            background: alpha('#38bdf8', 0.08),
-                            border: `1px solid ${alpha('#38bdf8', 0.15)}`,
+                            background: alpha(theme.palette.primary.light, 0.08),
+                            border: `1px solid ${alpha(theme.palette.primary.light, 0.15)}`,
                           }}
                         >
                           <Typography variant="caption" sx={{ fontWeight: 500 }}>
@@ -119,7 +119,7 @@ const AIProjectShowcase: FC<AIProjectShowcaseProps> = ({ projects }) => {
                   </Box>
 
                   <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1, mt: 2 }}>
-                    <DescriptionIcon sx={{ color: '#1e88e5', fontSize: 20, mt: 0.25 }} />
+                    <DescriptionIcon sx={{ color: theme.palette.ai.main, fontSize: 20, mt: 0.25 }} />
                     <Typography
                       variant="body2"
                       sx={{
@@ -128,7 +128,7 @@ const AIProjectShowcase: FC<AIProjectShowcaseProps> = ({ projects }) => {
                         fontSize: '0.875rem',
                       }}
                     >
-                      <Box component="span" sx={{ fontWeight: 600, color: '#1e88e5' }}>
+                      <Box component="span" sx={{ fontWeight: 600, color: theme.palette.ai.main }}>
                         Outcome:
                       </Box>{' '}
                       {project.outcome}

@@ -79,9 +79,9 @@ const AILearningPath: FC<AILearningPathProps> = ({ steps }) => {
                         borderRadius: '50%',
                         background:
                           index < activeStep
-                            ? `linear-gradient(135deg, #38bdf8, #0284c7)`
-                            : alpha('#38bdf8', 0.1),
-                        color: index < activeStep ? 'white' : '#38bdf8',
+                            ? `linear-gradient(135deg, ${theme.palette.primary.light}, ${theme.palette.primary.main})`
+                            : alpha(theme.palette.primary.light, 0.1),
+                        color: index < activeStep ? 'white' : theme.palette.primary.light,
                         fontWeight: 700,
                         fontSize: '0.875rem',
                       }}
@@ -104,7 +104,7 @@ const AILearningPath: FC<AILearningPathProps> = ({ steps }) => {
                         variant="contained"
                         onClick={handleNext}
                         sx={{
-                          background: `linear-gradient(135deg, #38bdf8, #0284c7)`,
+                          background: `linear-gradient(135deg, ${theme.palette.primary.light}, ${theme.palette.primary.main})`,
                           mr: 1,
                         }}
                       >
@@ -125,7 +125,7 @@ const AILearningPath: FC<AILearningPathProps> = ({ steps }) => {
           </Stepper>
 
           {activeStep === steps.length && (
-            <Paper square elevation={0} sx={{ p: 3, mt: 2, background: alpha('#38bdf8', 0.05) }}>
+            <Paper square elevation={0} sx={{ p: 3, mt: 2, background: alpha(theme.palette.primary.light, 0.05) }}>
               <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
                 🎉 All steps completed - you're ready to start your AI journey!
               </Typography>

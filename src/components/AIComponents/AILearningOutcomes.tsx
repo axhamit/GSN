@@ -16,7 +16,7 @@ const AILearningOutcomes: FC<AILearningOutcomesProps> = ({ outcomes }) => {
   const theme = useTheme()
 
   return (
-    <Box sx={{ py: { xs: 6, md: 8 }, background: alpha('#38bdf8', 0.02) }}>
+    <Box sx={{ py: { xs: 6, md: 8 }, background: alpha(theme.palette.primary.light, 0.02) }}>
       <Container maxWidth="lg">
         <Typography
           variant="h3"
@@ -50,12 +50,12 @@ const AILearningOutcomes: FC<AILearningOutcomesProps> = ({ outcomes }) => {
                   height: '100%',
                   borderRadius: 3,
                   background: theme.palette.background.paper,
-                  border: `1px solid ${alpha('#38bdf8', 0.08)}`,
+                  border: `1px solid ${alpha(theme.palette.primary.light, 0.08)}`,
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-4px)',
-                    boxShadow: `0 12px 40px ${alpha('#38bdf8', 0.15)}`,
-                    borderColor: alpha('#38bdf8', 0.2),
+                    boxShadow: `0 12px 40px ${alpha(theme.palette.primary.main, 0.15)}`,
+                    borderColor: alpha(theme.palette.primary.light, 0.2),
                   },
                 }}
               >
@@ -70,7 +70,7 @@ const AILearningOutcomes: FC<AILearningOutcomesProps> = ({ outcomes }) => {
                   >
                     <CheckCircleIcon
                       sx={{
-                        color: '#38bdf8',
+                        color: theme.palette.primary.light,
                         fontSize: 24,
                         flexShrink: 0,
                         mt: 0.25,
